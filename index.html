@@ -18,17 +18,9 @@ background:radial-gradient(circle at 30% 30%,#0a1a35,#000814 70%);
 display:flex;
 justify-content:center;
 align-items:center;
-perspective:1600px;
 }
 
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:-2;
-}
-
-/* PHONE CARD */
+/* PHONE */
 .phone{
 width:360px;
 height:min(92vh,700px);
@@ -36,17 +28,12 @@ border-radius:42px;
 padding:28px;
 display:flex;
 flex-direction:column;
-position:relative;
 background:linear-gradient(rgba(255,255,255,0.08),rgba(255,255,255,0.03));
 backdrop-filter:blur(60px) saturate(180%);
 border:1px solid rgba(255,255,255,0.18);
-box-shadow:
-0 35px 70px rgba(0,0,0,0.6),
-inset 0 1px 1px rgba(255,255,255,0.25),
-inset 0 -1px 1px rgba(255,255,255,0.1);
+box-shadow:0 35px 70px rgba(0,0,0,0.6);
 animation:float 6s ease-in-out infinite alternate;
 }
-
 @keyframes float{
 from{transform:translateY(0)}
 to{transform:translateY(-12px)}
@@ -72,7 +59,6 @@ box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
 .avatar img{width:100%;height:100%;object-fit:cover;}
 
-/* TEXT */
 .name{text-align:center;color:white;font-size:20px;font-weight:600;margin-top:15px;}
 .title{text-align:center;color:rgba(255,255,255,0.7);font-size:13px;margin-top:4px;}
 .company{text-align:center;color:white;font-size:14px;margin-top:6px;}
@@ -104,8 +90,6 @@ justify-content:center;
 align-items:center;
 text-align:center;
 }
-
-/* MAIN LINE (ICON + TEXT SAME ROW) */
 .btn-main{
 display:flex;
 align-items:center;
@@ -113,56 +97,57 @@ justify-content:center;
 gap:6px;
 white-space:nowrap;
 }
-
-.btn-main i{
-font-size:14px;
-}
-
-/* SUBTEXT */
 .subtext{
 font-size:65%;
 opacity:0.85;
 margin-top:3px;
 }
-
 .btn:hover{
 transform:translateY(-3px);
 background:rgba(255,255,255,0.18);
 }
-
 .btn:active{
 transform:scale(0.96);
 }
 
-/* POPUPS */
+/* POPUP */
 .popup{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,0.65);
+background:rgba(0,0,0,0.7);
 display:flex;
 justify-content:center;
 align-items:center;
 visibility:hidden;
 opacity:0;
 transition:0.4s;
-z-index:10;
+z-index:100;
 }
-.popup.active{visibility:visible;opacity:1;}
+.popup.active{
+visibility:visible;
+opacity:1;
+}
 
 .popup-content{
 position:relative;
 background:rgba(255,255,255,0.08);
-backdrop-filter:blur(60px) saturate(180%);
-border:1px solid rgba(0,255,255,0.35);
+backdrop-filter:blur(70px) saturate(200%);
+border:1px solid rgba(0,255,255,0.5);
 padding:30px;
 border-radius:25px;
 text-align:center;
 width:300px;
 color:white;
 overflow:hidden;
-box-shadow:0 0 40px rgba(0,255,255,0.25);
+box-shadow:0 0 50px rgba(0,255,255,0.35);
+transform:scale(0.85);
+transition:0.4s;
+}
+.popup.active .popup-content{
+transform:scale(1);
 }
 
+/* WATERMARK LOGO */
 .popup-content::before{
 content:"";
 position:absolute;
@@ -173,8 +158,31 @@ width:70%;
 height:70%;
 background:url('assets/logo.png') no-repeat center;
 background-size:contain;
-opacity:0.18;
+opacity:0.15;
+filter:brightness(2) drop-shadow(0 0 40px rgba(0,255,255,0.8));
 pointer-events:none;
+animation:glowPulse 4s ease-in-out infinite alternate;
+}
+@keyframes glowPulse{
+from{opacity:0.12; transform:translate(-50%,-50%) scale(1);}
+to{opacity:0.22; transform:translate(-50%,-50%) scale(1.08);}
+}
+
+/* LIGHT SWEEP */
+.popup-content::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:60%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.25),transparent);
+transform:skewX(-20deg);
+animation:lightSweep 4s infinite;
+}
+@keyframes lightSweep{
+0%{left:-100%;}
+100%{left:150%;}
 }
 
 .label{opacity:0.8;}
@@ -182,7 +190,7 @@ pointer-events:none;
 
 .popup-content h3{margin-bottom:14px;position:relative;z-index:2;}
 .popup-content p{font-size:13px;margin-bottom:8px;position:relative;z-index:2;}
-.close{margin-top:15px;cursor:pointer;opacity:0.7;}
+.close{margin-top:15px;cursor:pointer;opacity:0.7;position:relative;z-index:2;}
 .close:hover{opacity:1;}
 </style>
 </head>
