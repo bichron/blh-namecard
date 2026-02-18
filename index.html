@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chris Pham - Digital Card</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
 *{
 margin:0;
@@ -19,62 +9,70 @@ font-family:'Poppins',sans-serif;
 body{
 height:100vh;
 overflow:hidden;
-background:#000814;
+background:radial-gradient(circle at 30% 30%,#0a1a35,#000814 70%);
 display:flex;
 justify-content:center;
 align-items:center;
-perspective:1200px;
+perspective:1600px;
 }
 
-/* 3D GALAXY */
+/* CANVAS */
 canvas{
 position:fixed;
 top:0;
 left:0;
-z-index:-1;
+z-index:-2;
 }
 
-/* PHONE */
+/* =========================
+   APPLE VISION PRO GLASS
+========================= */
+
 .phone{
-width:350px;
-height:690px;
-border-radius:40px;
-padding:30px;
-background:rgba(15,30,60,0.55);
-backdrop-filter:blur(30px);
--webkit-backdrop-filter:blur(30px);
-border:1px solid rgba(255,255,255,0.1);
-box-shadow:
-0 0 80px rgba(0,255,255,0.4),
-inset 0 0 40px rgba(0,255,255,0.2);
+width:360px;
+height:700px;
+border-radius:45px;
+padding:35px;
 position:relative;
 transform-style:preserve-3d;
 transition:transform 0.2s ease;
+
+/* Multi-layer glass */
+background:
+linear-gradient(rgba(255,255,255,0.08),rgba(255,255,255,0.03));
+
+backdrop-filter:blur(60px) saturate(180%);
+-webkit-backdrop-filter:blur(60px) saturate(180%);
+
+border:1px solid rgba(255,255,255,0.18);
+
+box-shadow:
+0 40px 80px rgba(0,0,0,0.6),
+inset 0 1px 1px rgba(255,255,255,0.25),
+inset 0 -1px 1px rgba(255,255,255,0.1);
+
 animation:float 6s ease-in-out infinite alternate;
 }
 
-/* EDGE LIGHT */
-.phone::before{
+/* Glass highlight reflection */
+.phone::after{
 content:"";
 position:absolute;
-inset:0;
-border-radius:40px;
-padding:2px;
-background:linear-gradient(45deg,#00f0ff,#0066ff,#00f0ff);
-background-size:400% 400%;
--webkit-mask:
-linear-gradient(#000 0 0) content-box,
-linear-gradient(#000 0 0);
--webkit-mask-composite:xor;
-mask-composite:exclude;
-animation:edgeRotate 8s linear infinite;
+top:0;
+left:0;
+width:100%;
+height:40%;
+background:linear-gradient(
+to bottom,
+rgba(255,255,255,0.25),
+rgba(255,255,255,0.05),
+transparent
+);
+border-radius:45px;
+pointer-events:none;
 }
 
-@keyframes edgeRotate{
-0%{background-position:0% 50%}
-100%{background-position:400% 50%}
-}
-
+/* Floating motion */
 @keyframes float{
 from{transform:translateY(0)}
 to{transform:translateY(-15px)}
@@ -93,10 +91,9 @@ position:absolute;
 width:170px;
 height:170px;
 border-radius:50%;
-border-top:3px solid #00eaff;
-border-right:3px solid #00eaff;
-animation:spin 4s linear infinite;
-box-shadow:0 0 30px #00eaff;
+border:2px solid rgba(255,255,255,0.3);
+backdrop-filter:blur(10px);
+animation:spin 8s linear infinite;
 }
 
 @keyframes spin{
@@ -108,8 +105,10 @@ width:150px;
 height:150px;
 border-radius:50%;
 overflow:hidden;
-border:3px solid #00eaff;
-box-shadow:0 0 40px #00eaff;
+border:2px solid rgba(255,255,255,0.4);
+box-shadow:
+0 20px 40px rgba(0,0,0,0.5),
+inset 0 1px 2px rgba(255,255,255,0.4);
 }
 
 .avatar img{
@@ -121,24 +120,24 @@ object-fit:cover;
 /* TEXT */
 .name{
 text-align:center;
-color:#fff;
+color:white;
 font-size:24px;
-font-weight:700;
+font-weight:600;
 margin-top:25px;
 letter-spacing:2px;
 }
 
 .title{
 text-align:center;
-color:#8fdfff;
+color:rgba(255,255,255,0.7);
 font-size:14px;
 margin-top:6px;
 }
 
 .company{
 text-align:center;
-color:#00eaff;
-font-weight:600;
+color:rgba(255,255,255,0.9);
+font-weight:500;
 margin-top:8px;
 }
 
@@ -146,19 +145,18 @@ margin-top:8px;
 .logo{
 display:flex;
 justify-content:center;
-margin-top:10px;
+margin-top:12px;
 }
 
 .logo img{
-width:15px; /* 10% of 150px avatar */
-height:auto;
-opacity:0.9;
-filter:drop-shadow(0 0 8px rgba(0,255,255,0.8));
+width:30px;
+opacity:0.95;
+filter:drop-shadow(0 10px 20px rgba(0,0,0,0.4));
 }
 
-/* BUTTONS */
+/* BUTTONS - Floating Glass Capsules */
 .buttons{
-margin-top:35px;
+margin-top:40px;
 display:flex;
 flex-direction:column;
 gap:18px;
@@ -171,28 +169,34 @@ gap:12px;
 
 .btn{
 flex:1;
-padding:14px;
-border-radius:25px;
-background:linear-gradient(145deg,#00eaff,#0066ff);
-color:#fff;
+padding:15px;
+border-radius:30px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(40px) saturate(160%);
+-webkit-backdrop-filter:blur(40px);
+border:1px solid rgba(255,255,255,0.25);
+color:white;
 text-decoration:none;
 text-align:center;
-font-weight:600;
-box-shadow:0 0 25px rgba(0,255,255,0.7);
+font-weight:500;
 transition:0.3s;
 cursor:pointer;
+
+box-shadow:
+0 15px 35px rgba(0,0,0,0.4),
+inset 0 1px 1px rgba(255,255,255,0.3);
 }
 
 .btn:hover{
 transform:translateY(-4px);
-box-shadow:0 0 40px rgba(0,255,255,1);
+background:rgba(255,255,255,0.15);
 }
 
 .btn i{
 margin-right:8px;
 }
 
-/* QR POPUP */
+/* POPUP */
 .popup{
 position:fixed;
 inset:0;
@@ -202,7 +206,7 @@ justify-content:center;
 align-items:center;
 visibility:hidden;
 opacity:0;
-transition:0.3s;
+transition:0.4s;
 }
 
 .popup.active{
@@ -211,149 +215,30 @@ opacity:1;
 }
 
 .popup-content{
-background:rgba(20,40,80,0.6);
-backdrop-filter:blur(25px);
--webkit-backdrop-filter:blur(25px);
-border:1px solid rgba(255,255,255,0.1);
-padding:30px;
-border-radius:20px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(50px);
+border:1px solid rgba(255,255,255,0.2);
+padding:35px;
+border-radius:25px;
+box-shadow:
+0 40px 80px rgba(0,0,0,0.6),
+inset 0 1px 2px rgba(255,255,255,0.4);
 text-align:center;
-box-shadow:0 0 40px #00eaff;
 }
 
 .popup img{
-width:200px;
+width:220px;
+border-radius:15px;
 }
 
 .close{
-margin-top:15px;
-color:#fff;
+margin-top:18px;
+color:white;
 cursor:pointer;
+opacity:0.7;
 }
 
+.close:hover{
+opacity:1;
+}
 </style>
-</head>
-<body>
-
-<canvas id="galaxy"></canvas>
-
-<div class="phone" id="card">
-
-<div class="avatar-wrap">
-<div class="ring"></div>
-<div class="avatar">
-<img src="assets/CCOPham/avatar.png">
-</div>
-</div>
-
-<div class="name">CHRIS PHAM</div>
-<div class="title">Chief Commercial Officer</div>
-<div class="company">BLH Joint Stock Company</div>
-
-<div class="logo">
-<img src="assets/logo.png" alt="Company Logo">
-</div>
-
-<div class="buttons">
-
-<div class="row">
-<a href="tel:0909554558" class="btn">
-<i class="fa-solid fa-phone"></i>Call
-</a>
-<a href="#" class="btn">
-<i class="fa-brands fa-facebook-messenger"></i>Zalo
-</a>
-</div>
-
-<div class="btn" onclick="openQR()">
-<i class="fa-solid fa-qrcode"></i>Payment QR
-</div>
-
-<div class="btn" onclick="downloadVCF()">
-<i class="fa-solid fa-address-card"></i>Save Contact
-</div>
-
-</div>
-</div>
-
-<!-- QR POPUP -->
-<div class="popup" id="popup">
-<div class="popup-content">
-<img src="assets/qr.png">
-<div class="close" onclick="closeQR()">Close</div>
-</div>
-</div>
-
-<script>
-
-/* 3D GALAXY */
-const canvas=document.getElementById("galaxy");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let stars=[];
-for(let i=0;i<200;i++){
-stars.push({
-x:Math.random()*canvas.width-canvas.width/2,
-y:Math.random()*canvas.height-canvas.height/2,
-z:Math.random()*canvas.width
-});
-}
-
-function animate(){
-ctx.fillStyle="#000814";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-
-stars.forEach(s=>{
-s.z-=2;
-if(s.z<=0)s.z=canvas.width;
-let k=128/s.z;
-let px=s.x*k+canvas.width/2;
-let py=s.y*k+canvas.height/2;
-if(px>=0&&px<=canvas.width&&py>=0&&py<=canvas.height){
-ctx.fillStyle="#00eaff";
-ctx.fillRect(px,py,2,2);
-}
-});
-requestAnimationFrame(animate);
-}
-animate();
-
-/* PARALLAX */
-const card=document.getElementById("card");
-document.addEventListener("mousemove",e=>{
-let x=(e.clientX/window.innerWidth-0.5)*20;
-let y=(e.clientY/window.innerHeight-0.5)*20;
-card.style.transform=`rotateY(${x}deg) rotateX(${-y}deg)`;
-});
-
-/* QR */
-function openQR(){
-document.getElementById("popup").classList.add("active");
-}
-function closeQR(){
-document.getElementById("popup").classList.remove("active");
-}
-
-/* vCard */
-function downloadVCF(){
-const vcf=`BEGIN:VCARD
-VERSION:3.0
-FN:Chris Pham
-TITLE:Chief Commercial Officer
-ORG:BLH Joint Stock Company
-TEL:0909554558
-END:VCARD`;
-
-const blob=new Blob([vcf],{type:"text/vcard"});
-const link=document.createElement("a");
-link.href=URL.createObjectURL(blob);
-link.download="Chris_Pham.vcf";
-link.click();
-}
-
-</script>
-
-</body>
-</html>
