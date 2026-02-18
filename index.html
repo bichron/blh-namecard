@@ -21,7 +21,6 @@ align-items:center;
 perspective:1600px;
 }
 
-/* STAR CANVAS */
 canvas{
 position:fixed;
 top:0;
@@ -30,7 +29,6 @@ z-index:-2;
 }
 
 /* PHONE CARD */
-
 .phone{
 width:360px;
 height:min(92vh,700px);
@@ -60,14 +58,7 @@ to{transform:translateY(-12px)}
 }
 
 /* AVATAR */
-
-.avatar-wrap{
-display:flex;
-justify-content:center;
-margin-top:15px;
-position:relative;
-}
-
+.avatar-wrap{display:flex;justify-content:center;margin-top:15px;position:relative;}
 .ring{
 position:absolute;
 width:150px;height:150px;
@@ -75,7 +66,6 @@ border-radius:50%;
 border:2px solid rgba(255,255,255,0.35);
 animation:spin 12s linear infinite;
 }
-
 @keyframes spin{to{transform:rotate(360deg)}}
 
 .avatar{
@@ -85,50 +75,18 @@ overflow:hidden;
 border:2px solid rgba(255,255,255,0.5);
 box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
-
 .avatar img{width:100%;height:100%;object-fit:cover;}
 
 /* TEXT */
+.name{text-align:center;color:white;font-size:20px;font-weight:600;margin-top:15px;letter-spacing:1px;}
+.title{text-align:center;color:rgba(255,255,255,0.7);font-size:13px;margin-top:4px;}
+.company{text-align:center;color:rgba(255,255,255,0.95);font-size:14px;margin-top:6px;}
 
-.name{
-text-align:center;
-color:white;
-font-size:20px;
-font-weight:600;
-margin-top:15px;
-letter-spacing:1px;
-}
-
-.title{
-text-align:center;
-color:rgba(255,255,255,0.7);
-font-size:13px;
-margin-top:4px;
-}
-
-.company{
-text-align:center;
-color:rgba(255,255,255,0.95);
-font-size:14px;
-margin-top:6px;
-}
-
-.logo{
-display:flex;
-justify-content:center;
-margin-top:8px;
-}
+.logo{display:flex;justify-content:center;margin-top:8px;}
 .logo img{width:48px;}
 
 /* BUTTONS */
-
-.buttons{
-margin-top:auto;
-display:flex;
-flex-direction:column;
-gap:10px;
-}
-
+.buttons{margin-top:auto;display:flex;flex-direction:column;gap:10px;}
 .row{display:flex;gap:10px;}
 
 .btn{
@@ -147,16 +105,10 @@ transition:0.25s;
 cursor:pointer;
 box-shadow:0 10px 25px rgba(0,0,0,0.35);
 }
-
-.btn:hover{
-transform:translateY(-3px);
-background:rgba(255,255,255,0.18);
-}
-
+.btn:hover{transform:translateY(-3px);background:rgba(255,255,255,0.18);}
 .btn i{margin-right:6px;}
 
 /* POPUPS */
-
 .popup{
 position:fixed;
 inset:0;
@@ -169,23 +121,23 @@ opacity:0;
 transition:0.4s;
 z-index:10;
 }
-
 .popup.active{visibility:visible;opacity:1;}
 
 .popup-content{
 position:relative;
 background:rgba(255,255,255,0.08);
-backdrop-filter:blur(50px);
-border:1px solid rgba(255,255,255,0.2);
+backdrop-filter:blur(60px) saturate(180%);
+border:1px solid rgba(0,255,255,0.35);
 padding:30px;
 border-radius:25px;
 text-align:center;
 width:300px;
 color:white;
 overflow:hidden;
+box-shadow:0 0 40px rgba(0,255,255,0.25);
 }
 
-/* WATERMARK - BRIGHTER BRAND IDENTITY */
+/* PREMIUM WATERMARK */
 .popup-content::before{
 content:"";
 position:absolute;
@@ -196,19 +148,60 @@ width:70%;
 height:70%;
 background:url('assets/logo.png') no-repeat center;
 background-size:contain;
-opacity:0.15; /* tăng sáng hơn */
-filter:brightness(1.6) drop-shadow(0 0 25px rgba(255,255,255,0.35));
+opacity:0.18;
+filter:brightness(2) drop-shadow(0 0 40px rgba(0,255,255,0.8));
 pointer-events:none;
-animation:waterGlow 4s ease-in-out infinite alternate;
+animation:glowPulse 4s ease-in-out infinite alternate;
 }
 
-@keyframes waterGlow{
-from{opacity:0.12; transform:translate(-50%,-50%) scale(1);}
-to{opacity:0.18; transform:translate(-50%,-50%) scale(1.05);}
+@keyframes glowPulse{
+from{opacity:0.15; transform:translate(-50%,-50%) scale(1);}
+to{opacity:0.22; transform:translate(-50%,-50%) scale(1.08);}
 }
 
-.popup-content h3{margin-bottom:12px;position:relative;z-index:2;}
-.popup-content p{font-size:13px;margin-bottom:6px;position:relative;z-index:2;}
+/* LIGHT SWEEP */
+.popup-content::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:60%;
+height:100%;
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.25),
+transparent
+);
+transform:skewX(-20deg);
+animation:lightSweep 4s infinite;
+}
+
+@keyframes lightSweep{
+0%{left:-100%;}
+100%{left:150%;}
+}
+
+/* TEXT STYLE */
+.popup-content h3{
+margin-bottom:14px;
+position:relative;
+z-index:2;
+letter-spacing:1px;
+}
+
+.popup-content p{
+font-size:13px;
+margin-bottom:8px;
+position:relative;
+z-index:2;
+opacity:0.95;
+}
+
+/* Label normal - value bold */
+.label{font-weight:400;opacity:0.8;}
+.value{font-weight:600;color:#00ffff;}
+
 .close{margin-top:15px;cursor:pointer;opacity:0.7;position:relative;z-index:2;}
 .close:hover{opacity:1;}
 
@@ -219,7 +212,6 @@ to{opacity:0.18; transform:translate(-50%,-50%) scale(1.05);}
 <canvas id="galaxy"></canvas>
 
 <div class="phone" id="card">
-
 <div class="avatar-wrap">
 <div class="ring"></div>
 <div class="avatar">
@@ -236,41 +228,14 @@ to{opacity:0.18; transform:translate(-50%,-50%) scale(1.05);}
 </div>
 
 <div class="buttons">
-
 <div class="row">
-<a href="tel:0909554558" class="btn">
-<i class="fa-solid fa-phone"></i>Call
-</a>
-<a href="#" class="btn">
-<i class="fa-brands fa-facebook-messenger"></i>Zalo
-</a>
-</div>
-
-<div class="btn" onclick="openQR()">
-<i class="fa-solid fa-qrcode"></i>Payment QR
-</div>
-
-<div class="btn" onclick="downloadVCF()">
-<i class="fa-solid fa-address-card"></i>Save Contact
+<a href="tel:0909554558" class="btn"><i class="fa-solid fa-phone"></i>Call</a>
+<a href="#" class="btn"><i class="fa-brands fa-facebook-messenger"></i>Zalo</a>
 </div>
 
 <div class="btn" onclick="openEnterprise()">
 <i class="fa-solid fa-building"></i>Enterprise Code / Tax Code
 </div>
-
-<div class="btn" onclick="openWebsite()">
-<i class="fa-solid fa-globe"></i>Website and Company Profile
-</div>
-
-</div>
-</div>
-
-<!-- QR POPUP -->
-<div class="popup" id="qrPopup">
-<div class="popup-content">
-<h3>Payment QR</h3>
-<img src="assets/qr.png" width="200">
-<div class="close" onclick="closeQR()">Close</div>
 </div>
 </div>
 
@@ -278,84 +243,26 @@ to{opacity:0.18; transform:translate(-50%,-50%) scale(1.05);}
 <div class="popup" id="enterprisePopup">
 <div class="popup-content">
 <h3>Business Information</h3>
-<p><strong>Company:</strong> BLH Joint Stock Company</p>
-<p><strong>Enterprise Code / Tax Code:</strong> 0318787124</p>
-<p><strong>Representative:</strong> Nguyễn Trung Hiếu</p>
-<p><strong>Title:</strong> CEO</p>
+
+<p><span class="label">Company:</span> 
+<span class="value">BLH Joint Stock Company</span></p>
+
+<p><span class="label">Enterprise Code / Tax Code:</span> 
+<span class="value">0318787124</span></p>
+
+<p><span class="label">Representative:</span> 
+<span class="value">Nguyễn Trung Hiếu</span></p>
+
+<p><span class="label">Title:</span> 
+<span class="value">CEO</span></p>
+
 <div class="close" onclick="closeEnterprise()">Close</div>
 </div>
 </div>
 
 <script>
-
-/* WEBSITE */
-function openWebsite(){
-window.open("https://yourwebsite.com","_blank");
-}
-
-/* POPUPS */
-function openQR(){document.getElementById("qrPopup").classList.add("active");}
-function closeQR(){document.getElementById("qrPopup").classList.remove("active");}
 function openEnterprise(){document.getElementById("enterprisePopup").classList.add("active");}
 function closeEnterprise(){document.getElementById("enterprisePopup").classList.remove("active");}
-
-/* VCARD */
-function downloadVCF(){
-const vcf=`BEGIN:VCARD
-VERSION:3.0
-FN:Chris Pham
-TITLE:Chief Commercial Officer
-ORG:BLH Joint Stock Company
-TEL:0909554558
-END:VCARD`;
-const blob=new Blob([vcf],{type:"text/vcard"});
-const link=document.createElement("a");
-link.href=URL.createObjectURL(blob);
-link.download="Chris_Pham.vcf";
-link.click();
-}
-
-/* STARFIELD */
-const canvas=document.getElementById("galaxy");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let stars=[];
-for(let i=0;i<220;i++){
-stars.push({
-x:Math.random()*canvas.width-canvas.width/2,
-y:Math.random()*canvas.height-canvas.height/2,
-z:Math.random()*canvas.width
-});
-}
-
-function animate(){
-ctx.fillStyle="#000814";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-stars.forEach(s=>{
-s.z-=1.2;
-if(s.z<=0)s.z=canvas.width;
-let k=128/s.z;
-let px=s.x*k+canvas.width/2;
-let py=s.y*k+canvas.height/2;
-if(px>=0&&px<=canvas.width&&py>=0&&py<=canvas.height){
-ctx.fillStyle="white";
-ctx.fillRect(px,py,2,2);
-}
-});
-requestAnimationFrame(animate);
-}
-animate();
-
-/* PARALLAX */
-const card=document.getElementById("card");
-document.addEventListener("mousemove",e=>{
-let x=(e.clientX/window.innerWidth-0.5)*12;
-let y=(e.clientY/window.innerHeight-0.5)*12;
-card.style.transform=`rotateY(${x}deg) rotateX(${-y}deg)`;
-});
-
 </script>
 
 </body>
