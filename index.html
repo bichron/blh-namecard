@@ -26,7 +26,7 @@ align-items:center;
 perspective:1200px;
 }
 
-/* 3D GALAXY CANVAS */
+/* 3D GALAXY */
 canvas{
 position:fixed;
 top:0;
@@ -40,8 +40,10 @@ width:350px;
 height:690px;
 border-radius:40px;
 padding:30px;
-background:rgba(15,30,60,0.6);
-backdrop-filter:blur(25px);
+background:rgba(15,30,60,0.55);
+backdrop-filter:blur(30px);
+-webkit-backdrop-filter:blur(30px);
+border:1px solid rgba(255,255,255,0.1);
 box-shadow:
 0 0 80px rgba(0,255,255,0.4),
 inset 0 0 40px rgba(0,255,255,0.2);
@@ -57,19 +59,20 @@ content:"";
 position:absolute;
 inset:0;
 border-radius:40px;
-padding:3px;
+padding:2px;
 background:linear-gradient(45deg,#00f0ff,#0066ff,#00f0ff);
+background-size:400% 400%;
 -webkit-mask:
 linear-gradient(#000 0 0) content-box,
 linear-gradient(#000 0 0);
 -webkit-mask-composite:xor;
 mask-composite:exclude;
-animation:edgeRotate 6s linear infinite;
+animation:edgeRotate 8s linear infinite;
 }
 
 @keyframes edgeRotate{
-0%{background-position:0%}
-100%{background-position:400%}
+0%{background-position:0% 50%}
+100%{background-position:400% 50%}
 }
 
 @keyframes float{
@@ -139,9 +142,23 @@ font-weight:600;
 margin-top:8px;
 }
 
+/* LOGO */
+.logo{
+display:flex;
+justify-content:center;
+margin-top:10px;
+}
+
+.logo img{
+width:15px; /* 10% of 150px avatar */
+height:auto;
+opacity:0.9;
+filter:drop-shadow(0 0 8px rgba(0,255,255,0.8));
+}
+
 /* BUTTONS */
 .buttons{
-margin-top:40px;
+margin-top:35px;
 display:flex;
 flex-direction:column;
 gap:18px;
@@ -175,7 +192,7 @@ box-shadow:0 0 40px rgba(0,255,255,1);
 margin-right:8px;
 }
 
-/* POPUP QR */
+/* QR POPUP */
 .popup{
 position:fixed;
 inset:0;
@@ -194,8 +211,10 @@ opacity:1;
 }
 
 .popup-content{
-background:rgba(20,40,80,0.8);
-backdrop-filter:blur(20px);
+background:rgba(20,40,80,0.6);
+backdrop-filter:blur(25px);
+-webkit-backdrop-filter:blur(25px);
+border:1px solid rgba(255,255,255,0.1);
 padding:30px;
 border-radius:20px;
 text-align:center;
@@ -223,18 +242,22 @@ cursor:pointer;
 <div class="avatar-wrap">
 <div class="ring"></div>
 <div class="avatar">
-<img src="assets/CCOPham.png">
+<img src="assets/CCOPham/avatar.png">
 </div>
 </div>
 
 <div class="name">CHRIS PHAM</div>
 <div class="title">Chief Commercial Officer</div>
-<div class="company">BLH GROUP</div>
+<div class="company">BLH Joint Stock Company</div>
+
+<div class="logo">
+<img src="assets/logo.png" alt="Company Logo">
+</div>
 
 <div class="buttons">
 
 <div class="row">
-<a href="tel:+84901234567" class="btn">
+<a href="tel:0909554558" class="btn">
 <i class="fa-solid fa-phone"></i>Call
 </a>
 <a href="#" class="btn">
@@ -263,7 +286,7 @@ cursor:pointer;
 
 <script>
 
-/* 3D GALAXY BACKGROUND */
+/* 3D GALAXY */
 const canvas=document.getElementById("galaxy");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
@@ -272,8 +295,8 @@ canvas.height=window.innerHeight;
 let stars=[];
 for(let i=0;i<200;i++){
 stars.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
+x:Math.random()*canvas.width-canvas.width/2,
+y:Math.random()*canvas.height-canvas.height/2,
 z:Math.random()*canvas.width
 });
 }
@@ -319,9 +342,8 @@ const vcf=`BEGIN:VCARD
 VERSION:3.0
 FN:Chris Pham
 TITLE:Chief Commercial Officer
-ORG:BLH GROUP
-TEL:+84901234567
-EMAIL:chris@example.com
+ORG:BLH Joint Stock Company
+TEL:0909554558
 END:VCARD`;
 
 const blob=new Blob([vcf],{type:"text/vcard"});
