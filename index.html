@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chris Pham - Digital Card</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
 *{
 margin:0;
@@ -16,7 +26,7 @@ align-items:center;
 perspective:1600px;
 }
 
-/* CANVAS */
+/* 3D GALAXY BACKGROUND */
 canvas{
 position:fixed;
 top:0;
@@ -35,15 +45,11 @@ border-radius:45px;
 padding:35px;
 position:relative;
 transform-style:preserve-3d;
-transition:transform 0.2s ease;
+transition:transform 0.15s ease;
 
-/* Multi-layer glass */
-background:
-linear-gradient(rgba(255,255,255,0.08),rgba(255,255,255,0.03));
-
+background:linear-gradient(rgba(255,255,255,0.08),rgba(255,255,255,0.03));
 backdrop-filter:blur(60px) saturate(180%);
 -webkit-backdrop-filter:blur(60px) saturate(180%);
-
 border:1px solid rgba(255,255,255,0.18);
 
 box-shadow:
@@ -54,7 +60,7 @@ inset 0 -1px 1px rgba(255,255,255,0.1);
 animation:float 6s ease-in-out infinite alternate;
 }
 
-/* Glass highlight reflection */
+/* Glass reflection */
 .phone::after{
 content:"";
 position:absolute;
@@ -72,7 +78,6 @@ border-radius:45px;
 pointer-events:none;
 }
 
-/* Floating motion */
 @keyframes float{
 from{transform:translateY(0)}
 to{transform:translateY(-15px)}
@@ -91,9 +96,8 @@ position:absolute;
 width:170px;
 height:170px;
 border-radius:50%;
-border:2px solid rgba(255,255,255,0.3);
-backdrop-filter:blur(10px);
-animation:spin 8s linear infinite;
+border:2px solid rgba(255,255,255,0.35);
+animation:spin 10s linear infinite;
 }
 
 @keyframes spin{
@@ -105,9 +109,9 @@ width:150px;
 height:150px;
 border-radius:50%;
 overflow:hidden;
-border:2px solid rgba(255,255,255,0.4);
+border:2px solid rgba(255,255,255,0.5);
 box-shadow:
-0 20px 40px rgba(0,0,0,0.5),
+0 25px 50px rgba(0,0,0,0.5),
 inset 0 1px 2px rgba(255,255,255,0.4);
 }
 
@@ -136,7 +140,7 @@ margin-top:6px;
 
 .company{
 text-align:center;
-color:rgba(255,255,255,0.9);
+color:rgba(255,255,255,0.95);
 font-weight:500;
 margin-top:8px;
 }
@@ -151,10 +155,10 @@ margin-top:12px;
 .logo img{
 width:30px;
 opacity:0.95;
-filter:drop-shadow(0 10px 20px rgba(0,0,0,0.4));
+filter:drop-shadow(0 15px 30px rgba(0,0,0,0.5));
 }
 
-/* BUTTONS - Floating Glass Capsules */
+/* BUTTONS */
 .buttons{
 margin-top:40px;
 display:flex;
@@ -189,7 +193,7 @@ inset 0 1px 1px rgba(255,255,255,0.3);
 
 .btn:hover{
 transform:translateY(-4px);
-background:rgba(255,255,255,0.15);
+background:rgba(255,255,255,0.18);
 }
 
 .btn i{
@@ -242,3 +246,127 @@ opacity:0.7;
 opacity:1;
 }
 </style>
+</head>
+<body>
+
+<canvas id="galaxy"></canvas>
+
+<div class="phone" id="card">
+
+<div class="avatar-wrap">
+<div class="ring"></div>
+<div class="avatar">
+<img src="assets/CCOPham/avatar.png">
+</div>
+</div>
+
+<div class="name">CHRIS PHAM</div>
+<div class="title">Chief Commercial Officer</div>
+<div class="company">BLH Joint Stock Company</div>
+
+<div class="logo">
+<img src="assets/logo.png">
+</div>
+
+<div class="buttons">
+
+<div class="row">
+<a href="tel:0909554558" class="btn">
+<i class="fa-solid fa-phone"></i>Call
+</a>
+<a href="#" class="btn">
+<i class="fa-brands fa-facebook-messenger"></i>Zalo
+</a>
+</div>
+
+<div class="btn" onclick="openQR()">
+<i class="fa-solid fa-qrcode"></i>Payment QR
+</div>
+
+<div class="btn" onclick="downloadVCF()">
+<i class="fa-solid fa-address-card"></i>Save Contact
+</div>
+
+</div>
+</div>
+
+<div class="popup" id="popup">
+<div class="popup-content">
+<img src="assets/qr.png">
+<div class="close" onclick="closeQR()">Close</div>
+</div>
+</div>
+
+<script>
+
+/* 3D STARFIELD */
+const canvas=document.getElementById("galaxy");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<250;i++){
+stars.push({
+x:Math.random()*canvas.width-canvas.width/2,
+y:Math.random()*canvas.height-canvas.height/2,
+z:Math.random()*canvas.width
+});
+}
+
+function animate(){
+ctx.fillStyle="#000814";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+stars.forEach(s=>{
+s.z-=1.5;
+if(s.z<=0)s.z=canvas.width;
+let k=128/s.z;
+let px=s.x*k+canvas.width/2;
+let py=s.y*k+canvas.height/2;
+if(px>=0&&px<=canvas.width&&py>=0&&py<=canvas.height){
+ctx.fillStyle="white";
+ctx.fillRect(px,py,2,2);
+}
+});
+requestAnimationFrame(animate);
+}
+animate();
+
+/* PARALLAX */
+const card=document.getElementById("card");
+document.addEventListener("mousemove",e=>{
+let x=(e.clientX/window.innerWidth-0.5)*15;
+let y=(e.clientY/window.innerHeight-0.5)*15;
+card.style.transform=`rotateY(${x}deg) rotateX(${-y}deg)`;
+});
+
+/* QR */
+function openQR(){
+document.getElementById("popup").classList.add("active");
+}
+function closeQR(){
+document.getElementById("popup").classList.remove("active");
+}
+
+/* vCard */
+function downloadVCF(){
+const vcf=`BEGIN:VCARD
+VERSION:3.0
+FN:Chris Pham
+TITLE:Chief Commercial Officer
+ORG:BLH Joint Stock Company
+TEL:0909554558
+END:VCARD`;
+
+const blob=new Blob([vcf],{type:"text/vcard"});
+const link=document.createElement("a");
+link.href=URL.createObjectURL(blob);
+link.download="Chris_Pham.vcf";
+link.click();
+}
+
+</script>
+
+</body>
+</html>
