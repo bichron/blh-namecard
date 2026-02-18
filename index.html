@@ -96,11 +96,28 @@ backdrop-filter:blur(40px);
 border:1px solid rgba(255,255,255,0.25);
 color:white;
 text-decoration:none;
-text-align:center;
 font-weight:500;
 transition:0.25s ease;
 cursor:pointer;
 box-shadow:0 10px 25px rgba(0,0,0,0.35);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.btn-main{
+display:flex;
+align-items:center;
+}
+
+.btn i{margin-right:6px;}
+
+.subtext{
+font-size:65%;
+opacity:0.85;
+margin-top:2px;
 }
 
 .btn:hover{
@@ -122,8 +139,6 @@ animation:shake 0.25s;
 80%{transform:translateX(2px)}
 100%{transform:translateX(0)}
 }
-
-.btn i{margin-right:6px;}
 
 /* POPUPS */
 .popup{
@@ -226,17 +241,25 @@ animation:lightSweep 4s infinite;
 <div class="buttons">
 
 <div class="row">
+
 <a href="tel:0909554558" class="btn">
+<div class="btn-main">
 <i class="fa-solid fa-phone"></i>Call
+</div>
+<div class="subtext">0909554558</div>
 </a>
 
 <div class="btn" onclick="downloadVCF()">
 <i class="fa-solid fa-address-card"></i>Save Contact
 </div>
+
 </div>
 
 <div class="btn">
+<div class="btn-main">
 <i class="fa-brands fa-facebook-messenger"></i>Chat
+</div>
+<div class="subtext">Telegram • WhatsApp • Zalo</div>
 </div>
 
 <div class="btn" onclick="openQR()">
