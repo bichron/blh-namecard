@@ -3,239 +3,335 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chris Pham</title>
+<title>Chris Pham - Digital Card</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
-body {
-    height: 100vh;
-    background: radial-gradient(circle at top, #081428, #000814);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+body{
+height:100vh;
+overflow:hidden;
+background:#000814;
+display:flex;
+justify-content:center;
+align-items:center;
+perspective:1200px;
 }
 
-/* FLOATING PARTICLES */
-
-body::before {
-    content: "";
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    background: url('https://www.transparenttextures.com/patterns/stardust.png');
-    animation: moveBg 60s linear infinite;
-    opacity: 0.3;
-}
-
-@keyframes moveBg {
-    from { transform: translateY(0); }
-    to { transform: translateY(-500px); }
+/* 3D GALAXY CANVAS */
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
 }
 
 /* PHONE */
-
-.phone {
-    width: 350px;
-    height: 690px;
-    border-radius: 40px;
-    padding: 30px;
-    backdrop-filter: blur(20px);
-    background: rgba(10, 25, 60, 0.55);
-    box-shadow:
-        0 0 60px rgba(0, 162, 255, 0.4),
-        inset 0 0 50px rgba(0, 162, 255, 0.2);
-    position: relative;
-    animation: fadeIn 1.2s ease forwards;
-    opacity: 0;
+.phone{
+width:350px;
+height:690px;
+border-radius:40px;
+padding:30px;
+background:rgba(15,30,60,0.6);
+backdrop-filter:blur(25px);
+box-shadow:
+0 0 80px rgba(0,255,255,0.4),
+inset 0 0 40px rgba(0,255,255,0.2);
+position:relative;
+transform-style:preserve-3d;
+transition:transform 0.2s ease;
+animation:float 6s ease-in-out infinite alternate;
 }
 
-@keyframes fadeIn {
-    to { opacity: 1; transform: translateY(0); }
+/* EDGE LIGHT */
+.phone::before{
+content:"";
+position:absolute;
+inset:0;
+border-radius:40px;
+padding:3px;
+background:linear-gradient(45deg,#00f0ff,#0066ff,#00f0ff);
+-webkit-mask:
+linear-gradient(#000 0 0) content-box,
+linear-gradient(#000 0 0);
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+animation:edgeRotate 6s linear infinite;
 }
 
-/* AVATAR GLOW RING */
-
-.avatar-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    position: relative;
+@keyframes edgeRotate{
+0%{background-position:0%}
+100%{background-position:400%}
 }
 
-.avatar-ring {
-    position: absolute;
-    width: 170px;
-    height: 170px;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    border-top: 3px solid #00eaff;
-    border-right: 3px solid #00eaff;
-    animation: rotateRing 4s linear infinite;
-    box-shadow: 0 0 25px #00eaff;
+@keyframes float{
+from{transform:translateY(0)}
+to{transform:translateY(-15px)}
 }
 
-@keyframes rotateRing {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+/* AVATAR */
+.avatar-wrap{
+display:flex;
+justify-content:center;
+margin-top:40px;
+position:relative;
 }
 
-.avatar {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid rgba(0,255,255,0.6);
-    box-shadow:
-        0 0 30px #00eaff,
-        0 0 60px rgba(0,234,255,0.6);
+.ring{
+position:absolute;
+width:170px;
+height:170px;
+border-radius:50%;
+border-top:3px solid #00eaff;
+border-right:3px solid #00eaff;
+animation:spin 4s linear infinite;
+box-shadow:0 0 30px #00eaff;
 }
 
-.avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+
+.avatar{
+width:150px;
+height:150px;
+border-radius:50%;
+overflow:hidden;
+border:3px solid #00eaff;
+box-shadow:0 0 40px #00eaff;
+}
+
+.avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
 /* TEXT */
-
-.name {
-    text-align: center;
-    color: white;
-    font-size: 24px;
-    font-weight: 700;
-    margin-top: 25px;
-    letter-spacing: 2px;
+.name{
+text-align:center;
+color:#fff;
+font-size:24px;
+font-weight:700;
+margin-top:25px;
+letter-spacing:2px;
 }
 
-.title {
-    text-align: center;
-    color: #8fdfff;
-    font-size: 14px;
-    margin-top: 6px;
+.title{
+text-align:center;
+color:#8fdfff;
+font-size:14px;
+margin-top:6px;
 }
 
-.company {
-    text-align: center;
-    color: #00eaff;
-    font-weight: 600;
-    margin-top: 8px;
+.company{
+text-align:center;
+color:#00eaff;
+font-weight:600;
+margin-top:8px;
 }
 
 /* BUTTONS */
-
-.buttons {
-    margin-top: 45px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+.buttons{
+margin-top:40px;
+display:flex;
+flex-direction:column;
+gap:18px;
 }
 
-.row-buttons {
-    display: flex;
-    gap: 12px;
+.row{
+display:flex;
+gap:12px;
 }
 
-.small-btn {
-    flex: 1;
-    background: linear-gradient(145deg, #00cfff, #0077ff);
-    padding: 12px;
-    border-radius: 25px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-    text-decoration: none;
-    box-shadow: 0 0 20px rgba(0,255,255,0.6);
-    transition: 0.3s;
+.btn{
+flex:1;
+padding:14px;
+border-radius:25px;
+background:linear-gradient(145deg,#00eaff,#0066ff);
+color:#fff;
+text-decoration:none;
+text-align:center;
+font-weight:600;
+box-shadow:0 0 25px rgba(0,255,255,0.7);
+transition:0.3s;
+cursor:pointer;
 }
 
-.small-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 30px rgba(0,255,255,0.9);
+.btn:hover{
+transform:translateY(-4px);
+box-shadow:0 0 40px rgba(0,255,255,1);
 }
 
-.btn {
-    background: linear-gradient(145deg, #00eaff, #0066ff);
-    padding: 15px;
-    border-radius: 30px;
-    text-align: center;
-    font-weight: 600;
-    color: white;
-    text-decoration: none;
-    box-shadow: 0 0 30px rgba(0,255,255,0.7);
-    transition: 0.3s;
+.btn i{
+margin-right:8px;
 }
 
-.btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 40px rgba(0,255,255,1);
+/* POPUP QR */
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.6);
+display:flex;
+justify-content:center;
+align-items:center;
+visibility:hidden;
+opacity:0;
+transition:0.3s;
 }
 
-.btn i, .small-btn i {
-    margin-right: 8px;
+.popup.active{
+visibility:visible;
+opacity:1;
 }
 
-/* FLOATING EFFECT */
-
-.phone {
-    animation: float 6s ease-in-out infinite alternate;
+.popup-content{
+background:rgba(20,40,80,0.8);
+backdrop-filter:blur(20px);
+padding:30px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 0 40px #00eaff;
 }
 
-@keyframes float {
-    from { transform: translateY(0px); }
-    to { transform: translateY(-15px); }
+.popup img{
+width:200px;
+}
+
+.close{
+margin-top:15px;
+color:#fff;
+cursor:pointer;
 }
 
 </style>
 </head>
 <body>
 
-<div class="phone">
+<canvas id="galaxy"></canvas>
 
-    <div class="avatar-wrapper">
-        <div class="avatar-ring"></div>
-        <div class="avatar">
-            <img src="assets/CCOPham.png" alt="Chris Pham">
-        </div>
-    </div>
+<div class="phone" id="card">
 
-    <div class="name">CHRIS PHAM</div>
-    <div class="title">Chief Commercial Officer</div>
-    <div class="company">BLH Joint Stock Company</div>
+<div class="avatar-wrap">
+<div class="ring"></div>
+<div class="avatar">
+<img src="assets/CCOPham.png">
+</div>
+</div>
 
-    <div class="buttons">
+<div class="name">CHRIS PHAM</div>
+<div class="title">Chief Commercial Officer</div>
+<div class="company">BLH GROUP</div>
 
-        <div class="row-buttons">
-            <a href="tel:+84901234567" class="small-btn">
-                <i class="fa-solid fa-phone"></i>Call
-            </a>
-            <a href="#" class="small-btn">
-                <i class="fa-brands fa-facebook-messenger"></i>Zalo
-            </a>
-        </div>
+<div class="buttons">
 
-        <a href="#" class="btn">
-            <i class="fa-solid fa-qrcode"></i>Payment QR
-        </a>
+<div class="row">
+<a href="tel:+84901234567" class="btn">
+<i class="fa-solid fa-phone"></i>Call
+</a>
+<a href="#" class="btn">
+<i class="fa-brands fa-facebook-messenger"></i>Zalo
+</a>
+</div>
 
-        <a href="#" class="btn">
-            <i class="fa-solid fa-address-card"></i>Contact Us
-        </a>
+<div class="btn" onclick="openQR()">
+<i class="fa-solid fa-qrcode"></i>Payment QR
+</div>
 
-    </div>
+<div class="btn" onclick="downloadVCF()">
+<i class="fa-solid fa-address-card"></i>Save Contact
+</div>
 
 </div>
+</div>
+
+<!-- QR POPUP -->
+<div class="popup" id="popup">
+<div class="popup-content">
+<img src="assets/qr.png">
+<div class="close" onclick="closeQR()">Close</div>
+</div>
+</div>
+
+<script>
+
+/* 3D GALAXY BACKGROUND */
+const canvas=document.getElementById("galaxy");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<200;i++){
+stars.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+z:Math.random()*canvas.width
+});
+}
+
+function animate(){
+ctx.fillStyle="#000814";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+stars.forEach(s=>{
+s.z-=2;
+if(s.z<=0)s.z=canvas.width;
+let k=128/s.z;
+let px=s.x*k+canvas.width/2;
+let py=s.y*k+canvas.height/2;
+if(px>=0&&px<=canvas.width&&py>=0&&py<=canvas.height){
+ctx.fillStyle="#00eaff";
+ctx.fillRect(px,py,2,2);
+}
+});
+requestAnimationFrame(animate);
+}
+animate();
+
+/* PARALLAX */
+const card=document.getElementById("card");
+document.addEventListener("mousemove",e=>{
+let x=(e.clientX/window.innerWidth-0.5)*20;
+let y=(e.clientY/window.innerHeight-0.5)*20;
+card.style.transform=`rotateY(${x}deg) rotateX(${-y}deg)`;
+});
+
+/* QR */
+function openQR(){
+document.getElementById("popup").classList.add("active");
+}
+function closeQR(){
+document.getElementById("popup").classList.remove("active");
+}
+
+/* vCard */
+function downloadVCF(){
+const vcf=`BEGIN:VCARD
+VERSION:3.0
+FN:Chris Pham
+TITLE:Chief Commercial Officer
+ORG:BLH GROUP
+TEL:+84901234567
+EMAIL:chris@example.com
+END:VCARD`;
+
+const blob=new Blob([vcf],{type:"text/vcard"});
+const link=document.createElement("a");
+link.href=URL.createObjectURL(blob);
+link.download="Chris_Pham.vcf";
+link.click();
+}
+
+</script>
 
 </body>
 </html>
