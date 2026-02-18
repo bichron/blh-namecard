@@ -21,24 +21,15 @@ align-items:center;
 perspective:1600px;
 }
 
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:-2;
-}
-
 /* PHONE CARD */
 .phone{
 width:360px;
 height:min(92vh,700px);
 border-radius:42px;
-padding:28px;
+padding:26px;
 display:flex;
 flex-direction:column;
 position:relative;
-transform-style:preserve-3d;
-transition:transform 0.2s ease;
 background:linear-gradient(rgba(255,255,255,0.08),rgba(255,255,255,0.03));
 backdrop-filter:blur(60px) saturate(180%);
 border:1px solid rgba(255,255,255,0.18);
@@ -55,7 +46,7 @@ to{transform:translateY(-12px)}
 }
 
 /* AVATAR */
-.avatar-wrap{display:flex;justify-content:center;margin-top:15px;position:relative;}
+.avatar-wrap{display:flex;justify-content:center;margin-top:10px;position:relative;}
 .ring{
 position:absolute;
 width:150px;height:150px;
@@ -74,7 +65,7 @@ box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
 .avatar img{width:100%;height:100%;object-fit:cover;}
 
-.name{text-align:center;color:white;font-size:20px;font-weight:600;margin-top:15px;}
+.name{text-align:center;color:white;font-size:20px;font-weight:600;margin-top:14px;}
 .title{text-align:center;color:rgba(255,255,255,0.7);font-size:13px;margin-top:4px;}
 .company{text-align:center;color:rgba(255,255,255,0.95);font-size:14px;margin-top:6px;}
 
@@ -87,54 +78,49 @@ box-shadow:0 20px 40px rgba(0,0,0,0.5);
 
 .btn{
 flex:1;
-padding:10px 12px;
-border-radius:24px;
+padding:11px 14px;
+border-radius:26px;
 font-size:13px;
 background:rgba(255,255,255,0.08);
 backdrop-filter:blur(40px);
 border:1px solid rgba(255,255,255,0.25);
 color:white;
 text-decoration:none;
-text-align:center;
 font-weight:500;
-transition:0.25s ease;
 cursor:pointer;
 box-shadow:0 10px 25px rgba(0,0,0,0.35);
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
+transition:all 0.25s ease;
+min-height:52px;
+}
+
+.btn-main{
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+.btn i{margin:0;}
+
+.subtext{
+font-size:65%;
+opacity:0.8;
+margin-top:3px;
 }
 
 .btn:hover{
 transform:translateY(-3px);
 background:rgba(255,255,255,0.18);
-animation:shake 0.35s;
 }
 
 .btn:active{
 transform:scale(0.96);
-animation:shake 0.25s;
 }
 
-@keyframes shake{
-0%{transform:translateX(0)}
-20%{transform:translateX(-2px)}
-40%{transform:translateX(2px)}
-60%{transform:translateX(-2px)}
-80%{transform:translateX(2px)}
-100%{transform:translateX(0)}
-}
-
-.btn i{margin-bottom:4px;}
-
-.subtext{
-font-size:65%;
-opacity:0.8;
-margin-top:2px;
-}
-
-/* POPUPS */
+/* POPUP */
 .popup{
 position:fixed;
 inset:0;
@@ -144,50 +130,27 @@ justify-content:center;
 align-items:center;
 visibility:hidden;
 opacity:0;
-transition:0.4s;
+transition:0.3s;
 z-index:10;
 }
 .popup.active{visibility:visible;opacity:1;}
 
 .popup-content{
-position:relative;
 background:rgba(255,255,255,0.08);
 backdrop-filter:blur(60px) saturate(180%);
 border:1px solid rgba(0,255,255,0.35);
-padding:30px;
+padding:28px;
 border-radius:25px;
 text-align:center;
 width:300px;
 color:white;
-overflow:hidden;
 box-shadow:0 0 40px rgba(0,255,255,0.25);
 }
 
-.popup-content::before{
-content:"";
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:70%;
-height:70%;
-background:url('assets/logo.png') no-repeat center;
-background-size:contain;
-opacity:0.18;
-pointer-events:none;
-animation:glowPulse 4s ease-in-out infinite alternate;
-}
-
-@keyframes glowPulse{
-from{opacity:0.15;}
-to{opacity:0.22;}
-}
-
-.popup-content h3{margin-bottom:14px;position:relative;z-index:2;}
-.popup-content p{font-size:13px;margin-bottom:8px;position:relative;z-index:2;}
-.close{margin-top:15px;cursor:pointer;opacity:0.7;position:relative;z-index:2;}
+.popup-content h3{margin-bottom:14px;}
+.popup-content p{font-size:13px;margin-bottom:8px;}
+.close{margin-top:15px;cursor:pointer;opacity:0.7;}
 .close:hover{opacity:1;}
-
 </style>
 </head>
 <body>
@@ -214,39 +177,71 @@ to{opacity:0.22;}
 <div class="row">
 
 <a href="tel:0909554558" class="btn">
+<div class="btn-main">
 <i class="fa-solid fa-phone"></i>
-<div>Call</div>
+<span>Call</span>
+</div>
 <div class="subtext">0909554558</div>
 </a>
 
 <a href="#" class="btn">
+<div class="btn-main">
 <i class="fa-solid fa-comments"></i>
-<div>Chat</div>
+<span>Chat</span>
+</div>
 <div class="subtext">Telegram • Zalo • Viber</div>
 </a>
 
 </div>
 
 <div class="btn" onclick="openQR()">
+<div class="btn-main">
 <i class="fa-solid fa-qrcode"></i>
-Payment QR
+<span>Payment QR</span>
+</div>
 </div>
 
 <div class="btn" onclick="downloadVCF()">
+<div class="btn-main">
 <i class="fa-solid fa-address-card"></i>
-Save Contact
+<span>Save Contact</span>
+</div>
 </div>
 
 <div class="btn" onclick="openEnterprise()">
+<div class="btn-main">
 <i class="fa-solid fa-building"></i>
-Enterprise Code / Tax Code
+<span>Enterprise Code / Tax Code</span>
+</div>
 </div>
 
 <div class="btn" onclick="openWebsite()">
+<div class="btn-main">
 <i class="fa-solid fa-globe"></i>
-Website and Company Profile
+<span>Website and Company Profile</span>
+</div>
 </div>
 
+</div>
+</div>
+
+<!-- QR POPUP -->
+<div class="popup" id="qrPopup">
+<div class="popup-content">
+<h3>Payment QR</h3>
+<p>QR Code nội dung thanh toán tại đây</p>
+<div class="close" onclick="closeQR()">Close</div>
+</div>
+</div>
+
+<!-- ENTERPRISE POPUP -->
+<div class="popup" id="enterprisePopup">
+<div class="popup-content">
+<h3>Enterprise Information</h3>
+<p>Company: BLH Joint Stock Company</p>
+<p>Enterprise Code: 0312345678</p>
+<p>Tax Code: 0312345678</p>
+<div class="close" onclick="closeEnterprise()">Close</div>
 </div>
 </div>
 
@@ -254,11 +249,18 @@ Website and Company Profile
 function openWebsite(){
 window.open("https://yourwebsite.com","_blank");
 }
-function openQR(){document.getElementById("qrPopup").classList.add("active");}
-function closeQR(){document.getElementById("qrPopup").classList.remove("active");}
-function openEnterprise(){document.getElementById("enterprisePopup").classList.add("active");}
-function closeEnterprise(){document.getElementById("enterprisePopup").classList.remove("active");}
-
+function openQR(){
+document.getElementById("qrPopup").classList.add("active");
+}
+function closeQR(){
+document.getElementById("qrPopup").classList.remove("active");
+}
+function openEnterprise(){
+document.getElementById("enterprisePopup").classList.add("active");
+}
+function closeEnterprise(){
+document.getElementById("enterprisePopup").classList.remove("active");
+}
 function downloadVCF(){
 const vcf=`BEGIN:VCARD
 VERSION:3.0
