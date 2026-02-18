@@ -6,6 +6,7 @@
 <title>Chris Pham</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 
@@ -18,56 +19,86 @@
 
 body {
     height: 100vh;
-    background: radial-gradient(circle at top, #0f2a55, #000814);
+    background: radial-gradient(circle at top, #081428, #000814);
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-/* PHONE FRAME */
-
-.phone {
-    width: 340px;
-    height: 680px;
-    border-radius: 40px;
-    padding: 25px;
-    background: linear-gradient(180deg, #0a1c3d, #07142c);
-    box-shadow: 
-        0 0 40px rgba(0, 153, 255, 0.4),
-        inset 0 0 30px rgba(0, 153, 255, 0.3);
-    position: relative;
     overflow: hidden;
 }
 
-/* GLOW BACKGROUND */
+/* FLOATING PARTICLES */
 
-.phone::before {
+body::before {
     content: "";
     position: absolute;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(0, 162, 255, 0.6), transparent 70%);
-    top: -150px;
-    left: -50px;
+    width: 200%;
+    height: 200%;
+    background: url('https://www.transparenttextures.com/patterns/stardust.png');
+    animation: moveBg 60s linear infinite;
+    opacity: 0.3;
 }
 
-/* AVATAR */
+@keyframes moveBg {
+    from { transform: translateY(0); }
+    to { transform: translateY(-500px); }
+}
+
+/* PHONE */
+
+.phone {
+    width: 350px;
+    height: 690px;
+    border-radius: 40px;
+    padding: 30px;
+    backdrop-filter: blur(20px);
+    background: rgba(10, 25, 60, 0.55);
+    box-shadow:
+        0 0 60px rgba(0, 162, 255, 0.4),
+        inset 0 0 50px rgba(0, 162, 255, 0.2);
+    position: relative;
+    animation: fadeIn 1.2s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* AVATAR GLOW RING */
 
 .avatar-wrapper {
     display: flex;
     justify-content: center;
     margin-top: 40px;
+    position: relative;
+}
+
+.avatar-ring {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top: 3px solid #00eaff;
+    border-right: 3px solid #00eaff;
+    animation: rotateRing 4s linear infinite;
+    box-shadow: 0 0 25px #00eaff;
+}
+
+@keyframes rotateRing {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .avatar {
-    width: 140px;
-    height: 140px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     overflow: hidden;
-    border: 4px solid #00bfff;
+    border: 3px solid rgba(0,255,255,0.6);
     box-shadow:
-        0 0 25px #00bfff,
-        0 0 50px rgba(0,191,255,0.6);
+        0 0 30px #00eaff,
+        0 0 60px rgba(0,234,255,0.6);
 }
 
 .avatar img {
@@ -76,27 +107,27 @@ body {
     object-fit: cover;
 }
 
-/* NAME */
+/* TEXT */
 
 .name {
     text-align: center;
     color: white;
     font-size: 24px;
     font-weight: 700;
-    margin-top: 20px;
-    letter-spacing: 1px;
+    margin-top: 25px;
+    letter-spacing: 2px;
 }
 
 .title {
     text-align: center;
-    color: #9ecfff;
+    color: #8fdfff;
     font-size: 14px;
-    margin-top: 5px;
+    margin-top: 6px;
 }
 
 .company {
     text-align: center;
-    color: #00bfff;
+    color: #00eaff;
     font-weight: 600;
     margin-top: 8px;
 }
@@ -104,59 +135,66 @@ body {
 /* BUTTONS */
 
 .buttons {
-    margin-top: 40px;
+    margin-top: 45px;
     display: flex;
     flex-direction: column;
     gap: 18px;
 }
 
-.btn {
-    background: linear-gradient(145deg, #0e2a5e, #081c3a);
-    color: white;
-    padding: 14px;
-    border-radius: 30px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 15px;
-    text-decoration: none;
-    box-shadow:
-        0 5px 15px rgba(0, 162, 255, 0.4),
-        inset 0 0 15px rgba(0, 162, 255, 0.3);
-    transition: 0.3s;
-}
-
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow:
-        0 8px 20px rgba(0, 162, 255, 0.6),
-        inset 0 0 20px rgba(0, 162, 255, 0.5);
-}
-
-/* SMALL BUTTON ROW */
-
 .row-buttons {
     display: flex;
-    gap: 10px;
+    gap: 12px;
 }
 
 .small-btn {
     flex: 1;
-    background: linear-gradient(145deg, #0e2a5e, #081c3a);
-    padding: 10px;
+    background: linear-gradient(145deg, #00cfff, #0077ff);
+    padding: 12px;
     border-radius: 25px;
     text-align: center;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     color: white;
     text-decoration: none;
-    box-shadow:
-        0 5px 15px rgba(0, 162, 255, 0.4),
-        inset 0 0 15px rgba(0, 162, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0,255,255,0.6);
     transition: 0.3s;
 }
 
 .small-btn:hover {
     transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(0,255,255,0.9);
+}
+
+.btn {
+    background: linear-gradient(145deg, #00eaff, #0066ff);
+    padding: 15px;
+    border-radius: 30px;
+    text-align: center;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 0 30px rgba(0,255,255,0.7);
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 40px rgba(0,255,255,1);
+}
+
+.btn i, .small-btn i {
+    margin-right: 8px;
+}
+
+/* FLOATING EFFECT */
+
+.phone {
+    animation: float 6s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-15px); }
 }
 
 </style>
@@ -166,6 +204,7 @@ body {
 <div class="phone">
 
     <div class="avatar-wrapper">
+        <div class="avatar-ring"></div>
         <div class="avatar">
             <img src="assets/CCOPham.png" alt="Chris Pham">
         </div>
@@ -173,17 +212,26 @@ body {
 
     <div class="name">CHRIS PHAM</div>
     <div class="title">Chief Commercial Officer</div>
-    <div class="company">BLH GROUP</div>
+    <div class="company">BLH Joint Stock Company</div>
 
     <div class="buttons">
 
         <div class="row-buttons">
-            <a href="#" class="small-btn">Call</a>
-            <a href="#" class="small-btn">Zalo</a>
+            <a href="tel:+84901234567" class="small-btn">
+                <i class="fa-solid fa-phone"></i>Call
+            </a>
+            <a href="#" class="small-btn">
+                <i class="fa-brands fa-facebook-messenger"></i>Zalo
+            </a>
         </div>
 
-        <a href="#" class="btn">Payment QR</a>
-        <a href="#" class="btn">Contact Us</a>
+        <a href="#" class="btn">
+            <i class="fa-solid fa-qrcode"></i>Payment QR
+        </a>
+
+        <a href="#" class="btn">
+            <i class="fa-solid fa-address-card"></i>Contact Us
+        </a>
 
     </div>
 
