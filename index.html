@@ -96,33 +96,24 @@ backdrop-filter:blur(40px);
 border:1px solid rgba(255,255,255,0.25);
 color:white;
 text-decoration:none;
+text-align:center;
 font-weight:500;
 transition:0.25s ease;
 cursor:pointer;
 box-shadow:0 10px 25px rgba(0,0,0,0.35);
-
-/* QUAN TRỌNG: icon + chữ luôn cùng dòng */
-display:flex;
-align-items:center;
-justify-content:center;
-gap:6px;
-white-space:nowrap;
 }
 
-/* Hover desktop */
 .btn:hover{
 transform:translateY(-3px);
 background:rgba(255,255,255,0.18);
 animation:shake 0.35s;
 }
 
-/* Mobile tap effect */
 .btn:active{
 transform:scale(0.96);
 animation:shake 0.25s;
 }
 
-/* Rung nhẹ */
 @keyframes shake{
 0%{transform:translateX(0)}
 20%{transform:translateX(-2px)}
@@ -132,9 +123,7 @@ animation:shake 0.25s;
 100%{transform:translateX(0)}
 }
 
-.btn i{
-margin:0;
-}
+.btn i{margin-right:6px;}
 
 /* POPUPS */
 .popup{
@@ -165,7 +154,6 @@ overflow:hidden;
 box-shadow:0 0 40px rgba(0,255,255,0.25);
 }
 
-/* PREMIUM WATERMARK */
 .popup-content::before{
 content:"";
 position:absolute;
@@ -187,7 +175,6 @@ from{opacity:0.15; transform:translate(-50%,-50%) scale(1);}
 to{opacity:0.22; transform:translate(-50%,-50%) scale(1.08);}
 }
 
-/* LIGHT SWEEP */
 .popup-content::after{
 content:"";
 position:absolute;
@@ -219,7 +206,7 @@ animation:lightSweep 4s infinite;
 
 <canvas id="galaxy"></canvas>
 
-<div class="phone" id="card">
+<div class="phone">
 
 <div class="avatar-wrap">
 <div class="ring"></div>
@@ -243,17 +230,17 @@ animation:lightSweep 4s infinite;
 <i class="fa-solid fa-phone"></i>Call
 </a>
 
-<a href="#" class="btn">
-<i class="fa-solid fa-comments"></i>Chat
-</a>
+<div class="btn" onclick="downloadVCF()">
+<i class="fa-solid fa-address-card"></i>Save Contact
+</div>
+</div>
+
+<div class="btn">
+<i class="fa-brands fa-facebook-messenger"></i>Chat
 </div>
 
 <div class="btn" onclick="openQR()">
 <i class="fa-solid fa-qrcode"></i>Payment QR
-</div>
-
-<div class="btn" onclick="downloadVCF()">
-<i class="fa-solid fa-address-card"></i>Save Contact
 </div>
 
 <div class="btn" onclick="openEnterprise()">
