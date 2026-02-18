@@ -101,6 +101,11 @@ font-weight:500;
 transition:0.25s ease;
 cursor:pointer;
 box-shadow:0 10px 25px rgba(0,0,0,0.35);
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
 }
 
 /* Hover desktop */
@@ -126,7 +131,18 @@ animation:shake 0.25s;
 100%{transform:translateX(0)}
 }
 
+.btn-main{
+display:flex;
+align-items:center;
+}
+
 .btn i{margin-right:6px;}
+
+.subtext{
+font-size:60%;
+opacity:0.8;
+margin-top:3px;
+}
 
 /* POPUPS */
 .popup{
@@ -232,10 +248,17 @@ animation:lightSweep 4s infinite;
 
 <div class="row">
 <a href="tel:0909554558" class="btn">
+<div class="btn-main">
 <i class="fa-solid fa-phone"></i>Call
+</div>
+<div class="subtext">0909554558</div>
 </a>
+
 <a href="#" class="btn">
-<i class="fa-brands fa-facebook-messenger"></i>Zalo
+<div class="btn-main">
+<i class="fa-solid fa-comments"></i>Chat
+</div>
+<div class="subtext">Telegram • Zalo • Viber</div>
 </a>
 </div>
 
