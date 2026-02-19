@@ -17,13 +17,13 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 :root{
---bg1:#0b1f3a;
+--bg1:#0b1f3a;              /* Dark Navy */
 --bg2:#071427;
---text:#f8f4ea;
+--text:#f8f4ea;            /* White Ivory */
 --sub:rgba(248,244,234,0.7);
 --glass:rgba(255,255,255,0.05);
---border:#8c7a4f;
---gold:#ffd700;
+--border:#8c7a4f;          /* Gold Grey */
+--gold:#ffd700;            /* Gold Bright */
 }
 
 body.light{
@@ -48,6 +48,7 @@ align-items:center;
 transition:background .4s ease;
 }
 
+/* Wrapper */
 .wrapper{
 width:100%;
 height:100%;
@@ -57,6 +58,7 @@ align-items:center;
 perspective:1400px;
 }
 
+/* PHONE */
 .phone{
 width:360px;
 height:700px;
@@ -74,10 +76,9 @@ animation:float 6s ease-in-out infinite alternate;
 transform-origin:center center;
 opacity:0;
 position:relative;
-overflow:hidden;
 }
 
-/* Enterprise Premium Glass giữ nguyên */
+/* Enterprise Premium Glass */
 .phone::after{
 content:"";
 position:absolute;
@@ -87,6 +88,7 @@ background:linear-gradient(120deg,transparent 30%,rgba(255,215,0,0.05),transpare
 pointer-events:none;
 }
 
+/* Load animation */
 .phone.loaded{
 animation:float 6s ease-in-out infinite alternate, fadeIn .6s ease forwards;
 }
@@ -101,90 +103,46 @@ from{transform:translateY(0)}
 to{transform:translateY(-12px)}
 }
 
-/* ===============================
-   AVATAR BACKGROUND UPGRADE
-   =============================== */
-
-.avatar-wrap{
-display:flex;
-justify-content:center;
-margin-top:10px;
-position:relative;
-height:230px;
-align-items:flex-end;
-overflow:hidden;
+/* Theme Toggle */
+.theme-toggle{
+position:fixed;
+top:20px;
+right:20px;
+font-size:18px;
+cursor:pointer;
+color:var(--text);
+z-index:999;
 }
 
-/* Nền hologram full như hình */
-.avatar-wrap::before{
-content:"";
-position:absolute;
-bottom:-40px;
-width:320px;
-height:320px;
-border-radius:50%;
-background:
-radial-gradient(circle at center,
-rgba(0,150,255,0.8) 0%,
-rgba(0,120,255,0.5) 25%,
-rgba(0,80,200,0.25) 45%,
-rgba(0,0,0,0) 65%);
-filter:blur(8px);
-animation:glowPulse 4s ease-in-out infinite alternate;
-z-index:0;
-}
-
-/* Hologram ring layers */
-.avatar-wrap::after{
-content:"";
-position:absolute;
-bottom:-30px;
-width:260px;
-height:260px;
-border-radius:50%;
-border:1px solid rgba(0,170,255,0.6);
-box-shadow:
-0 0 40px rgba(0,170,255,0.6),
-0 0 80px rgba(0,170,255,0.4);
-animation:spin 20s linear infinite;
-z-index:0;
-}
-
-/* giữ spin animation */
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* Ring HTML vẫn giữ nhưng ẩn đi */
-.ring{display:none;}
-
-.avatar{
-width:200px;
-height:auto;
-border-radius:0;
-overflow:visible;
-border:none;
-box-shadow:none;
-position:relative;
-z-index:2;
-display:flex;
-justify-content:center;
-align-items:flex-end;
-}
-
-.avatar img{
-width:200px;
-height:auto;
-object-fit:contain;
-}
-
-/* TEXT */
-.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:10px;}
+/* Text */
+.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:15px;}
 .title{text-align:center;color:var(--sub);font-size:13px;margin-top:4px;}
 .company{text-align:center;color:var(--text);font-size:14px;margin-top:6px;}
 
 .logo{display:flex;justify-content:center;margin-top:8px;}
 .logo img{width:48px;filter:drop-shadow(0 0 8px rgba(255,215,0,0.4));}
 
-/* Buttons giữ nguyên */
+/* Avatar */
+.avatar-wrap{display:flex;justify-content:center;margin-top:15px;position:relative;}
+.ring{
+position:absolute;
+width:150px;height:150px;
+border-radius:50%;
+border:2px solid var(--border);
+animation:spin 12s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.avatar{
+width:130px;height:130px;
+border-radius:50%;
+overflow:hidden;
+border:2px solid var(--border);
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+.avatar img{width:100%;height:100%;object-fit:cover;}
+
+/* Buttons */
 .buttons{margin-top:auto;display:flex;flex-direction:column;gap:10px;}
 .row{display:flex;gap:10px;}
 
@@ -210,10 +168,12 @@ text-align:center;
 }
 .btn:hover{transform:translateY(-3px);}
 .btn:active{transform:scale(.96);}
+
 .btn i{color:var(--gold);margin-bottom:4px;}
+
 .subtext{font-size:11px;color:var(--sub);}
 
-/* POPUP GIỮ NGUYÊN */
+/* POPUP (GIỮ NGUYÊN EFFECT) */
 .popup{
 position:fixed;
 inset:0;
