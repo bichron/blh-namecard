@@ -19,26 +19,18 @@
 --bg1:#0a1a35;
 --bg2:#000814;
 --text:#ffffff;
---subtext:rgba(255,255,255,0.7);
---card-bg:rgba(255,255,255,0.08);
---card-border:rgba(255,255,255,0.18);
---btn-bg:rgba(255,255,255,0.08);
---btn-hover:rgba(255,255,255,0.18);
---popup-border:rgba(0,255,255,0.5);
---popup-glow:rgba(0,255,255,0.35);
+--sub:rgba(255,255,255,0.7);
+--glass:rgba(255,255,255,0.08);
+--border:rgba(255,255,255,0.18);
 }
 
 body.light{
---bg1:#f2f5fa;
---bg2:#dce6f3;
+--bg1:#eef3f9;
+--bg2:#dbe5f2;
 --text:#0a1a35;
---subtext:rgba(10,26,53,0.7);
---card-bg:rgba(255,255,255,0.6);
---card-border:rgba(0,0,0,0.1);
---btn-bg:rgba(255,255,255,0.6);
---btn-hover:rgba(255,255,255,0.9);
---popup-border:rgba(0,150,255,0.4);
---popup-glow:rgba(0,150,255,0.3);
+--sub:rgba(10,26,53,0.7);
+--glass:rgba(255,255,255,0.65);
+--border:rgba(0,0,0,0.1);
 }
 
 body{
@@ -56,13 +48,13 @@ align-items:center;
 transition:background .4s ease;
 }
 
-/* WRAPPER SCALE */
+/* SCALE WRAPPER */
 .wrapper{
+width:100%;
+height:100%;
 display:flex;
 justify-content:center;
 align-items:center;
-width:100%;
-height:100%;
 }
 
 /* PHONE */
@@ -73,16 +65,16 @@ border-radius:42px;
 padding:28px;
 display:flex;
 flex-direction:column;
-background:linear-gradient(var(--card-bg),rgba(255,255,255,0.03));
+background:linear-gradient(var(--glass),rgba(255,255,255,0.03));
 backdrop-filter:blur(60px) saturate(180%);
-border:1px solid var(--card-border);
+border:1px solid var(--border);
 box-shadow:0 35px 70px rgba(0,0,0,0.6);
 animation:float 6s ease-in-out infinite alternate;
 transform-origin:center center;
 opacity:0;
 }
 
-.phone.loaded{
+.phone.ready{
 animation:float 6s ease-in-out infinite alternate, fadeIn .6s ease forwards;
 }
 
@@ -96,7 +88,7 @@ from{transform:translateY(0)}
 to{transform:translateY(-12px)}
 }
 
-/* THEME TOGGLE */
+/* TOGGLE */
 .theme-toggle{
 position:absolute;
 top:20px;
@@ -109,7 +101,7 @@ z-index:999;
 
 /* TEXT */
 .name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:15px;}
-.title{text-align:center;color:var(--subtext);font-size:13px;margin-top:4px;}
+.title{text-align:center;color:var(--sub);font-size:13px;margin-top:4px;}
 .company{text-align:center;color:var(--text);font-size:14px;margin-top:6px;}
 
 /* AVATAR */
@@ -118,7 +110,7 @@ z-index:999;
 position:absolute;
 width:150px;height:150px;
 border-radius:50%;
-border:2px solid var(--card-border);
+border:2px solid var(--border);
 animation:spin 12s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -126,7 +118,7 @@ animation:spin 12s linear infinite;
 width:130px;height:130px;
 border-radius:50%;
 overflow:hidden;
-border:2px solid var(--card-border);
+border:2px solid var(--border);
 box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
 .avatar img{width:100%;height:100%;object-fit:cover;}
@@ -143,9 +135,9 @@ flex:1;
 padding:10px 14px;
 border-radius:24px;
 font-size:13px;
-background:var(--btn-bg);
+background:var(--glass);
 backdrop-filter:blur(40px);
-border:1px solid var(--card-border);
+border:1px solid var(--border);
 color:var(--text);
 text-decoration:none;
 font-weight:500;
@@ -160,11 +152,11 @@ text-align:center;
 }
 .btn:hover{
 transform:translateY(-3px);
-background:var(--btn-hover);
+background:rgba(255,255,255,0.18);
 }
 .btn:active{transform:scale(.96);}
 
-/* POPUP */
+/* POPUP (GIỮ NGUYÊN HIỆU ỨNG) */
 .popup{
 position:fixed;
 inset:0;
@@ -181,16 +173,16 @@ z-index:100;
 
 .popup-content{
 position:relative;
-background:var(--card-bg);
+background:var(--glass);
 backdrop-filter:blur(70px) saturate(200%);
-border:1px solid var(--popup-border);
+border:1px solid rgba(0,255,255,0.5);
 padding:30px;
 border-radius:25px;
 text-align:center;
 width:300px;
 color:var(--text);
 overflow:hidden;
-box-shadow:0 0 50px var(--popup-glow);
+box-shadow:0 0 50px rgba(0,255,255,0.35);
 transform:scale(.85);
 transition:.4s;
 }
@@ -198,7 +190,6 @@ transition:.4s;
 
 .label{opacity:.8;}
 .value{font-weight:600;color:#00ffff;}
-
 .close{margin-top:15px;cursor:pointer;opacity:.7;}
 .close:hover{opacity:1;}
 </style>
@@ -231,41 +222,55 @@ transition:.4s;
 
 <div class="row">
 <a href="tel:0909554558" class="btn">
+<div class="btn-main">
 <i class="fa-solid fa-phone"></i>
 <span>Call</span>
+</div>
+<div class="subtext">0909554558</div>
 </a>
 
 <div class="btn" onclick="downloadVCF()">
+<div class="btn-main">
 <i class="fa-solid fa-address-card"></i>
 <span>Save Contact</span>
 </div>
 </div>
+</div>
 
 <div class="btn">
+<div class="btn-main">
 <i class="fa-brands fa-facebook-messenger"></i>
 <span>Chat</span>
 </div>
+<div class="subtext">Telegram • WhatsApp • Zalo</div>
+</div>
 
 <div class="btn" onclick="openQR()">
+<div class="btn-main">
 <i class="fa-solid fa-qrcode"></i>
 <span>Payment QR</span>
 </div>
+</div>
 
 <div class="btn" onclick="openEnterprise()">
+<div class="btn-main">
 <i class="fa-solid fa-building"></i>
 <span>Enterprise Code / Tax Code</span>
 </div>
+</div>
 
 <div class="btn" onclick="openWebsite()">
+<div class="btn-main">
 <i class="fa-solid fa-globe"></i>
 <span>Website and Company Profile</span>
 </div>
-
-</div>
-</div>
 </div>
 
-<!-- POPUPS giữ nguyên nội dung -->
+</div>
+</div>
+</div>
+
+<!-- POPUPS -->
 <div class="popup" id="qrPopup">
 <div class="popup-content">
 <h3>Payment QR</h3>
@@ -290,7 +295,7 @@ transition:.4s;
 </div>
 
 <script>
-/* AUTO SCALE SMOOTH */
+/* AUTO SCALE ENGINE */
 function scaleCard(){
 const phone=document.getElementById("phone");
 const baseW=360, baseH=700;
@@ -306,7 +311,7 @@ window.addEventListener("resize",smoothScale);
 window.addEventListener("orientationchange",smoothScale);
 window.addEventListener("load",()=>{
 smoothScale();
-document.getElementById("phone").classList.add("loaded");
+document.getElementById("phone").classList.add("ready");
 });
 
 /* THEME */
@@ -319,7 +324,7 @@ if(localStorage.getItem("theme")==="light"){
 document.body.classList.add("light");
 }
 
-/* Existing functions (UNCHANGED) */
+/* ORIGINAL FUNCTIONS (UNCHANGED) */
 function openWebsite(){window.open("https://yourwebsite.com","_blank");}
 function openQR(){document.getElementById("qrPopup").classList.add("active");}
 function closeQR(){document.getElementById("qrPopup").classList.remove("active");}
