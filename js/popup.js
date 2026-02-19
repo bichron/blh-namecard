@@ -1,9 +1,26 @@
-function openQR(){qrPopup.classList.add("active");}
-function closeQR(){qrPopup.classList.remove("active");}
+document.addEventListener("DOMContentLoaded",()=>{
 
-function openEnterprise(){enterprisePopup.classList.add("active");}
-function closeEnterprise(){enterprisePopup.classList.remove("active");}
+const qrPopup = document.getElementById("qrPopup");
+const enterprisePopup = document.getElementById("enterprisePopup");
 
-function openWebsite(){
-window.open("https://yourwebsite.com","_blank");
+window.openQR = function(){
+  qrPopup.classList.add("active");
 }
+
+window.closeQR = function(){
+  qrPopup.classList.remove("active");
+}
+
+window.openEnterprise = function(){
+  enterprisePopup.classList.add("active");
+}
+
+window.closeEnterprise = function(){
+  enterprisePopup.classList.remove("active");
+}
+
+window.openWebsite = function(){
+  window.open("https://yourwebsite.com","_blank");
+}
+
+});
