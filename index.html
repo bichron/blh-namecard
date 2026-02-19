@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Chris Pham - Digital Card</title>
 
-<!-- PWA / iOS -->
-<meta name="theme-color" content="#0a1a35">
+<meta name="theme-color" content="#0F5E6F">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="apple-touch-icon" href="assets/logo.png">
@@ -18,21 +17,25 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 :root{
---bg1:#0a1a35;
---bg2:#000814;
---text:white;
---sub:rgba(255,255,255,0.7);
---glass:rgba(255,255,255,0.08);
---border:rgba(255,255,255,0.18);
+--bg1:#0F5E6F;
+--bg2:#083C4A;
+--text:#F6E6C9;
+--sub:rgba(246,230,201,0.75);
+--glass:rgba(15,94,111,0.25);
+--border:rgba(242,169,0,0.6);
+--accent:#F2A900;
+--accent-dark:#C88700;
 }
 
 body.light{
---bg1:#eef2f7;
---bg2:#dbe4f2;
---text:#0a1a35;
---sub:rgba(10,26,53,0.7);
---glass:rgba(255,255,255,0.7);
---border:rgba(0,0,0,0.1);
+--bg1:#F6E6C9;
+--bg2:#E9D4AE;
+--text:#083C4A;
+--sub:rgba(8,60,74,0.7);
+--glass:rgba(255,255,255,0.6);
+--border:rgba(200,135,0,0.4);
+--accent:#C88700;
+--accent-dark:#A96F00;
 }
 
 body{
@@ -77,7 +80,7 @@ opacity:0;
 position:relative;
 }
 
-/* Enterprise Premium Glass */
+/* Enterprise Premium Glass (giữ nguyên logic) */
 .phone::after{
 content:"";
 position:absolute;
@@ -109,12 +112,12 @@ top:20px;
 right:20px;
 font-size:18px;
 cursor:pointer;
-color:var(--text);
+color:var(--accent);
 z-index:999;
 }
 
 /* Text */
-.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:15px;}
+.name{text-align:center;color:var(--accent);font-size:20px;font-weight:600;margin-top:15px;}
 .title{text-align:center;color:var(--sub);font-size:13px;margin-top:4px;}
 .company{text-align:center;color:var(--text);font-size:14px;margin-top:6px;}
 
@@ -127,7 +130,7 @@ z-index:999;
 position:absolute;
 width:150px;height:150px;
 border-radius:50%;
-border:2px solid var(--border);
+border:2px solid var(--accent);
 animation:spin 12s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -136,7 +139,7 @@ animation:spin 12s linear infinite;
 width:130px;height:130px;
 border-radius:50%;
 overflow:hidden;
-border:2px solid var(--border);
+border:2px solid var(--accent-dark);
 box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
 .avatar img{width:100%;height:100%;object-fit:cover;}
@@ -152,7 +155,7 @@ border-radius:24px;
 font-size:13px;
 background:var(--glass);
 backdrop-filter:blur(40px);
-border:1px solid var(--border);
+border:1px solid var(--accent);
 color:var(--text);
 text-decoration:none;
 font-weight:500;
@@ -165,7 +168,10 @@ justify-content:center;
 align-items:center;
 text-align:center;
 }
-.btn:hover{transform:translateY(-3px);}
+.btn:hover{
+transform:translateY(-3px);
+border-color:var(--accent-dark);
+}
 .btn:active{transform:scale(.96);}
 
 /* POPUP (giữ nguyên hiệu ứng flash) */
@@ -185,16 +191,16 @@ z-index:100;
 
 .popup-content{
 position:relative;
-background:rgba(255,255,255,0.08);
+background:rgba(15,94,111,0.35);
 backdrop-filter:blur(70px) saturate(200%);
-border:1px solid rgba(0,255,255,0.5);
+border:1px solid var(--accent);
 padding:30px;
 border-radius:25px;
 text-align:center;
 width:300px;
 color:var(--text);
 overflow:hidden;
-box-shadow:0 0 50px rgba(0,255,255,0.35);
+box-shadow:0 0 50px rgba(242,169,0,0.35);
 transform:scale(0.85);
 transition:0.4s;
 }
@@ -210,10 +216,11 @@ width:70%;
 height:70%;
 background:url('assets/logo.png') no-repeat center/contain;
 opacity:0.15;
-filter:brightness(2) drop-shadow(0 0 40px rgba(0,255,255,0.8));
+filter:brightness(1.8) drop-shadow(0 0 40px rgba(242,169,0,0.7));
 pointer-events:none;
 animation:glowPulse 4s ease-in-out infinite alternate;
 }
+
 @keyframes glowPulse{
 from{opacity:0.12; transform:translate(-50%,-50%) scale(1);}
 to{opacity:0.22; transform:translate(-50%,-50%) scale(1.08);}
@@ -230,179 +237,15 @@ background:linear-gradient(120deg,transparent,rgba(255,255,255,0.25),transparent
 transform:skewX(-20deg);
 animation:lightSweep 4s infinite;
 }
+
 @keyframes lightSweep{
 0%{left:-100%;}
 100%{left:150%;}
 }
 
-.label{opacity:0.8;}
-.value{font-weight:600;color:#00ffff;}
+.label{opacity:0.85;}
+.value{font-weight:600;color:var(--accent);}
 .close{margin-top:15px;cursor:pointer;opacity:0.7;}
 .close:hover{opacity:1;}
 </style>
 </head>
-
-<body>
-
-<div class="theme-toggle" onclick="toggleTheme()">
-<i class="fa-solid fa-circle-half-stroke"></i>
-</div>
-
-<div class="wrapper">
-<div class="phone" id="phone">
-
-<!-- ===== GIỮ NGUYÊN 100% NỘI DUNG GỐC ===== -->
-
-<div class="avatar-wrap">
-<div class="ring"></div>
-<div class="avatar">
-<img src="assets/CCOPham/avatar.png">
-</div>
-</div>
-
-<div class="name">CHRIS PHAM</div>
-<div class="title">Chief Commercial Officer</div>
-<div class="company">BLH Joint Stock Company</div>
-
-<div class="logo">
-<img src="assets/logo.png">
-</div>
-
-<div class="buttons">
-
-<div class="row">
-<a href="tel:0909554558" class="btn">
-<div class="btn-main">
-<i class="fa-solid fa-phone"></i>
-<span>Call</span>
-</div>
-<div class="subtext">0909554558</div>
-</a>
-
-<div class="btn" onclick="downloadVCF()">
-<div class="btn-main">
-<i class="fa-solid fa-address-card"></i>
-<span>Save Contact</span>
-</div>
-</div>
-</div>
-
-<div class="btn">
-<div class="btn-main">
-<i class="fa-brands fa-facebook-messenger"></i>
-<span>Chat</span>
-</div>
-<div class="subtext">Telegram • WhatsApp • Zalo</div>
-</div>
-
-<div class="btn" onclick="openQR()">
-<div class="btn-main">
-<i class="fa-solid fa-qrcode"></i>
-<span>Payment QR</span>
-</div>
-</div>
-
-<div class="btn" onclick="openEnterprise()">
-<div class="btn-main">
-<i class="fa-solid fa-building"></i>
-<span>Enterprise Code / Tax Code</span>
-</div>
-</div>
-
-<div class="btn" onclick="openWebsite()">
-<div class="btn-main">
-<i class="fa-solid fa-globe"></i>
-<span>Website and Company Profile</span>
-</div>
-</div>
-
-</div>
-</div>
-</div>
-
-<!-- POPUPS GIỮ NGUYÊN -->
-<div class="popup" id="qrPopup">
-<div class="popup-content">
-<h3>Payment QR</h3>
-<img src="assets/CCOPham/qrpayment.png" height="250">
-<div class="close" onclick="closeQR()">Close</div>
-</div>
-</div>
-
-<div class="popup" id="enterprisePopup">
-<div class="popup-content">
-<h3>Business Information</h3>
-<p><span class="label">Company:</span>
-<span class="value">BLH Joint Stock Company</span></p>
-<p><span class="label">Enterprise Code / Tax Code:</span>
-<span class="value">0318787124</span></p>
-<p><span class="label">Representative:</span>
-<span class="value">Nguyễn Trung Hiếu</span></p>
-<p><span class="label">Title:</span>
-<span class="value">CEO</span></p>
-<div class="close" onclick="closeEnterprise()">Close</div>
-</div>
-</div>
-
-<script>
-/* SCALE FULL SCREEN */
-function scaleCard(){
-const phone=document.getElementById("phone");
-const scale=Math.min(innerWidth/360, innerHeight/700);
-phone.style.transform=`scale(${scale})`;
-}
-addEventListener("resize",()=>requestAnimationFrame(scaleCard));
-addEventListener("load",()=>{
-scaleCard();
-phone.classList.add("loaded");
-});
-
-/* Theme */
-function toggleTheme(){
-document.body.classList.toggle("light");
-localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");
-}
-if(localStorage.getItem("theme")==="light") document.body.classList.add("light");
-
-/* Motion Parallax (stable) */
-if(window.DeviceOrientationEvent){
-window.addEventListener("deviceorientation",e=>{
-const x=e.gamma/40;
-const y=e.beta/40;
-document.getElementById("phone").style.rotate=`${-y}deg ${x}deg`;
-});
-}
-
-/* NFC animation */
-const params=new URLSearchParams(location.search);
-if(params.has("nfc")){
-document.getElementById("phone").animate(
-[{transform:"scale(.95)"},{transform:"scale(1)"}],
-{duration:800,easing:"ease-out"}
-);
-}
-
-/* ORIGINAL FUNCTIONS */
-function openWebsite(){window.open("https://yourwebsite.com","_blank");}
-function openQR(){qrPopup.classList.add("active");}
-function closeQR(){qrPopup.classList.remove("active");}
-function openEnterprise(){enterprisePopup.classList.add("active");}
-function closeEnterprise(){enterprisePopup.classList.remove("active");}
-function downloadVCF(){
-const vcf=`BEGIN:VCARD
-VERSION:3.0
-FN:Chris Pham
-TITLE:Chief Commercial Officer
-ORG:BLH Joint Stock Company
-TEL:0909554558
-END:VCARD`;
-const blob=new Blob([vcf],{type:"text/vcard"});
-const a=document.createElement("a");
-a.href=URL.createObjectURL(blob);
-a.download="Chris_Pham.vcf";
-a.click();
-}
-</script>
-
-</body>
-</html>
