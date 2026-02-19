@@ -48,7 +48,6 @@ align-items:center;
 transition:background .4s ease;
 }
 
-/* Wrapper */
 .wrapper{
 width:100%;
 height:100%;
@@ -58,7 +57,6 @@ align-items:center;
 perspective:1400px;
 }
 
-/* PHONE */
 .phone{
 width:360px;
 height:700px;
@@ -76,9 +74,10 @@ animation:float 6s ease-in-out infinite alternate;
 transform-origin:center center;
 opacity:0;
 position:relative;
+overflow:hidden;
 }
 
-/* Enterprise Premium Glass */
+/* Enterprise Premium Glass giữ nguyên */
 .phone::after{
 content:"";
 position:absolute;
@@ -88,7 +87,6 @@ background:linear-gradient(120deg,transparent 30%,rgba(255,215,0,0.05),transpare
 pointer-events:none;
 }
 
-/* Load animation */
 .phone.loaded{
 animation:float 6s ease-in-out infinite alternate, fadeIn .6s ease forwards;
 }
@@ -103,7 +101,82 @@ from{transform:translateY(0)}
 to{transform:translateY(-12px)}
 }
 
-/* Text */
+/* ===============================
+   AVATAR BACKGROUND UPGRADE
+   =============================== */
+
+.avatar-wrap{
+display:flex;
+justify-content:center;
+margin-top:10px;
+position:relative;
+height:230px;
+align-items:flex-end;
+overflow:hidden;
+}
+
+/* Nền hologram full như hình */
+.avatar-wrap::before{
+content:"";
+position:absolute;
+bottom:-40px;
+width:320px;
+height:320px;
+border-radius:50%;
+background:
+radial-gradient(circle at center,
+rgba(0,150,255,0.8) 0%,
+rgba(0,120,255,0.5) 25%,
+rgba(0,80,200,0.25) 45%,
+rgba(0,0,0,0) 65%);
+filter:blur(8px);
+animation:glowPulse 4s ease-in-out infinite alternate;
+z-index:0;
+}
+
+/* Hologram ring layers */
+.avatar-wrap::after{
+content:"";
+position:absolute;
+bottom:-30px;
+width:260px;
+height:260px;
+border-radius:50%;
+border:1px solid rgba(0,170,255,0.6);
+box-shadow:
+0 0 40px rgba(0,170,255,0.6),
+0 0 80px rgba(0,170,255,0.4);
+animation:spin 20s linear infinite;
+z-index:0;
+}
+
+/* giữ spin animation */
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Ring HTML vẫn giữ nhưng ẩn đi */
+.ring{display:none;}
+
+.avatar{
+width:200px;
+height:auto;
+border-radius:0;
+overflow:visible;
+border:none;
+box-shadow:none;
+position:relative;
+z-index:2;
+display:flex;
+justify-content:center;
+align-items:flex-end;
+}
+
+.avatar img{
+width:200px;
+height:auto;
+object-fit:contain;
+}
+
+/* TEXT */
 .name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:10px;}
 .title{text-align:center;color:var(--sub);font-size:13px;margin-top:4px;}
 .company{text-align:center;color:var(--text);font-size:14px;margin-top:6px;}
@@ -111,75 +184,7 @@ to{transform:translateY(-12px)}
 .logo{display:flex;justify-content:center;margin-top:8px;}
 .logo img{width:48px;filter:drop-shadow(0 0 8px rgba(255,215,0,0.4));}
 
-/* ================= AVATAR ZONE – SCI-FI FULL BACKGROUND ================= */
-
-.avatar-wrap{
-display:flex;
-justify-content:center;
-align-items:center;
-margin-top:8px;
-position:relative;
-height:210px;
-}
-
-/* Energy background */
-.avatar-wrap::before{
-content:"";
-position:absolute;
-width:260px;
-height:260px;
-border-radius:50%;
-background:
-radial-gradient(circle,
-rgba(0,180,255,0.55),
-rgba(0,120,255,0.35) 40%,
-rgba(0,60,160,0.25) 60%,
-transparent 72%);
-filter:blur(6px);
-animation:glowPulse 4s ease-in-out infinite alternate;
-}
-
-/* Outer energy ring */
-.avatar-wrap::after{
-content:"";
-position:absolute;
-width:290px;
-height:290px;
-border-radius:50%;
-background:
-radial-gradient(circle,
-transparent 60%,
-rgba(0,200,255,0.45) 64%,
-transparent 70%);
-opacity:.8;
-}
-
-/* Ring vẫn tồn tại – nhưng ẩn */
-.ring{
-opacity:0;
-pointer-events:none;
-}
-
-/* Avatar PNG người */
-.avatar{
-width:190px;
-height:210px;
-border:none;
-background:none;
-overflow:visible;
-z-index:2;
-}
-
-.avatar img{
-width:100%;
-height:100%;
-object-fit:contain;
-filter:
-drop-shadow(0 30px 45px rgba(0,0,0,.65))
-drop-shadow(0 0 30px rgba(0,160,255,.4));
-}
-
-/* Buttons */
+/* Buttons giữ nguyên */
 .buttons{margin-top:auto;display:flex;flex-direction:column;gap:10px;}
 .row{display:flex;gap:10px;}
 
@@ -208,7 +213,7 @@ text-align:center;
 .btn i{color:var(--gold);margin-bottom:4px;}
 .subtext{font-size:11px;color:var(--sub);}
 
-/* POPUP – GIỮ NGUYÊN */
+/* POPUP GIỮ NGUYÊN */
 .popup{
 position:fixed;
 inset:0;
@@ -240,10 +245,45 @@ transition:0.4s;
 }
 .popup.active .popup-content{transform:scale(1);}
 
-@keyframes glowPulse{
-from{opacity:.35; transform:scale(1);}
-to{opacity:.6; transform:scale(1.08);}
+.popup-content::before{
+content:"";
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:70%;
+height:70%;
+background:url('assets/logo.png') no-repeat center/contain;
+opacity:0.12;
+filter:brightness(1.5) drop-shadow(0 0 40px rgba(255,215,0,0.7));
+pointer-events:none;
+animation:glowPulse 4s ease-in-out infinite alternate;
 }
+@keyframes glowPulse{
+from{opacity:0.1; transform:translate(-50%,-50%) scale(1);}
+to{opacity:0.18; transform:translate(-50%,-50%) scale(1.08);}
+}
+
+.popup-content::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:60%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.2),transparent);
+transform:skewX(-20deg);
+animation:lightSweep 4s infinite;
+}
+@keyframes lightSweep{
+0%{left:-100%;}
+100%{left:150%;}
+}
+
+.label{opacity:0.8;}
+.value{font-weight:600;color:var(--gold);}
+.close{margin-top:15px;cursor:pointer;opacity:0.7;}
+.close:hover{opacity:1;}
 </style>
 </head>
 
@@ -272,9 +312,78 @@ to{opacity:.6; transform:scale(1.08);}
 </div>
 
 <div class="buttons">
-<!-- NÚT GIỮ NGUYÊN NHƯ BẢN GỐC -->
+
+<div class="row">
+<a href="tel:0909554558" class="btn">
+<div class="btn-main">
+<i class="fa-solid fa-phone"></i>
+<span>Call</span>
+</div>
+<div class="subtext">0909554558</div>
+</a>
+
+<div class="btn" onclick="downloadVCF()">
+<div class="btn-main">
+<i class="fa-solid fa-address-card"></i>
+<span>Save Contact</span>
+</div>
+</div>
 </div>
 
+<div class="btn">
+<div class="btn-main">
+<i class="fa-brands fa-facebook-messenger"></i>
+<span>Chat</span>
+</div>
+<div class="subtext">Telegram • WhatsApp • Zalo</div>
+</div>
+
+<div class="btn" onclick="openQR()">
+<div class="btn-main">
+<i class="fa-solid fa-qrcode"></i>
+<span>Payment QR</span>
+</div>
+</div>
+
+<div class="btn" onclick="openEnterprise()">
+<div class="btn-main">
+<i class="fa-solid fa-building"></i>
+<span>Enterprise Code / Tax Code</span>
+</div>
+</div>
+
+<div class="btn" onclick="openWebsite()">
+<div class="btn-main">
+<i class="fa-solid fa-globe"></i>
+<span>Website and Company Profile</span>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- POPUPS GIỮ NGUYÊN -->
+<div class="popup" id="qrPopup">
+<div class="popup-content">
+<h3>Payment QR</h3>
+<img src="assets/CCOPham/qrpayment.png" height="250">
+<div class="close" onclick="closeQR()">Close</div>
+</div>
+</div>
+
+<div class="popup" id="enterprisePopup">
+<div class="popup-content">
+<h3>Business Information</h3>
+<p><span class="label">Company:</span>
+<span class="value">BLH Joint Stock Company</span></p>
+<p><span class="label">Enterprise Code / Tax Code:</span>
+<span class="value">0318787124</span></p>
+<p><span class="label">Representative:</span>
+<span class="value">Nguyễn Trung Hiếu</span></p>
+<p><span class="label">Title:</span>
+<span class="value">CEO</span></p>
+<div class="close" onclick="closeEnterprise()">Close</div>
 </div>
 </div>
 
@@ -310,6 +419,26 @@ document.getElementById("phone").animate(
 [{transform:"scale(.95)"},{transform:"scale(1)"}],
 {duration:800,easing:"ease-out"}
 );
+}
+
+function openWebsite(){window.open("https://yourwebsite.com","_blank");}
+function openQR(){qrPopup.classList.add("active");}
+function closeQR(){qrPopup.classList.remove("active");}
+function openEnterprise(){enterprisePopup.classList.add("active");}
+function closeEnterprise(){enterprisePopup.classList.remove("active");}
+function downloadVCF(){
+const vcf=`BEGIN:VCARD
+VERSION:3.0
+FN:Chris Pham
+TITLE:Chief Commercial Officer
+ORG:BLH Joint Stock Company
+TEL:0909554558
+END:VCARD`;
+const blob=new Blob([vcf],{type:"text/vcard"});
+const a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="Chris_Pham.vcf";
+a.click();
 }
 </script>
 
