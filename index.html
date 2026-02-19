@@ -2,34 +2,50 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Chris Pham - Digital Card</title>
+
+<meta name="theme-color" content="#000814">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-
 :root{
---blue:#0d2f6b;
---blue-deep:#071a3a;
---gold:#d4af37;
---gold-soft:#f5d67a;
---white:#ffffff;
+--bg1:#0a1a35;
+--bg2:#000814;
+--text:#ffffff;
+--glass:rgba(255,255,255,0.08);
+--border:rgba(255,255,255,0.18);
+--popup-border:rgba(0,255,255,0.5);
 }
 
-/* BACKGROUND */
+body.light{
+--bg1:#e9f1ff;
+--bg2:#cfdfff;
+--text:#111;
+--glass:rgba(255,255,255,0.6);
+--border:rgba(0,0,0,0.1);
+--popup-border:rgba(0,150,255,0.5);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
 body{
 height:100vh;
 overflow:hidden;
-background:
-radial-gradient(circle at 20% 20%, rgba(212,175,55,0.25), transparent 40%),
-radial-gradient(circle at 80% 80%, rgba(13,47,107,0.6), transparent 50%),
-linear-gradient(135deg,var(--blue-deep),var(--blue));
+background:radial-gradient(circle at 30% 30%,var(--bg1),var(--bg2) 70%);
 display:flex;
 justify-content:center;
 align-items:center;
+color:var(--text);
+padding-top:env(safe-area-inset-top);
+padding-bottom:env(safe-area-inset-bottom);
+padding-left:env(safe-area-inset-left);
+padding-right:env(safe-area-inset-right);
+transition:background 0.4s ease;
 }
 
 /* PHONE */
@@ -40,18 +56,37 @@ border-radius:42px;
 padding:28px;
 display:flex;
 flex-direction:column;
-background:linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.05));
-backdrop-filter:blur(70px) saturate(180%);
-border:1px solid rgba(212,175,55,0.5);
-box-shadow:
-0 35px 70px rgba(0,0,0,0.7),
-0 0 40px rgba(212,175,55,0.25);
-animation:float 6s ease-in-out infinite alternate;
+background:linear-gradient(rgba(255,255,255,0.08),rgba(255,255,255,0.03));
+backdrop-filter:blur(60px) saturate(180%);
+border:1px solid var(--border);
+box-shadow:0 35px 70px rgba(0,0,0,0.6);
+animation:float 6s ease-in-out infinite alternate, scaleIn 0.7s ease;
+transform-origin:center;
+transition:0.3s ease;
 }
+
+@keyframes scaleIn{
+from{transform:scale(0.9);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
 @keyframes float{
 from{transform:translateY(0)}
 to{transform:translateY(-12px)}
 }
+
+/* DARK LIGHT TOGGLE */
+.theme-toggle{
+position:absolute;
+top:20px;
+right:20px;
+font-size:18px;
+cursor:pointer;
+opacity:0.8;
+transition:0.3s;
+z-index:5;
+}
+.theme-toggle:hover{opacity:1;}
 
 /* AVATAR */
 .avatar-wrap{display:flex;justify-content:center;margin-top:15px;position:relative;}
@@ -59,8 +94,7 @@ to{transform:translateY(-12px)}
 position:absolute;
 width:150px;height:150px;
 border-radius:50%;
-border:2px solid var(--gold);
-box-shadow:0 0 25px rgba(212,175,55,0.6);
+border:2px solid rgba(255,255,255,0.35);
 animation:spin 12s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -69,41 +103,17 @@ animation:spin 12s linear infinite;
 width:130px;height:130px;
 border-radius:50%;
 overflow:hidden;
-border:2px solid var(--white);
-box-shadow:
-0 20px 40px rgba(0,0,0,0.6),
-0 0 20px rgba(212,175,55,0.4);
+border:2px solid rgba(255,255,255,0.5);
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
 .avatar img{width:100%;height:100%;object-fit:cover;}
 
-.name{
-text-align:center;
-color:var(--white);
-font-size:20px;
-font-weight:700;
-margin-top:15px;
-letter-spacing:1px;
-}
-
-.title{
-text-align:center;
-color:var(--gold-soft);
-font-size:13px;
-margin-top:4px;
-}
-
-.company{
-text-align:center;
-color:var(--white);
-font-size:14px;
-margin-top:6px;
-}
+.name{text-align:center;font-size:20px;font-weight:600;margin-top:15px;}
+.title{text-align:center;font-size:13px;margin-top:4px;opacity:0.7;}
+.company{text-align:center;font-size:14px;margin-top:6px;}
 
 .logo{display:flex;justify-content:center;margin-top:8px;}
-.logo img{
-width:48px;
-filter:drop-shadow(0 0 12px rgba(212,175,55,0.8));
-}
+.logo img{width:48px;}
 
 /* BUTTONS */
 .buttons{margin-top:auto;display:flex;flex-direction:column;gap:10px;}
@@ -114,23 +124,21 @@ flex:1;
 padding:10px 14px;
 border-radius:24px;
 font-size:13px;
-background:linear-gradient(135deg,rgba(13,47,107,0.95),rgba(212,175,55,0.25));
-border:1px solid rgba(212,175,55,0.7);
-color:var(--white);
+background:var(--glass);
+backdrop-filter:blur(40px);
+border:1px solid var(--border);
+color:var(--text);
 text-decoration:none;
 font-weight:500;
-transition:0.3s ease;
+transition:0.25s ease;
 cursor:pointer;
-box-shadow:
-0 10px 25px rgba(0,0,0,0.5),
-0 0 15px rgba(212,175,55,0.3);
+box-shadow:0 10px 25px rgba(0,0,0,0.35);
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
 }
-
 .btn-main{
 display:flex;
 align-items:center;
@@ -138,28 +146,15 @@ justify-content:center;
 gap:6px;
 white-space:nowrap;
 }
-
-.subtext{
-font-size:65%;
-opacity:0.95;
-margin-top:3px;
-color:var(--gold-soft);
-}
-
-.btn:hover{
-transform:translateY(-4px);
-box-shadow:
-0 15px 35px rgba(0,0,0,0.6),
-0 0 25px rgba(212,175,55,0.6);
-}
-
+.subtext{font-size:65%;opacity:0.85;margin-top:3px;}
+.btn:hover{transform:translateY(-3px);background:rgba(255,255,255,0.18);}
 .btn:active{transform:scale(0.96);}
 
 /* POPUP */
 .popup{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,0.75);
+background:rgba(0,0,0,0.7);
 display:flex;
 justify-content:center;
 align-items:center;
@@ -168,28 +163,26 @@ opacity:0;
 transition:0.4s;
 z-index:100;
 }
-.popup.active{
-visibility:visible;
-opacity:1;
-}
+.popup.active{visibility:visible;opacity:1;}
 
 .popup-content{
 position:relative;
-background:linear-gradient(145deg,rgba(13,47,107,0.95),rgba(212,175,55,0.15));
-border:1px solid var(--gold);
+background:var(--glass);
+backdrop-filter:blur(70px) saturate(200%);
+border:1px solid var(--popup-border);
 padding:30px;
 border-radius:25px;
 text-align:center;
 width:300px;
-color:var(--white);
+color:var(--text);
 overflow:hidden;
-box-shadow:0 0 60px rgba(212,175,55,0.6);
+box-shadow:0 0 50px rgba(0,255,255,0.35);
 transform:scale(0.85);
 transition:0.4s;
 }
 .popup.active .popup-content{transform:scale(1);}
 
-/* WATERMARK */
+/* Watermark */
 .popup-content::before{
 content:"";
 position:absolute;
@@ -200,62 +193,26 @@ width:70%;
 height:70%;
 background:url('assets/logo.png') no-repeat center;
 background-size:contain;
-opacity:0.08;
-filter:brightness(2) drop-shadow(0 0 40px rgba(212,175,55,0.8));
+opacity:0.15;
 pointer-events:none;
 animation:glowPulse 4s ease-in-out infinite alternate;
 }
 @keyframes glowPulse{
-from{opacity:0.06; transform:translate(-50%,-50%) scale(1);}
-to{opacity:0.14; transform:translate(-50%,-50%) scale(1.08);}
+from{opacity:0.12; transform:translate(-50%,-50%) scale(1);}
+to{opacity:0.22; transform:translate(-50%,-50%) scale(1.08);}
 }
 
-/* LIGHT SWEEP */
-.popup-content::after{
-content:"";
-position:absolute;
-top:0;
-left:-100%;
-width:60%;
-height:100%;
-background:linear-gradient(120deg,transparent,rgba(255,255,255,0.25),transparent);
-transform:skewX(-20deg);
-animation:lightSweep 4s infinite;
-}
-@keyframes lightSweep{
-0%{left:-100%;}
-100%{left:150%;}
-}
-
-.label{opacity:0.85;}
-.value{font-weight:600;color:var(--gold-soft);}
-
-.popup-content h3{
-margin-bottom:14px;
-position:relative;
-z-index:2;
-color:var(--gold);
-}
-
-.popup-content p{
-font-size:13px;
-margin-bottom:8px;
-position:relative;
-z-index:2;
-}
-
-.close{
-margin-top:15px;
-cursor:pointer;
-opacity:0.85;
-position:relative;
-z-index:2;
-color:var(--gold-soft);
-}
+.label{opacity:0.8;}
+.value{font-weight:600;color:#00ffff;}
+.close{margin-top:15px;cursor:pointer;opacity:0.7;}
 .close:hover{opacity:1;}
 </style>
 </head>
 <body>
+
+<div class="theme-toggle" onclick="toggleTheme()">
+<i class="fa-solid fa-circle-half-stroke"></i>
+</div>
 
 <div class="phone">
 
@@ -277,7 +234,6 @@ color:var(--gold-soft);
 <div class="buttons">
 
 <div class="row">
-
 <a href="tel:0909554558" class="btn">
 <div class="btn-main">
 <i class="fa-solid fa-phone"></i>
@@ -292,7 +248,6 @@ color:var(--gold-soft);
 <span>Save Contact</span>
 </div>
 </div>
-
 </div>
 
 <div class="btn">
@@ -327,6 +282,7 @@ color:var(--gold-soft);
 </div>
 </div>
 
+<!-- QR POPUP -->
 <div class="popup" id="qrPopup">
 <div class="popup-content">
 <h3>Payment QR</h3>
@@ -335,22 +291,18 @@ color:var(--gold-soft);
 </div>
 </div>
 
+<!-- ENTERPRISE POPUP -->
 <div class="popup" id="enterprisePopup">
 <div class="popup-content">
 <h3>Business Information</h3>
-
 <p><span class="label">Company:</span>
 <span class="value">BLH Joint Stock Company</span></p>
-
 <p><span class="label">Enterprise Code / Tax Code:</span>
 <span class="value">0318787124</span></p>
-
 <p><span class="label">Representative:</span>
 <span class="value">Nguyễn Trung Hiếu</span></p>
-
 <p><span class="label">Title:</span>
 <span class="value">CEO</span></p>
-
 <div class="close" onclick="closeEnterprise()">Close</div>
 </div>
 </div>
@@ -377,6 +329,16 @@ const link=document.createElement("a");
 link.href=URL.createObjectURL(blob);
 link.download="Chris_Pham.vcf";
 link.click();
+}
+
+function toggleTheme(){
+document.body.classList.toggle("light");
+localStorage.setItem("theme",
+document.body.classList.contains("light")?"light":"dark");
+}
+
+if(localStorage.getItem("theme")==="light"){
+document.body.classList.add("light");
 }
 </script>
 
