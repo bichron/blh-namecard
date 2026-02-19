@@ -19,6 +19,15 @@
 --white:#ffffff;
 }
 
+/* ================= AUTO SCALE WRAPPER ================= */
+.scale-wrapper{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(1);
+transform-origin:center center;
+}
+
 /* BACKGROUND */
 body{
 height:100vh;
@@ -35,7 +44,7 @@ align-items:center;
 /* PHONE */
 .phone{
 width:360px;
-height:min(92vh,700px);
+height:700px;
 border-radius:42px;
 padding:28px;
 display:flex;
@@ -187,69 +196,26 @@ box-shadow:0 0 60px rgba(212,175,55,0.6);
 transform:scale(0.85);
 transition:0.4s;
 }
+
 .popup.active .popup-content{transform:scale(1);}
-
-/* WATERMARK */
-.popup-content::before{
-content:"";
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:70%;
-height:70%;
-background:url('assets/logo.png') no-repeat center;
-background-size:contain;
-opacity:0.08;
-filter:brightness(2) drop-shadow(0 0 40px rgba(212,175,55,0.8));
-pointer-events:none;
-animation:glowPulse 4s ease-in-out infinite alternate;
-}
-@keyframes glowPulse{
-from{opacity:0.06; transform:translate(-50%,-50%) scale(1);}
-to{opacity:0.14; transform:translate(-50%,-50%) scale(1.08);}
-}
-
-/* LIGHT SWEEP */
-.popup-content::after{
-content:"";
-position:absolute;
-top:0;
-left:-100%;
-width:60%;
-height:100%;
-background:linear-gradient(120deg,transparent,rgba(255,255,255,0.25),transparent);
-transform:skewX(-20deg);
-animation:lightSweep 4s infinite;
-}
-@keyframes lightSweep{
-0%{left:-100%;}
-100%{left:150%;}
-}
 
 .label{opacity:0.85;}
 .value{font-weight:600;color:var(--gold-soft);}
 
 .popup-content h3{
 margin-bottom:14px;
-position:relative;
-z-index:2;
 color:var(--gold);
 }
 
 .popup-content p{
 font-size:13px;
 margin-bottom:8px;
-position:relative;
-z-index:2;
 }
 
 .close{
 margin-top:15px;
 cursor:pointer;
 opacity:0.85;
-position:relative;
-z-index:2;
 color:var(--gold-soft);
 }
 .close:hover{opacity:1;}
@@ -257,6 +223,7 @@ color:var(--gold-soft);
 </head>
 <body>
 
+<div class="scale-wrapper" id="scaleWrapper">
 <div class="phone">
 
 <div class="avatar-wrap">
@@ -277,7 +244,6 @@ color:var(--gold-soft);
 <div class="buttons">
 
 <div class="row">
-
 <a href="tel:0909554558" class="btn">
 <div class="btn-main">
 <i class="fa-solid fa-phone"></i>
@@ -292,7 +258,6 @@ color:var(--gold-soft);
 <span>Save Contact</span>
 </div>
 </div>
-
 </div>
 
 <div class="btn">
@@ -326,43 +291,30 @@ color:var(--gold-soft);
 
 </div>
 </div>
-
-<div class="popup" id="qrPopup">
-<div class="popup-content">
-<h3>Payment QR</h3>
-<img src="assets/qr.png" width="200">
-<div class="close" onclick="closeQR()">Close</div>
-</div>
-</div>
-
-<div class="popup" id="enterprisePopup">
-<div class="popup-content">
-<h3>Business Information</h3>
-
-<p><span class="label">Company:</span>
-<span class="value">BLH Joint Stock Company</span></p>
-
-<p><span class="label">Enterprise Code / Tax Code:</span>
-<span class="value">0318787124</span></p>
-
-<p><span class="label">Representative:</span>
-<span class="value">Nguyễn Trung Hiếu</span></p>
-
-<p><span class="label">Title:</span>
-<span class="value">CEO</span></p>
-
-<div class="close" onclick="closeEnterprise()">Close</div>
-</div>
 </div>
 
 <script>
+/* ================= AUTO SCALE SCRIPT ================= */
+function autoScale(){
+const designWidth = 360;
+const designHeight = 700;
+
+const scaleX = window.innerWidth / designWidth;
+const scaleY = window.innerHeight / designHeight;
+
+const scale = Math.min(scaleX, scaleY);
+
+document.getElementById("scaleWrapper").style.transform =
+`translate(-50%, -50%) scale(${scale})`;
+}
+
+window.addEventListener("resize", autoScale);
+window.addEventListener("load", autoScale);
+
+/* ================= ORIGINAL FUNCTIONS ================= */
 function openWebsite(){
 window.open("https://yourwebsite.com","_blank");
 }
-function openQR(){document.getElementById("qrPopup").classList.add("active");}
-function closeQR(){document.getElementById("qrPopup").classList.remove("active");}
-function openEnterprise(){document.getElementById("enterprisePopup").classList.add("active");}
-function closeEnterprise(){document.getElementById("enterprisePopup").classList.remove("active");}
 
 function downloadVCF(){
 const vcf=`BEGIN:VCARD
