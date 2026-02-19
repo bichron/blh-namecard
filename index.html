@@ -24,7 +24,16 @@
 --glass:rgba(255,255,255,0.05);
 --border:#8c7a4f;
 --gold:#ffd700;
---aura:#2fdcff;
+}
+
+body.light{
+--bg1:#eef2f7;
+--bg2:#dbe4f2;
+--text:#0a1a35;
+--sub:rgba(10,26,53,0.7);
+--glass:rgba(255,255,255,0.7);
+--border:rgba(0,0,0,0.1);
+--gold:#c6a643;
 }
 
 body{
@@ -36,6 +45,7 @@ background:radial-gradient(circle at 30% 30%,var(--bg1),var(--bg2) 70%);
 display:flex;
 justify-content:center;
 align-items:center;
+transition:background .4s ease;
 }
 
 /* Wrapper */
@@ -59,36 +69,13 @@ flex-direction:column;
 background:linear-gradient(var(--glass),rgba(255,255,255,0.02));
 backdrop-filter:blur(60px) saturate(180%);
 border:1px solid var(--border);
-box-shadow:0 35px 70px rgba(0,0,0,0.6);
+box-shadow:
+0 35px 70px rgba(0,0,0,0.6),
+inset 0 0 0.5px rgba(255,255,255,0.2);
 animation:float 6s ease-in-out infinite alternate;
+transform-origin:center center;
 opacity:0;
 position:relative;
-overflow:hidden;
-}
-
-/* ===== DIGITAL EXECUTIVE AURA (LIKE IMAGE SAMPLE) ===== */
-.phone::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-right:0;
-height:46%;
-background:
-radial-gradient(circle at 50% 42%, rgba(47,220,255,0.45), transparent 55%),
-radial-gradient(circle at 50% 42%, rgba(255,215,0,0.35), transparent 62%),
-url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'>\
-<g fill='none' stroke='rgba(47,220,255,0.35)' stroke-width='0.6'>\
-<circle cx='200' cy='200' r='80'/>\
-<circle cx='200' cy='200' r='110' stroke-dasharray='4 6'/>\
-<circle cx='200' cy='200' r='145' stroke-dasharray='2 10'/>\
-</g>\
-</svg>");
-background-size:cover;
-mask-image:linear-gradient(to bottom,#000 82%,transparent);
-pointer-events:none;
-z-index:0;
 }
 
 /* Enterprise Premium Glass */
@@ -99,10 +86,9 @@ inset:0;
 border-radius:42px;
 background:linear-gradient(120deg,transparent 30%,rgba(255,215,0,0.05),transparent 70%);
 pointer-events:none;
-z-index:3;
 }
 
-/* Load */
+/* Load animation */
 .phone.loaded{
 animation:float 6s ease-in-out infinite alternate, fadeIn .6s ease forwards;
 }
@@ -111,46 +97,89 @@ animation:float 6s ease-in-out infinite alternate, fadeIn .6s ease forwards;
 from{opacity:0; transform:scale(.85);}
 to{opacity:1; transform:scale(1);}
 }
+
 @keyframes float{
 from{transform:translateY(0)}
 to{transform:translateY(-12px)}
 }
 
-/* Foreground guarantee */
-.avatar-wrap,.name,.title,.company,.logo{position:relative;z-index:2;}
-
-/* Avatar */
-.avatar-wrap{display:flex;justify-content:center;margin-top:15px;position:relative;}
-.ring{
-position:absolute;
-width:150px;height:150px;
-border-radius:50%;
-border:2px solid var(--border);
-animation:spin 12s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-.avatar{
-width:130px;height:130px;
-border-radius:50%;
-overflow:hidden;
-border:2px solid var(--border);
-box-shadow:
-0 0 40px rgba(47,220,255,0.45),
-0 0 70px rgba(255,215,0,0.35),
-0 20px 40px rgba(0,0,0,0.6);
-}
-.avatar img{width:100%;height:100%;object-fit:cover;}
-
 /* Text */
-.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:15px;}
+.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:10px;}
 .title{text-align:center;color:var(--sub);font-size:13px;margin-top:4px;}
 .company{text-align:center;color:var(--text);font-size:14px;margin-top:6px;}
 
 .logo{display:flex;justify-content:center;margin-top:8px;}
-.logo img{width:48px;filter:drop-shadow(0 0 10px rgba(255,215,0,0.6));}
+.logo img{width:48px;filter:drop-shadow(0 0 8px rgba(255,215,0,0.4));}
 
-/* Buttons – giữ nguyên */
+/* ================= AVATAR ZONE – SCI-FI FULL BACKGROUND ================= */
+
+.avatar-wrap{
+display:flex;
+justify-content:center;
+align-items:center;
+margin-top:8px;
+position:relative;
+height:210px;
+}
+
+/* Energy background */
+.avatar-wrap::before{
+content:"";
+position:absolute;
+width:260px;
+height:260px;
+border-radius:50%;
+background:
+radial-gradient(circle,
+rgba(0,180,255,0.55),
+rgba(0,120,255,0.35) 40%,
+rgba(0,60,160,0.25) 60%,
+transparent 72%);
+filter:blur(6px);
+animation:glowPulse 4s ease-in-out infinite alternate;
+}
+
+/* Outer energy ring */
+.avatar-wrap::after{
+content:"";
+position:absolute;
+width:290px;
+height:290px;
+border-radius:50%;
+background:
+radial-gradient(circle,
+transparent 60%,
+rgba(0,200,255,0.45) 64%,
+transparent 70%);
+opacity:.8;
+}
+
+/* Ring vẫn tồn tại – nhưng ẩn */
+.ring{
+opacity:0;
+pointer-events:none;
+}
+
+/* Avatar PNG người */
+.avatar{
+width:190px;
+height:210px;
+border:none;
+background:none;
+overflow:visible;
+z-index:2;
+}
+
+.avatar img{
+width:100%;
+height:100%;
+object-fit:contain;
+filter:
+drop-shadow(0 30px 45px rgba(0,0,0,.65))
+drop-shadow(0 0 30px rgba(0,160,255,.4));
+}
+
+/* Buttons */
 .buttons{margin-top:auto;display:flex;flex-direction:column;gap:10px;}
 .row{display:flex;gap:10px;}
 
@@ -163,18 +192,66 @@ background:var(--glass);
 backdrop-filter:blur(40px);
 border:1px solid var(--border);
 color:var(--text);
+text-decoration:none;
 font-weight:500;
+transition:.25s ease;
+cursor:pointer;
 box-shadow:0 10px 25px rgba(0,0,0,0.35);
 display:flex;
 flex-direction:column;
+justify-content:center;
 align-items:center;
+text-align:center;
 }
+.btn:hover{transform:translateY(-3px);}
+.btn:active{transform:scale(.96);}
 .btn i{color:var(--gold);margin-bottom:4px;}
 .subtext{font-size:11px;color:var(--sub);}
+
+/* POPUP – GIỮ NGUYÊN */
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.7);
+display:flex;
+justify-content:center;
+align-items:center;
+visibility:hidden;
+opacity:0;
+transition:0.4s;
+z-index:100;
+}
+.popup.active{visibility:visible;opacity:1;}
+
+.popup-content{
+position:relative;
+background:rgba(10,20,35,0.85);
+backdrop-filter:blur(70px) saturate(200%);
+border:1px solid var(--border);
+padding:30px;
+border-radius:25px;
+text-align:center;
+width:300px;
+color:var(--text);
+overflow:hidden;
+box-shadow:0 0 50px rgba(255,215,0,0.25);
+transform:scale(0.85);
+transition:0.4s;
+}
+.popup.active .popup-content{transform:scale(1);}
+
+@keyframes glowPulse{
+from{opacity:.35; transform:scale(1);}
+to{opacity:.6; transform:scale(1.08);}
+}
 </style>
 </head>
 
 <body>
+
+<div class="theme-toggle" onclick="toggleTheme()">
+<i class="fa-solid fa-circle-half-stroke"></i>
+</div>
 
 <div class="wrapper">
 <div class="phone" id="phone">
@@ -194,7 +271,9 @@ align-items:center;
 <img src="assets/logo.png">
 </div>
 
-<!-- PHẦN BUTTON + POPUP + JS GIỮ NGUYÊN Y HỆT BẢN GỐC -->
+<div class="buttons">
+<!-- NÚT GIỮ NGUYÊN NHƯ BẢN GỐC -->
+</div>
 
 </div>
 </div>
@@ -205,10 +284,33 @@ const phone=document.getElementById("phone");
 const scale=Math.min(innerWidth/360, innerHeight/700);
 phone.style.transform=`scale(${scale})`;
 }
+addEventListener("resize",()=>requestAnimationFrame(scaleCard));
 addEventListener("load",()=>{
 scaleCard();
 phone.classList.add("loaded");
 });
+
+function toggleTheme(){
+document.body.classList.toggle("light");
+localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");
+}
+if(localStorage.getItem("theme")==="light") document.body.classList.add("light");
+
+if(window.DeviceOrientationEvent){
+window.addEventListener("deviceorientation",e=>{
+const x=e.gamma/40;
+const y=e.beta/40;
+document.getElementById("phone").style.rotate=`${-y}deg ${x}deg`;
+});
+}
+
+const params=new URLSearchParams(location.search);
+if(params.has("nfc")){
+document.getElementById("phone").animate(
+[{transform:"scale(.95)"},{transform:"scale(1)"}],
+{duration:800,easing:"ease-out"}
+);
+}
 </script>
 
 </body>
