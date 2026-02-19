@@ -1,0 +1,117 @@
+.avatar-wrap{
+display:flex;
+justify-content:center;
+margin-top:15px;
+position:relative;
+}
+
+.ring{
+position:absolute;
+width:150px;height:150px;
+border-radius:50%;
+border:2px solid var(--border);
+animation:spin 12s linear infinite;
+}
+
+.avatar{
+width:130px;height:130px;
+border-radius:50%;
+overflow:hidden;
+border:2px solid var(--border);
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+.avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:15px;}
+.title{text-align:center;color:var(--sub);font-size:13px;margin-top:4px;}
+.company{text-align:center;color:var(--text);font-size:14px;margin-top:6px;}
+
+.logo{display:flex;justify-content:center;margin-top:8px;}
+.logo img{width:48px;filter:drop-shadow(0 0 8px rgba(255,215,0,0.4));}
+
+
+.buttons{margin-top:auto;display:flex;flex-direction:column;gap:10px;}
+.row{display:flex;gap:10px;}
+
+.btn{
+flex:1;
+padding:10px 14px;
+border-radius:24px;
+font-size:13px;
+background:var(--glass);
+backdrop-filter:blur(40px);
+border:1px solid var(--border);
+color:var(--text);
+text-decoration:none;
+font-weight:500;
+transition:.25s ease;
+cursor:pointer;
+box-shadow:0 10px 25px rgba(0,0,0,0.35);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.btn:hover{transform:translateY(-3px);}
+.btn:active{transform:scale(.96);}
+.btn i{color:var(--gold);margin-bottom:4px;}
+.subtext{font-size:11px;color:var(--sub);}
+
+
+.wrapper{
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+perspective:1400px;
+}
+
+.phone{
+width:360px;
+height:700px;
+border-radius:42px;
+padding:28px;
+display:flex;
+flex-direction:column;
+background:linear-gradient(var(--glass),rgba(255,255,255,0.02));
+backdrop-filter:blur(60px) saturate(180%);
+border:1px solid var(--border);
+box-shadow:
+0 35px 70px rgba(0,0,0,0.6),
+inset 0 0 0.5px rgba(255,255,255,0.2);
+animation:float 6s ease-in-out infinite alternate;
+transform-origin:center center;
+opacity:0;
+position:relative;
+}
+
+.phone::after{
+content:"";
+position:absolute;
+inset:0;
+border-radius:42px;
+background:linear-gradient(120deg,transparent 30%,rgba(255,215,0,0.05),transparent 70%);
+pointer-events:none;
+}
+
+.phone.loaded{
+animation:float 6s ease-in-out infinite alternate, fadeIn .6s ease forwards;
+}
+
+.theme-toggle{
+position:fixed;
+top:20px;
+right:20px;
+font-size:18px;
+cursor:pointer;
+color:var(--text);
+z-index:999;
+}
