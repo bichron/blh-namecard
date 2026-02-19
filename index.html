@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Chris Pham - Digital Card</title>
 
-<!-- PWA / iOS -->
-<meta name="theme-color" content="#0b1f2d">
+<meta name="theme-color" content="#0b1f3a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="apple-touch-icon" href="assets/logo.png">
@@ -17,24 +16,24 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
-/* ===== AVIATION LUXURY PALETTE ===== */
 :root{
---bg1:#0b1f2d;                    /* blue dark */
---bg2:#071521;                    /* deep blue */
---text:#f4f2ec;                   /* white ivory */
---sub:rgba(244,242,236,0.7);
---glass:rgba(15,35,52,0.65);      /* blue glass */
---border:rgba(198,171,110,0.55);  /* gold grey */
---gold:#c6ab6e;
+--bg1:#0b1f3a;              /* Dark Navy */
+--bg2:#071427;
+--text:#f8f4ea;            /* White Ivory */
+--sub:rgba(248,244,234,0.7);
+--glass:rgba(255,255,255,0.05);
+--border:#8c7a4f;          /* Gold Grey */
+--gold:#ffd700;            /* Gold Bright */
 }
 
 body.light{
---bg1:#f4f2ec;
---bg2:#e6e2d8;
---text:#0b1f2d;
---sub:rgba(11,31,45,0.7);
---glass:rgba(255,255,255,0.75);
---border:rgba(198,171,110,0.55);
+--bg1:#eef2f7;
+--bg2:#dbe4f2;
+--text:#0a1a35;
+--sub:rgba(10,26,53,0.7);
+--glass:rgba(255,255,255,0.7);
+--border:rgba(0,0,0,0.1);
+--gold:#c6a643;
 }
 
 body{
@@ -67,12 +66,12 @@ border-radius:42px;
 padding:28px;
 display:flex;
 flex-direction:column;
-background:linear-gradient(var(--glass),rgba(255,255,255,0.03));
+background:linear-gradient(var(--glass),rgba(255,255,255,0.02));
 backdrop-filter:blur(60px) saturate(180%);
 border:1px solid var(--border);
 box-shadow:
 0 35px 70px rgba(0,0,0,0.6),
-inset 0 0 0.5px rgba(255,255,255,0.25);
+inset 0 0 0.5px rgba(255,255,255,0.2);
 animation:float 6s ease-in-out infinite alternate;
 transform-origin:center center;
 opacity:0;
@@ -85,12 +84,7 @@ content:"";
 position:absolute;
 inset:0;
 border-radius:42px;
-background:linear-gradient(
-120deg,
-transparent 30%,
-rgba(198,171,110,0.12),
-transparent 70%
-);
+background:linear-gradient(120deg,transparent 30%,rgba(255,215,0,0.05),transparent 70%);
 pointer-events:none;
 }
 
@@ -121,30 +115,12 @@ z-index:999;
 }
 
 /* Text */
-.name{
-text-align:center;
-color:var(--text);
-font-size:20px;
-font-weight:600;
-margin-top:15px;
-letter-spacing:.3px;
-}
-.title{
-text-align:center;
-color:var(--sub);
-font-size:13px;
-margin-top:4px;
-}
-.company{
-text-align:center;
-color:var(--text);
-font-size:14px;
-margin-top:6px;
-}
+.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:15px;}
+.title{text-align:center;color:var(--sub);font-size:13px;margin-top:4px;}
+.company{text-align:center;color:var(--text);font-size:14px;margin-top:6px;}
 
-/* Logo */
 .logo{display:flex;justify-content:center;margin-top:8px;}
-.logo img{width:48px;}
+.logo img{width:48px;filter:drop-shadow(0 0 8px rgba(255,215,0,0.4));}
 
 /* Avatar */
 .avatar-wrap{display:flex;justify-content:center;margin-top:15px;position:relative;}
@@ -190,13 +166,14 @@ justify-content:center;
 align-items:center;
 text-align:center;
 }
-.btn:hover{
-transform:translateY(-3px);
-background:rgba(25,55,78,0.75);
-}
+.btn:hover{transform:translateY(-3px);}
 .btn:active{transform:scale(.96);}
 
-/* POPUP */
+.btn i{color:var(--gold);margin-bottom:4px;}
+
+.subtext{font-size:11px;color:var(--sub);}
+
+/* POPUP (GIỮ NGUYÊN EFFECT) */
 .popup{
 position:fixed;
 inset:0;
@@ -213,7 +190,7 @@ z-index:100;
 
 .popup-content{
 position:relative;
-background:rgba(15,35,52,0.85);
+background:rgba(10,20,35,0.85);
 backdrop-filter:blur(70px) saturate(200%);
 border:1px solid var(--border);
 padding:30px;
@@ -222,7 +199,7 @@ text-align:center;
 width:300px;
 color:var(--text);
 overflow:hidden;
-box-shadow:0 0 55px rgba(198,171,110,0.35);
+box-shadow:0 0 50px rgba(255,215,0,0.25);
 transform:scale(0.85);
 transition:0.4s;
 }
@@ -237,14 +214,14 @@ transform:translate(-50%,-50%);
 width:70%;
 height:70%;
 background:url('assets/logo.png') no-repeat center/contain;
-opacity:0.15;
-filter:brightness(1.8) drop-shadow(0 0 45px rgba(198,171,110,0.9));
+opacity:0.12;
+filter:brightness(1.5) drop-shadow(0 0 40px rgba(255,215,0,0.7));
 pointer-events:none;
 animation:glowPulse 4s ease-in-out infinite alternate;
 }
 @keyframes glowPulse{
-from{opacity:0.12; transform:translate(-50%,-50%) scale(1);}
-to{opacity:0.22; transform:translate(-50%,-50%) scale(1.08);}
+from{opacity:0.1; transform:translate(-50%,-50%) scale(1);}
+to{opacity:0.18; transform:translate(-50%,-50%) scale(1.08);}
 }
 
 .popup-content::after{
@@ -254,12 +231,7 @@ top:0;
 left:-100%;
 width:60%;
 height:100%;
-background:linear-gradient(
-120deg,
-transparent,
-rgba(198,171,110,0.35),
-transparent
-);
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.2),transparent);
 transform:skewX(-20deg);
 animation:lightSweep 4s infinite;
 }
@@ -303,37 +275,55 @@ animation:lightSweep 4s infinite;
 
 <div class="row">
 <a href="tel:0909554558" class="btn">
-<div class="btn-main"><i class="fa-solid fa-phone"></i><span>Call</span></div>
+<div class="btn-main">
+<i class="fa-solid fa-phone"></i>
+<span>Call</span>
+</div>
 <div class="subtext">0909554558</div>
 </a>
 
 <div class="btn" onclick="downloadVCF()">
-<div class="btn-main"><i class="fa-solid fa-address-card"></i><span>Save Contact</span></div>
+<div class="btn-main">
+<i class="fa-solid fa-address-card"></i>
+<span>Save Contact</span>
+</div>
 </div>
 </div>
 
 <div class="btn">
-<div class="btn-main"><i class="fa-brands fa-facebook-messenger"></i><span>Chat</span></div>
+<div class="btn-main">
+<i class="fa-brands fa-facebook-messenger"></i>
+<span>Chat</span>
+</div>
 <div class="subtext">Telegram • WhatsApp • Zalo</div>
 </div>
 
 <div class="btn" onclick="openQR()">
-<div class="btn-main"><i class="fa-solid fa-qrcode"></i><span>Payment QR</span></div>
+<div class="btn-main">
+<i class="fa-solid fa-qrcode"></i>
+<span>Payment QR</span>
+</div>
 </div>
 
 <div class="btn" onclick="openEnterprise()">
-<div class="btn-main"><i class="fa-solid fa-building"></i><span>Enterprise Code / Tax Code</span></div>
+<div class="btn-main">
+<i class="fa-solid fa-building"></i>
+<span>Enterprise Code / Tax Code</span>
+</div>
 </div>
 
 <div class="btn" onclick="openWebsite()">
-<div class="btn-main"><i class="fa-solid fa-globe"></i><span>Website and Company Profile</span></div>
+<div class="btn-main">
+<i class="fa-solid fa-globe"></i>
+<span>Website and Company Profile</span>
+</div>
 </div>
 
 </div>
 </div>
 </div>
 
-<!-- POPUPS -->
+<!-- POPUPS GIỮ NGUYÊN -->
 <div class="popup" id="qrPopup">
 <div class="popup-content">
 <h3>Payment QR</h3>
@@ -345,10 +335,14 @@ animation:lightSweep 4s infinite;
 <div class="popup" id="enterprisePopup">
 <div class="popup-content">
 <h3>Business Information</h3>
-<p><span class="label">Company:</span> <span class="value">BLH Joint Stock Company</span></p>
-<p><span class="label">Enterprise Code / Tax Code:</span> <span class="value">0318787124</span></p>
-<p><span class="label">Representative:</span> <span class="value">Nguyễn Trung Hiếu</span></p>
-<p><span class="label">Title:</span> <span class="value">CEO</span></p>
+<p><span class="label">Company:</span>
+<span class="value">BLH Joint Stock Company</span></p>
+<p><span class="label">Enterprise Code / Tax Code:</span>
+<span class="value">0318787124</span></p>
+<p><span class="label">Representative:</span>
+<span class="value">Nguyễn Trung Hiếu</span></p>
+<p><span class="label">Title:</span>
+<span class="value">CEO</span></p>
 <div class="close" onclick="closeEnterprise()">Close</div>
 </div>
 </div>
@@ -360,7 +354,10 @@ const scale=Math.min(innerWidth/360, innerHeight/700);
 phone.style.transform=`scale(${scale})`;
 }
 addEventListener("resize",()=>requestAnimationFrame(scaleCard));
-addEventListener("load",()=>{scaleCard();phone.classList.add("loaded");});
+addEventListener("load",()=>{
+scaleCard();
+phone.classList.add("loaded");
+});
 
 function toggleTheme(){
 document.body.classList.toggle("light");
@@ -389,7 +386,6 @@ function openQR(){qrPopup.classList.add("active");}
 function closeQR(){qrPopup.classList.remove("active");}
 function openEnterprise(){enterprisePopup.classList.add("active");}
 function closeEnterprise(){enterprisePopup.classList.remove("active");}
-
 function downloadVCF(){
 const vcf=`BEGIN:VCARD
 VERSION:3.0
