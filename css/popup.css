@@ -1,0 +1,64 @@
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.7);
+display:flex;
+justify-content:center;
+align-items:center;
+visibility:hidden;
+opacity:0;
+transition:0.4s;
+z-index:100;
+}
+
+.popup.active{visibility:visible;opacity:1;}
+
+.popup-content{
+position:relative;
+background:rgba(10,20,35,0.85);
+backdrop-filter:blur(70px) saturate(200%);
+border:1px solid var(--border);
+padding:30px;
+border-radius:25px;
+text-align:center;
+width:300px;
+color:var(--text);
+overflow:hidden;
+box-shadow:0 0 50px rgba(255,215,0,0.25);
+transform:scale(0.85);
+transition:0.4s;
+}
+
+.popup.active .popup-content{transform:scale(1);}
+
+.popup-content::before{
+content:"";
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:70%;
+height:70%;
+background:url('../assets/logo.png') no-repeat center/contain;
+opacity:0.12;
+filter:brightness(1.5) drop-shadow(0 0 40px rgba(255,215,0,0.7));
+pointer-events:none;
+animation:glowPulse 4s ease-in-out infinite alternate;
+}
+
+.popup-content::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:60%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.2),transparent);
+transform:skewX(-20deg);
+animation:lightSweep 4s infinite;
+}
+
+.label{opacity:0.8;}
+.value{font-weight:600;color:var(--gold);}
+.close{margin-top:15px;cursor:pointer;opacity:0.7;}
+.close:hover{opacity:1;}
