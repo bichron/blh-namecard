@@ -2,8 +2,12 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Chris Pham - Digital Card</title>
+
+<meta name="theme-color" content="#0a1a35">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,13 +15,45 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
+:root{
+--bg1:#0a1a35;
+--bg2:#000814;
+--text:#ffffff;
+--subtext:rgba(255,255,255,0.7);
+--card-bg:rgba(255,255,255,0.08);
+--card-border:rgba(255,255,255,0.18);
+--btn-bg:rgba(255,255,255,0.08);
+--btn-hover:rgba(255,255,255,0.18);
+--popup-border:rgba(0,255,255,0.5);
+--popup-glow:rgba(0,255,255,0.35);
+}
+
+body.light{
+--bg1:#f2f5fa;
+--bg2:#dce6f3;
+--text:#0a1a35;
+--subtext:rgba(10,26,53,0.7);
+--card-bg:rgba(255,255,255,0.6);
+--card-border:rgba(0,0,0,0.1);
+--btn-bg:rgba(255,255,255,0.6);
+--btn-hover:rgba(255,255,255,0.9);
+--popup-border:rgba(0,150,255,0.4);
+--popup-glow:rgba(0,150,255,0.3);
+}
+
 body{
-height:100vh;
+height:100dvh;
+padding:
+env(safe-area-inset-top)
+env(safe-area-inset-right)
+env(safe-area-inset-bottom)
+env(safe-area-inset-left);
 overflow:hidden;
-background:radial-gradient(circle at 30% 30%,#0a1a35,#000814 70%);
+background:radial-gradient(circle at 30% 30%,var(--bg1),var(--bg2) 70%);
 display:flex;
 justify-content:center;
 align-items:center;
+transition:background .4s ease;
 }
 
 /* WRAPPER SCALE */
@@ -37,12 +73,22 @@ border-radius:42px;
 padding:28px;
 display:flex;
 flex-direction:column;
-background:linear-gradient(rgba(255,255,255,0.08),rgba(255,255,255,0.03));
+background:linear-gradient(var(--card-bg),rgba(255,255,255,0.03));
 backdrop-filter:blur(60px) saturate(180%);
-border:1px solid rgba(255,255,255,0.18);
+border:1px solid var(--card-border);
 box-shadow:0 35px 70px rgba(0,0,0,0.6);
 animation:float 6s ease-in-out infinite alternate;
 transform-origin:center center;
+opacity:0;
+}
+
+.phone.loaded{
+animation:float 6s ease-in-out infinite alternate, fadeIn .6s ease forwards;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:scale(.85);}
+to{opacity:1; transform:scale(1);}
 }
 
 @keyframes float{
@@ -50,29 +96,40 @@ from{transform:translateY(0)}
 to{transform:translateY(-12px)}
 }
 
+/* THEME TOGGLE */
+.theme-toggle{
+position:absolute;
+top:20px;
+right:20px;
+font-size:18px;
+cursor:pointer;
+color:var(--text);
+z-index:999;
+}
+
+/* TEXT */
+.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:15px;}
+.title{text-align:center;color:var(--subtext);font-size:13px;margin-top:4px;}
+.company{text-align:center;color:var(--text);font-size:14px;margin-top:6px;}
+
 /* AVATAR */
 .avatar-wrap{display:flex;justify-content:center;margin-top:15px;position:relative;}
 .ring{
 position:absolute;
 width:150px;height:150px;
 border-radius:50%;
-border:2px solid rgba(255,255,255,0.35);
+border:2px solid var(--card-border);
 animation:spin 12s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
-
 .avatar{
 width:130px;height:130px;
 border-radius:50%;
 overflow:hidden;
-border:2px solid rgba(255,255,255,0.5);
+border:2px solid var(--card-border);
 box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
 .avatar img{width:100%;height:100%;object-fit:cover;}
-
-.name{text-align:center;color:white;font-size:20px;font-weight:600;margin-top:15px;}
-.title{text-align:center;color:rgba(255,255,255,0.7);font-size:13px;margin-top:4px;}
-.company{text-align:center;color:white;font-size:14px;margin-top:6px;}
 
 .logo{display:flex;justify-content:center;margin-top:8px;}
 .logo img{width:48px;}
@@ -86,13 +143,13 @@ flex:1;
 padding:10px 14px;
 border-radius:24px;
 font-size:13px;
-background:rgba(255,255,255,0.08);
+background:var(--btn-bg);
 backdrop-filter:blur(40px);
-border:1px solid rgba(255,255,255,0.25);
-color:white;
+border:1px solid var(--card-border);
+color:var(--text);
 text-decoration:none;
 font-weight:500;
-transition:0.25s ease;
+transition:.25s ease;
 cursor:pointer;
 box-shadow:0 10px 25px rgba(0,0,0,0.35);
 display:flex;
@@ -101,25 +158,11 @@ justify-content:center;
 align-items:center;
 text-align:center;
 }
-.btn-main{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:6px;
-white-space:nowrap;
-}
-.subtext{
-font-size:65%;
-opacity:0.85;
-margin-top:3px;
-}
 .btn:hover{
 transform:translateY(-3px);
-background:rgba(255,255,255,0.18);
+background:var(--btn-hover);
 }
-.btn:active{
-transform:scale(0.96);
-}
+.btn:active{transform:scale(.96);}
 
 /* POPUP */
 .popup{
@@ -131,81 +174,40 @@ justify-content:center;
 align-items:center;
 visibility:hidden;
 opacity:0;
-transition:0.4s;
+transition:.4s;
 z-index:100;
 }
-.popup.active{
-visibility:visible;
-opacity:1;
-}
+.popup.active{visibility:visible;opacity:1;}
 
 .popup-content{
 position:relative;
-background:rgba(255,255,255,0.08);
+background:var(--card-bg);
 backdrop-filter:blur(70px) saturate(200%);
-border:1px solid rgba(0,255,255,0.5);
+border:1px solid var(--popup-border);
 padding:30px;
 border-radius:25px;
 text-align:center;
 width:300px;
-color:white;
+color:var(--text);
 overflow:hidden;
-box-shadow:0 0 50px rgba(0,255,255,0.35);
-transform:scale(0.85);
-transition:0.4s;
+box-shadow:0 0 50px var(--popup-glow);
+transform:scale(.85);
+transition:.4s;
 }
-.popup.active .popup-content{
-transform:scale(1);
-}
+.popup.active .popup-content{transform:scale(1);}
 
-/* WATERMARK LOGO */
-.popup-content::before{
-content:"";
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:70%;
-height:70%;
-background:url('assets/logo.png') no-repeat center;
-background-size:contain;
-opacity:0.15;
-filter:brightness(2) drop-shadow(0 0 40px rgba(0,255,255,0.8));
-pointer-events:none;
-animation:glowPulse 4s ease-in-out infinite alternate;
-}
-@keyframes glowPulse{
-from{opacity:0.12; transform:translate(-50%,-50%) scale(1);}
-to{opacity:0.22; transform:translate(-50%,-50%) scale(1.08);}
-}
-
-/* LIGHT SWEEP */
-.popup-content::after{
-content:"";
-position:absolute;
-top:0;
-left:-100%;
-width:60%;
-height:100%;
-background:linear-gradient(120deg,transparent,rgba(255,255,255,0.25),transparent);
-transform:skewX(-20deg);
-animation:lightSweep 4s infinite;
-}
-@keyframes lightSweep{
-0%{left:-100%;}
-100%{left:150%;}
-}
-
-.label{opacity:0.8;}
+.label{opacity:.8;}
 .value{font-weight:600;color:#00ffff;}
 
-.popup-content h3{margin-bottom:14px;position:relative;z-index:2;}
-.popup-content p{font-size:13px;margin-bottom:8px;position:relative;z-index:2;}
-.close{margin-top:15px;cursor:pointer;opacity:0.7;position:relative;z-index:2;}
+.close{margin-top:15px;cursor:pointer;opacity:.7;}
 .close:hover{opacity:1;}
 </style>
 </head>
 <body>
+
+<div class="theme-toggle" onclick="toggleTheme()">
+<i class="fa-solid fa-circle-half-stroke"></i>
+</div>
 
 <div class="wrapper">
 <div class="phone" id="phone">
@@ -229,55 +231,41 @@ animation:lightSweep 4s infinite;
 
 <div class="row">
 <a href="tel:0909554558" class="btn">
-<div class="btn-main">
 <i class="fa-solid fa-phone"></i>
 <span>Call</span>
-</div>
-<div class="subtext">0909554558</div>
 </a>
 
 <div class="btn" onclick="downloadVCF()">
-<div class="btn-main">
 <i class="fa-solid fa-address-card"></i>
 <span>Save Contact</span>
 </div>
 </div>
-</div>
 
 <div class="btn">
-<div class="btn-main">
 <i class="fa-brands fa-facebook-messenger"></i>
 <span>Chat</span>
 </div>
-<div class="subtext">Telegram • WhatsApp • Zalo</div>
-</div>
 
 <div class="btn" onclick="openQR()">
-<div class="btn-main">
 <i class="fa-solid fa-qrcode"></i>
 <span>Payment QR</span>
 </div>
-</div>
 
 <div class="btn" onclick="openEnterprise()">
-<div class="btn-main">
 <i class="fa-solid fa-building"></i>
 <span>Enterprise Code / Tax Code</span>
 </div>
-</div>
 
 <div class="btn" onclick="openWebsite()">
-<div class="btn-main">
 <i class="fa-solid fa-globe"></i>
 <span>Website and Company Profile</span>
 </div>
-</div>
 
 </div>
 </div>
 </div>
 
-<!-- POPUPS giữ nguyên -->
+<!-- POPUPS giữ nguyên nội dung -->
 <div class="popup" id="qrPopup">
 <div class="popup-content">
 <h3>Payment QR</h3>
@@ -302,25 +290,37 @@ animation:lightSweep 4s infinite;
 </div>
 
 <script>
+/* AUTO SCALE SMOOTH */
 function scaleCard(){
 const phone=document.getElementById("phone");
-const baseWidth=360;
-const baseHeight=700;
-
-const scaleX=window.innerWidth/baseWidth;
-const scaleY=window.innerHeight/baseHeight;
-const scale=Math.min(scaleX,scaleY);
-
+const baseW=360, baseH=700;
+const scale=Math.min(window.innerWidth/baseW, window.innerHeight/baseH);
 phone.style.transform="scale("+scale+")";
 }
 
-window.addEventListener("resize",scaleCard);
-window.addEventListener("load",scaleCard);
-
-/* Existing functions */
-function openWebsite(){
-window.open("https://yourwebsite.com","_blank");
+function smoothScale(){
+requestAnimationFrame(scaleCard);
 }
+
+window.addEventListener("resize",smoothScale);
+window.addEventListener("orientationchange",smoothScale);
+window.addEventListener("load",()=>{
+smoothScale();
+document.getElementById("phone").classList.add("loaded");
+});
+
+/* THEME */
+function toggleTheme(){
+document.body.classList.toggle("light");
+localStorage.setItem("theme",
+document.body.classList.contains("light")?"light":"dark");
+}
+if(localStorage.getItem("theme")==="light"){
+document.body.classList.add("light");
+}
+
+/* Existing functions (UNCHANGED) */
+function openWebsite(){window.open("https://yourwebsite.com","_blank");}
 function openQR(){document.getElementById("qrPopup").classList.add("active");}
 function closeQR(){document.getElementById("qrPopup").classList.remove("active");}
 function openEnterprise(){document.getElementById("enterprisePopup").classList.add("active");}
