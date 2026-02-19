@@ -8,243 +8,19 @@
 <meta name="theme-color" content="#0b1f3a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 <link rel="apple-touch-icon" href="assets/logo.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-
-:root{
---bg1:#0b1f3a;              /* Dark Navy */
---bg2:#071427;
---text:#f8f4ea;            /* White Ivory */
---sub:rgba(248,244,234,0.7);
---glass:rgba(255,255,255,0.05);
---border:#8c7a4f;          /* Gold Grey */
---gold:#ffd700;            /* Gold Bright */
-}
-
-body.light{
---bg1:#eef2f7;
---bg2:#dbe4f2;
---text:#0a1a35;
---sub:rgba(10,26,53,0.7);
---glass:rgba(255,255,255,0.7);
---border:rgba(0,0,0,0.1);
---gold:#c6a643;
-}
-
-body{
-height:100dvh;
-padding:env(safe-area-inset-top) env(safe-area-inset-right)
-        env(safe-area-inset-bottom) env(safe-area-inset-left);
-overflow:hidden;
-background:radial-gradient(circle at 30% 30%,var(--bg1),var(--bg2) 70%);
-display:flex;
-justify-content:center;
-align-items:center;
-transition:background .4s ease;
-}
-
-/* Wrapper */
-.wrapper{
-width:100%;
-height:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-perspective:1400px;
-}
-
-/* PHONE */
-.phone{
-width:360px;
-height:700px;
-border-radius:42px;
-padding:28px;
-display:flex;
-flex-direction:column;
-background:linear-gradient(var(--glass),rgba(255,255,255,0.02));
-backdrop-filter:blur(60px) saturate(180%);
-border:1px solid var(--border);
-box-shadow:
-0 35px 70px rgba(0,0,0,0.6),
-inset 0 0 0.5px rgba(255,255,255,0.2);
-animation:float 6s ease-in-out infinite alternate;
-transform-origin:center center;
-opacity:0;
-position:relative;
-}
-
-/* Enterprise Premium Glass */
-.phone::after{
-content:"";
-position:absolute;
-inset:0;
-border-radius:42px;
-background:linear-gradient(120deg,transparent 30%,rgba(255,215,0,0.05),transparent 70%);
-pointer-events:none;
-}
-
-/* Load animation */
-.phone.loaded{
-animation:float 6s ease-in-out infinite alternate, fadeIn .6s ease forwards;
-}
-
-@keyframes fadeIn{
-from{opacity:0; transform:scale(.85);}
-to{opacity:1; transform:scale(1);}
-}
-
-@keyframes float{
-from{transform:translateY(0)}
-to{transform:translateY(-12px)}
-}
-
-/* Theme Toggle */
-.theme-toggle{
-position:fixed;
-top:20px;
-right:20px;
-font-size:18px;
-cursor:pointer;
-color:var(--text);
-z-index:999;
-}
-
-/* Text */
-.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:15px;}
-.title{text-align:center;color:var(--sub);font-size:13px;margin-top:4px;}
-.company{text-align:center;color:var(--text);font-size:14px;margin-top:6px;}
-
-.logo{display:flex;justify-content:center;margin-top:8px;}
-.logo img{width:48px;filter:drop-shadow(0 0 8px rgba(255,215,0,0.4));}
-
-/* Avatar */
-.avatar-wrap{display:flex;justify-content:center;margin-top:15px;position:relative;}
-.ring{
-position:absolute;
-width:150px;height:150px;
-border-radius:50%;
-border:2px solid var(--border);
-animation:spin 12s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-.avatar{
-width:130px;height:130px;
-border-radius:50%;
-overflow:hidden;
-border:2px solid var(--border);
-box-shadow:0 20px 40px rgba(0,0,0,0.5);
-}
-.avatar img{width:100%;height:100%;object-fit:cover;}
-
-/* Buttons */
-.buttons{margin-top:auto;display:flex;flex-direction:column;gap:10px;}
-.row{display:flex;gap:10px;}
-
-.btn{
-flex:1;
-padding:10px 14px;
-border-radius:24px;
-font-size:13px;
-background:var(--glass);
-backdrop-filter:blur(40px);
-border:1px solid var(--border);
-color:var(--text);
-text-decoration:none;
-font-weight:500;
-transition:.25s ease;
-cursor:pointer;
-box-shadow:0 10px 25px rgba(0,0,0,0.35);
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-}
-.btn:hover{transform:translateY(-3px);}
-.btn:active{transform:scale(.96);}
-
-.btn i{color:var(--gold);margin-bottom:4px;}
-
-.subtext{font-size:11px;color:var(--sub);}
-
-/* POPUP (GIỮ NGUYÊN EFFECT) */
-.popup{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.7);
-display:flex;
-justify-content:center;
-align-items:center;
-visibility:hidden;
-opacity:0;
-transition:0.4s;
-z-index:100;
-}
-.popup.active{visibility:visible;opacity:1;}
-
-.popup-content{
-position:relative;
-background:rgba(10,20,35,0.85);
-backdrop-filter:blur(70px) saturate(200%);
-border:1px solid var(--border);
-padding:30px;
-border-radius:25px;
-text-align:center;
-width:300px;
-color:var(--text);
-overflow:hidden;
-box-shadow:0 0 50px rgba(255,215,0,0.25);
-transform:scale(0.85);
-transition:0.4s;
-}
-.popup.active .popup-content{transform:scale(1);}
-
-.popup-content::before{
-content:"";
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:70%;
-height:70%;
-background:url('assets/logo.png') no-repeat center/contain;
-opacity:0.12;
-filter:brightness(1.5) drop-shadow(0 0 40px rgba(255,215,0,0.7));
-pointer-events:none;
-animation:glowPulse 4s ease-in-out infinite alternate;
-}
-@keyframes glowPulse{
-from{opacity:0.1; transform:translate(-50%,-50%) scale(1);}
-to{opacity:0.18; transform:translate(-50%,-50%) scale(1.08);}
-}
-
-.popup-content::after{
-content:"";
-position:absolute;
-top:0;
-left:-100%;
-width:60%;
-height:100%;
-background:linear-gradient(120deg,transparent,rgba(255,255,255,0.2),transparent);
-transform:skewX(-20deg);
-animation:lightSweep 4s infinite;
-}
-@keyframes lightSweep{
-0%{left:-100%;}
-100%{left:150%;}
-}
-
-.label{opacity:0.8;}
-.value{font-weight:600;color:var(--gold);}
-.close{margin-top:15px;cursor:pointer;opacity:0.7;}
-.close:hover{opacity:1;}
-</style>
+<!-- CSS LOAD ORDER – KHÔNG ĐƯỢC ĐỔI -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/phone.css">
+<link rel="stylesheet" href="css/avatar.css">
+<link rel="stylesheet" href="css/buttons.css">
+<link rel="stylesheet" href="css/popup.css">
 </head>
 
 <body>
@@ -323,7 +99,7 @@ animation:lightSweep 4s infinite;
 </div>
 </div>
 
-<!-- POPUPS GIỮ NGUYÊN -->
+<!-- POPUPS -->
 <div class="popup" id="qrPopup">
 <div class="popup-content">
 <h3>Payment QR</h3>
@@ -347,60 +123,13 @@ animation:lightSweep 4s infinite;
 </div>
 </div>
 
-<script>
-function scaleCard(){
-const phone=document.getElementById("phone");
-const scale=Math.min(innerWidth/360, innerHeight/700);
-phone.style.transform=`scale(${scale})`;
-}
-addEventListener("resize",()=>requestAnimationFrame(scaleCard));
-addEventListener("load",()=>{
-scaleCard();
-phone.classList.add("loaded");
-});
-
-function toggleTheme(){
-document.body.classList.toggle("light");
-localStorage.setItem("theme",document.body.classList.contains("light")?"light":"dark");
-}
-if(localStorage.getItem("theme")==="light") document.body.classList.add("light");
-
-if(window.DeviceOrientationEvent){
-window.addEventListener("deviceorientation",e=>{
-const x=e.gamma/40;
-const y=e.beta/40;
-document.getElementById("phone").style.rotate=`${-y}deg ${x}deg`;
-});
-}
-
-const params=new URLSearchParams(location.search);
-if(params.has("nfc")){
-document.getElementById("phone").animate(
-[{transform:"scale(.95)"},{transform:"scale(1)"}],
-{duration:800,easing:"ease-out"}
-);
-}
-
-function openWebsite(){window.open("https://yourwebsite.com","_blank");}
-function openQR(){qrPopup.classList.add("active");}
-function closeQR(){qrPopup.classList.remove("active");}
-function openEnterprise(){enterprisePopup.classList.add("active");}
-function closeEnterprise(){enterprisePopup.classList.remove("active");}
-function downloadVCF(){
-const vcf=`BEGIN:VCARD
-VERSION:3.0
-FN:Chris Pham
-TITLE:Chief Commercial Officer
-ORG:BLH Joint Stock Company
-TEL:0909554558
-END:VCARD`;
-const blob=new Blob([vcf],{type:"text/vcard"});
-const a=document.createElement("a");
-a.href=URL.createObjectURL(blob);
-a.download="Chris_Pham.vcf";
-a.click();
-}
-</script>
+<!-- JS LOAD ORDER – KHÔNG ĐƯỢC ĐỔI -->
+<script src="js/scale.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/nfc.js"></script>
+<script src="js/popup.js"></script>
+<script src="js/vcard.js"></script>
 
 </body>
 </html>
