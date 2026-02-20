@@ -271,12 +271,3 @@ animation:lightSweep 4s infinite;
   position:relative;
   z-index:3;
 }
-
-/* ===== DEBUG FRONTTOP (FORCE SHOW) ===== */
-.phone{
-  background-image: url("assets/fronttop.png") !important;
-  background-repeat: no-repeat !important;
-  background-position: center top !important;
-  background-size: 100% 300px !important;
-  opacity: 1 !important;
-}
