@@ -294,13 +294,14 @@ display:none;
 }
 
 /* ===========================
-   BUSINESS STAMP – FIXED CORNER
+   BUSINESS STAMP – BOTTOM RIGHT (FIXED)
    =========================== */
 #enterprisePopup .popup-content{
-position:relative;   /* đảm bảo làm mốc neo */
+position:relative; /* mốc neo */
 }
 
-#enterprisePopup .popup-content::before{
+/* dùng ::after, không dùng ::before */
+#enterprisePopup .popup-content::after{
 content:"";
 position:absolute;
 right:16px;
@@ -311,4 +312,8 @@ background:url("assets/stamp.png") no-repeat center / contain;
 opacity:0.22;
 pointer-events:none;
 z-index:0;
+
+/* QUAN TRỌNG: hủy mọi transform/animation cũ */
+transform:none;
+animation:none;
 }
