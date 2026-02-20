@@ -107,14 +107,18 @@ from{transform:translateY(0)}
 to{transform:translateY(-12px)}
 }
 
+/* ===========================
+   THEME TOGGLE – INSIDE FRONTTOP
+   =========================== */
 .theme-toggle{
-position:fixed;
-top:20px;
-right:20px;
+position:absolute;
+top:178px;          /* ngay dưới avatar – trong fronttop 210px */
+left:50%;
+transform:translateX(-50%);
 font-size:18px;
 cursor:pointer;
-color:var(--text);
-z-index:999;
+color:var(--gold);
+z-index:3;
 }
 
 .name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:5px;}
