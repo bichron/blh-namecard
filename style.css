@@ -129,7 +129,7 @@ z-index:999;
    =========================== */
 .avatar-wrap{
 position:relative;
-height:210px;           /* đúng bằng height fronttop */
+height:180px;           /* đúng bằng height fronttop */
 display:flex;
 justify-content:center;
 align-items:flex-end;   /* đáy avatar trùng đáy fronttop */
