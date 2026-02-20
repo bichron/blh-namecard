@@ -121,7 +121,7 @@ color:var(--text);
 z-index:3;
 }
 
-.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:5px;}
+.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:1px;}
 .title{text-align:center;color:var(--sub);font-size:13px;margin-top:4px;}
 .company{text-align:center;color:var(--text);font-size:14px;margin-top:6px;}
 
