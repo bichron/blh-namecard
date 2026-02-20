@@ -124,7 +124,18 @@ z-index:999;
 .logo{display:flex;justify-content:center;margin-top:8px;}
 .logo img{width:48px;filter:drop-shadow(0 0 8px rgba(255,215,0,0.4));}
 
-.avatar-wrap{display:flex;justify-content:center;margin-top:15px;position:relative;}
+/* ===========================
+   AVATAR WRAP – ALIGN TO FRONTOP BOTTOM
+   =========================== */
+.avatar-wrap{
+position:relative;
+height:210px;           /* đúng bằng height fronttop */
+display:flex;
+justify-content:center;
+align-items:flex-end;   /* đáy avatar trùng đáy fronttop */
+margin-top:0;
+}
+
 .ring{
 position:absolute;
 width:150px;height:150px;
@@ -135,17 +146,19 @@ animation:spin 12s linear infinite;
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ===========================
-   AVATAR FAKE BLEND (JPG)
+   AVATAR – FLUSH WITH FRONTOP
    =========================== */
 .avatar{
-width:150px;
-height:150px;
+width:140px;
+height:140px;
 border-radius:50%;
 overflow:hidden;
 border:none;
 background:transparent;
-transform:translateY(-35px);
-
+box-shadow:
+0 25px 50px rgba(0,0,0,0.45);
+}
+       
 /* tạo cảm giác hòa nền */
 box-shadow:
 0 25px 50px rgba(0,0,0,0.45),
@@ -157,9 +170,6 @@ width:100%;
 height:100%;
 object-fit:cover;
 object-position:center top;
-filter:
-contrast(1.05)
-brightness(1.02);
 }
 
 .buttons{margin-top:auto;display:flex;flex-direction:column;gap:10px;}
