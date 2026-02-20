@@ -48,9 +48,7 @@ border-radius:42px;
 padding:28px;
 display:flex;
 flex-direction:column;
-background:
-  url("assets/fronttop.png") no-repeat center top / 100% 42%,
-  linear-gradient(var(--glass),rgba(255,255,255,0.02));
+background:linear-gradient(var(--glass),rgba(255,255,255,0.02));
 backdrop-filter:blur(60px) saturate(180%);
 border:1px solid var(--border);
 box-shadow:0 35px 70px rgba(0,0,0,0.6),
