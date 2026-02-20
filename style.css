@@ -219,3 +219,34 @@ animation:lightSweep 4s infinite;
 .value{font-weight:600;color:var(--gold);}
 .close{margin-top:15px;cursor:pointer;opacity:.7;}
 .close:hover{opacity:1;}
+
+/* =========================================================
+   === ADD FRONT TOP BACKGROUND (NON-DESTRUCTIVE ADDITION) ===
+   ========================================================= */
+
+.phone::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:45%;
+border-radius:42px 42px 0 0;
+background:
+    linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.05) 60%,
+        transparent
+    ),
+    url('/assets/fronttop.png') no-repeat top center;
+background-size:cover;
+pointer-events:none;
+z-index:0;
+}
+
+/* Đảm bảo toàn bộ nội dung phone nằm trên background top */
+.phone > *{
+position:relative;
+z-index:1;
+}
