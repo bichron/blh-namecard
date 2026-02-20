@@ -112,7 +112,7 @@ to{transform:translateY(-12px)}
    =========================== */
 .theme-toggle{
 position:absolute;
-top:220px;          /* ngay dưới avatar – trong fronttop 210px */
+bottom:2px;          /* ngay dưới avatar – trong fronttop 210px */
 left:50%;
 transform:translateX(-50%);
 font-size:18px;
