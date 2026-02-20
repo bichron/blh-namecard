@@ -133,6 +133,7 @@ height:180px;           /* đúng bằng height fronttop */
 display:flex;
 justify-content:center;
 align-items:flex-end;   /* đáy avatar trùng đáy fronttop */
+padding-bottom:40px;
 margin-top:0;
 }
 
