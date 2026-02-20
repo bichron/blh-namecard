@@ -4,7 +4,7 @@ const phone=document.querySelector(".phone");
 
 function scaleCard(){
 const scale=Math.min(innerWidth/360, innerHeight/700);
-phone.style.transform=`scale(${scale})`;
+phone.style.setProperty("--scale", scale);
 }
 
 scaleCard();
