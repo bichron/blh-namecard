@@ -244,3 +244,12 @@ animation:lightSweep 4s infinite;
 .value{font-weight:600;color:var(--gold);}
 .close{margin-top:15px;cursor:pointer;opacity:.7;}
 .close:hover{opacity:1;}
+
+/* ===========================
+   GOLD BRIGHT TITLE
+   =========================== */
+.title{
+color:var(--gold);
+font-weight:500;
+text-shadow:0 0 6px rgba(255,215,0,0.35);
+}
