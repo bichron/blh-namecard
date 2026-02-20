@@ -57,6 +57,31 @@ animation:float 6s ease-in-out infinite alternate;
 transform-origin:center center;
 opacity:0;
 position:relative;
+overflow:hidden;
+}
+
+/* ===========================
+   TOP PNG BACKGROUND (ADD)
+   =========================== */
+.phone::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:42%;
+background:
+url("assets/fronttop.png") no-repeat center top / cover;
+border-radius:42px 42px 0 0;
+opacity:.95;
+z-index:0;
+pointer-events:none;
+}
+
+/* giữ toàn bộ nội dung phía trên PNG */
+.phone > *{
+position:relative;
+z-index:1;
 }
 
 .phone::after{
@@ -219,34 +244,3 @@ animation:lightSweep 4s infinite;
 .value{font-weight:600;color:var(--gold);}
 .close{margin-top:15px;cursor:pointer;opacity:.7;}
 .close:hover{opacity:1;}
-
-/* =========================================================
-   === ADD FRONT TOP BACKGROUND (NON-DESTRUCTIVE ADDITION) ===
-   ========================================================= */
-
-.phone::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:45%;
-border-radius:42px 42px 0 0;
-background:
-    linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.35),
-        rgba(0,0,0,0.05) 60%,
-        transparent
-    ),
-    url('assets/fronttop.png') no-repeat top center;
-background-size:cover;
-pointer-events:none;
-z-index:0;
-}
-
-/* Đảm bảo toàn bộ nội dung phone nằm trên background top */
-.phone > *{
-position:relative;
-z-index:1;
-}
