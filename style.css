@@ -112,12 +112,12 @@ to{transform:translateY(-12px)}
    =========================== */
 .theme-toggle{
 position:absolute;
-bottom:2px;          /* ngay dưới avatar – trong fronttop 210px */
+top:190px;          /* ngay dưới avatar – trong fronttop 210px */
 left:50%;
 transform:translateX(-50%);
 font-size:18px;
 cursor:pointer;
-color:var(--gold);
+color:var(--text);
 z-index:3;
 }
 
@@ -133,7 +133,7 @@ z-index:3;
    =========================== */
 .avatar-wrap{
 position:relative;
-height:180px;           /* đúng bằng height fronttop */
+height:210px;           /* đúng bằng height fronttop */
 display:flex;
 justify-content:center;
 align-items:flex-end;   /* đáy avatar trùng đáy fronttop */
