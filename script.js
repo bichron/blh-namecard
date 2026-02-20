@@ -1,6 +1,6 @@
 window.addEventListener("DOMContentLoaded",()=>{
 
-const phone=document.querySelector(".phone");
+const phone=document.getElementById("phone");
 
 function scaleCard(){
 const scale=Math.min(innerWidth/360, innerHeight/700);
