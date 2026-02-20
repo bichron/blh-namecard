@@ -306,12 +306,12 @@ content:"";
 position:absolute;
 right:16px;
 bottom:16px;
-width:85px;
-height:85px;
-background:url("assets/stamp.png") no-repeat center / contain;
+width:25px;
+height:25px;
+background:url("assets/stamp.png") no-repeat bottom right / contain;
 opacity:0.22;
 pointer-events:none;
-z-index:0;
+z-index:1;
 
 /* QUAN TRỌNG: hủy mọi transform/animation cũ */
 transform:none;
