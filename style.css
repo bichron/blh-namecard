@@ -117,7 +117,7 @@ color:var(--text);
 z-index:999;
 }
 
-.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:0px;}
+.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:5px;}
 .title{text-align:center;color:var(--sub);font-size:13px;margin-top:4px;}
 .company{text-align:center;color:var(--text);font-size:14px;margin-top:6px;}
 
