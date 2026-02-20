@@ -294,26 +294,21 @@ display:none;
 }
 
 /* ===========================
-   BUSINESS STAMP – BOTTOM RIGHT (FIXED)
+   ENTERPRISE STAMP – REAL ELEMENT
    =========================== */
+
 #enterprisePopup .popup-content{
-position:relative; /* mốc neo */
+position:relative;
 }
 
-/* dùng ::after, không dùng ::before */
-#enterprisePopup .popup-content::after{
-content:"";
+.enterprise-stamp{
 position:absolute;
 right:16px;
 bottom:16px;
-width:25px;
-height:25px;
-background:url("assets/stamp.png") no-repeat bottom right / contain;
+width:70px;
+height:70px;
+background:url("assets/stamp.png") no-repeat center / contain;
 opacity:0.22;
 pointer-events:none;
-z-index:1;
-
-/* QUAN TRỌNG: hủy mọi transform/animation cũ */
-transform:none;
-animation:none;
+z-index:5;
 }
