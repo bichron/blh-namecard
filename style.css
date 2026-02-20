@@ -244,24 +244,3 @@ animation:lightSweep 4s infinite;
 .value{font-weight:600;color:var(--gold);}
 .close{margin-top:15px;cursor:pointer;opacity:.7;}
 .close:hover{opacity:1;}
-
-/* ===========================
-   FIX STACKING FOR TOP PNG
-   (NO HTML / JS CHANGE)
-   =========================== */
-
-/* layer nền PNG */
-.phone::before{
-  z-index:1;
-}
-
-/* layer sweep / glow */
-.phone::after{
-  z-index:2;
-}
-
-/* toàn bộ nội dung phone */
-.phone > *{
-  position:relative;
-  z-index:3;
-}
