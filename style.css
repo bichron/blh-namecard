@@ -294,24 +294,21 @@ display:none;
 }
 
 /* ===========================
-   BUSINESS STAMP – WATERMARK
+   BUSINESS STAMP – FIXED CORNER
    =========================== */
-#enterprisePopup .popup-content::after{
+#enterprisePopup .popup-content{
+position:relative;   /* đảm bảo làm mốc neo */
+}
+
+#enterprisePopup .popup-content::before{
 content:"";
 position:absolute;
-right:12px;
-bottom:12px;
-width:90px;
-height:90px;
+right:16px;
+bottom:16px;
+width:85px;
+height:85px;
 background:url("assets/stamp.png") no-repeat center / contain;
-opacity:0.18;                 /* độ mờ như con dấu thật */
+opacity:0.22;
 pointer-events:none;
 z-index:0;
-}
-/* ===========================
-   POPUP CONTENT ABOVE STAMP
-   =========================== */
-#enterprisePopup .popup-content > *{
-position:relative;
-z-index:1;
 }
