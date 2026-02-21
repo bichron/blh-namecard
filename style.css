@@ -257,49 +257,92 @@ transition:.4s;
 /* ===========================
    QR POPUP
    =========================== */
-.qr-popup{
-  width:320px;
+/* ===========================
+   GROUP MENU
+   =========================== */
+.qr-group-menu{
+  overflow:hidden;
+  margin-bottom:16px;
+}
+
+.qr-group-track{
+  display:flex;
+  justify-content:center;
+  gap:24px;
+  transition:transform .3s ease;
 }
 
 .qr-group{
-  margin-top:18px;
+  font-size:14px;
+  opacity:.4;
+  cursor:pointer;
+  transition:.3s;
 }
 
-.qr-title{
-  font-size:13px;
-  font-weight:600;
+.qr-group.active{
   color:var(--gold);
-  margin-bottom:8px;
-  text-align:center;
+  opacity:1;
+  font-weight:600;
 }
 
-/* SINGLE QR */
-.qr-single{
+/* ===========================
+   QR CONTENT
+   =========================== */
+.qr-content{
+  position:relative;
+  overflow:hidden;
+}
+
+.qr-panel{
+  display:none;
+}
+
+.qr-panel.active{
+  display:block;
+}
+
+.qr-slider{
   display:flex;
+  gap:12px;
   justify-content:center;
 }
 
-.qr-single img{
-  width:180px;
-  border-radius:12px;
+.qr-slider img{
+  width:80px;
+  height:80px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.25s;
 }
 
-/* SLIDER */
-.qr-slider{
-  overflow:hidden;
-  width:100%;
+.qr-slider img:hover{
+  transform:scale(1.05);
 }
 
-.qr-track{
+/* ===========================
+   QR ZOOM
+   =========================== */
+.qr-zoom{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
   display:flex;
-  gap:12px;
-  transition:transform .35s ease;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  visibility:hidden;
+  transition:.3s;
+  z-index:999;
 }
 
-.qr-track img{
-  width:180px;
-  flex-shrink:0;
-  border-radius:12px;
+.qr-zoom.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.qr-zoom img{
+  width:200px; /* 80px x 2.5 */
+  height:200px;
 }
 
 /* Enterprise popup only: logo glow */
