@@ -43,67 +43,68 @@ phone.animate(
 }
 
 /* ===========================
-   PREMIUM WHEEL CONTROLLER
+   CENTER SNAP WHEEL LOGIC
    =========================== */
 
-const wheelGroups = document.querySelectorAll(".qr-group");
+const wheel = document.querySelector(".qr-wheel");
+const groups = document.querySelectorAll(".qr-group");
 const panels = document.querySelectorAll(".qr-panel");
-const total = wheelGroups.length;
 
-let wheelIndex = 0;
+let currentIndex = 0;
 let startX = 0;
-let velocity = 0;
+let currentTranslate = 0;
 
-/* UPDATE */
-function updateWheel(){
-  wheelGroups.forEach((g,i)=>{
-    g.classList.remove("active","left","right");
+const itemWidth = 115; // 75 width + gap ~40
+const centerOffset = (wheel.parentElement.offsetWidth / 2) - (75/2);
+
+/* UPDATE ACTIVE */
+function updateActive(){
+  groups.forEach((g,i)=>{
+    g.classList.remove("active");
     panels[i].classList.remove("active");
 
-    const offset = (i - wheelIndex + total) % total;
-
-    if(offset === 0){
+    if(i === currentIndex){
       g.classList.add("active");
       panels[i].classList.add("active");
     }
-    if(offset === total - 1) g.classList.add("left");
-    if(offset === 1) g.classList.add("right");
   });
-
-  updateIndicators();
 }
 
-updateWheel();
+/* SNAP TO INDEX */
+function snapTo(index){
+  currentIndex = Math.max(0, Math.min(index, groups.length-1));
+  currentTranslate = centerOffset - (currentIndex * itemWidth);
+  wheel.style.transform = `translateX(${currentTranslate}px)`;
+  updateActive();
+}
 
-/* CLICK */
-wheelGroups.forEach((g,i)=>{
-  g.addEventListener("click",()=>{
-    wheelIndex = i;
-    updateWheel();
-  });
-});
+/* INIT */
+setTimeout(()=>{
+  snapTo(0);
+},50);
 
-/* SWIPE INERTIA */
-const wheelContainer = document.querySelector(".qr-group-wheel");
-
-wheelContainer.addEventListener("touchstart",e=>{
+/* SWIPE */
+wheel.addEventListener("touchstart",e=>{
   startX = e.touches[0].clientX;
 },{passive:true});
 
-wheelContainer.addEventListener("touchend",e=>{
+wheel.addEventListener("touchend",e=>{
   const diff = e.changedTouches[0].clientX - startX;
 
   if(Math.abs(diff) < 30) return;
 
-  velocity = diff;
-
   if(diff < 0){
-    wheelIndex = (wheelIndex + 1) % total;
+    snapTo(currentIndex + 1);
   }else{
-    wheelIndex = (wheelIndex - 1 + total) % total;
+    snapTo(currentIndex - 1);
   }
+});
 
-  updateWheel();
+/* CLICK SELECT */
+groups.forEach((g,i)=>{
+  g.addEventListener("click",()=>{
+    snapTo(i);
+  });
 });
 
 /* ===========================
