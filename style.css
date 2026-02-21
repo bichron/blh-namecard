@@ -242,6 +242,7 @@ transition:.4s;
 
 .popup-inner{
   position:relative;
+  z-index:1;            /* GLASS Ở DƯỚI */
   border-radius:25px;
   overflow:hidden; /* chỉ clip glass */
 }
@@ -290,6 +291,8 @@ transition:.4s;
 =========================== */
 
 .qr-group-wheel{
+  position:relative;
+  z-index:5;            /* NỔI TRÊN GLASS */
   perspective:1400px;
   height:90px;
   display:flex;
@@ -313,7 +316,7 @@ transition:.4s;
   width:75px;
   text-align:center;
   font-size:14px;
-
+  pointer-events:auto;
   transform-style:preserve-3d;
   transform-origin:center center -140px;
   backface-visibility:visible;
