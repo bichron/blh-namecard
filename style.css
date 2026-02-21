@@ -299,13 +299,13 @@ transition:.4s;
 
 /* LEFT SIDE */
 .qr-group.left{
-  transform:rotateY(45deg) scale(.9);
+  transform:rotateY(60deg) scale(.85);
   opacity:.5;
 }
 
 /* RIGHT SIDE */
 .qr-group.right{
-  transform:rotateY(-45deg) scale(.9);
+  transform:rotateY(-60deg) scale(.85);
   opacity:.5;
 }
 
