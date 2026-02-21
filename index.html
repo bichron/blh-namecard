@@ -103,11 +103,46 @@
 
 <!-- POPUPS -->
 <div class="popup" id="qrPopup">
-<div class="popup-content">
-<h3>Payment QR</h3>
-<img src="assets/CCOPham/qrpayment.png" height="250" alt="">
-<div class="close" onclick="closeQR()">Close</div>
-</div>
+  <div class="popup-content qr-popup">
+
+    <h3>QR Codes</h3>
+
+    <!-- GROUP 1: NAMECARD -->
+    <div class="qr-group">
+      <div class="qr-title">Namecard</div>
+      <div class="qr-single">
+        <img src="assets/qr/namecard.png" alt="QR Namecard">
+      </div>
+    </div>
+
+    <!-- GROUP 2: PERSONAL BANK -->
+    <div class="qr-group">
+      <div class="qr-title">Personal Payment</div>
+      <div class="qr-slider" data-group="personal">
+        <div class="qr-track">
+          <img src="assets/qr/personal-1.png">
+          <img src="assets/qr/personal-2.png">
+          <img src="assets/qr/personal-3.png">
+          <img src="assets/qr/personal-4.png">
+          <img src="assets/qr/personal-5.png">
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP 3: BLH BANK -->
+    <div class="qr-group">
+      <div class="qr-title">BLH Payment</div>
+      <div class="qr-slider" data-group="blh">
+        <div class="qr-track">
+          <img src="assets/qr/blh-1.png">
+          <img src="assets/qr/blh-2.png">
+          <img src="assets/qr/blh-3.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="close" onclick="closeQR()">Close</div>
+  </div>
 </div>
 
 <div class="popup" id="enterprisePopup">
