@@ -154,7 +154,16 @@ zoom.addEventListener("click",()=>{
 /* ===========================
    GLOBAL ACTIONS
 =========================== */
-window.openQR = () => qrPopup.classList.add("active");
+window.openQR = () => {
+  currentIndex = 0;      // 🔥 luôn reset về Namecard
+  updateWheel();         // cập nhật wheel
+
+  panels.forEach((p,i)=>{
+    p.classList.toggle("active", i === 0);
+  });
+
+  qrPopup.classList.add("active");
+};
 window.closeQR = () => qrPopup.classList.remove("active");
 
 window.openEnterprise = () => enterprisePopup.classList.add("active");
