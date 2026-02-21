@@ -258,49 +258,47 @@ transition:.4s;
    QR POPUP
    =========================== */
 /* ===========================
-   CENTER SNAP WHEEL
+   CYLINDER WHEEL MENU
    =========================== */
 
 .qr-group-wheel{
-  position:relative;
-  height:60px;
-  overflow:hidden;
+  perspective:1200px;
+  height:70px;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
+  overflow:hidden;
   margin-bottom:18px;
 }
 
 .qr-wheel{
-  display:flex;
-  gap:40px;
-  transition:transform .35s cubic-bezier(.22,.61,.36,1);
+  position:relative;
+  width:260px;
+  height:60px;
+  transform-style:preserve-3d;
 }
 
 .qr-group{
-  min-width:75px;
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:75px;
   text-align:center;
   font-size:14px;
+  transform-style:preserve-3d;
+  transform-origin:center center -120px;
   opacity:.35;
-  transition:.3s;
+  transition:
+    transform .6s cubic-bezier(.22,.61,.36,1),
+    opacity .3s,
+    color .3s;
 }
 
+/* ACTIVE (MẶT TRƯỚC) */
 .qr-group.active{
   color:var(--gold);
   opacity:1;
   font-weight:600;
-}
-
-/* CENTER INDICATOR LINE */
-.qr-center-indicator{
-  position:absolute;
-  width:90px;
-  height:2px;
-  background:var(--gold);
-  bottom:8px;
-  left:50%;
-  transform:translateX(-50%);
-  pointer-events:none;
 }
 
 /* ===========================
