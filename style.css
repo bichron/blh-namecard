@@ -257,33 +257,57 @@ transition:.4s;
 /* ===========================
    QR POPUP
    =========================== */
-/* ===========================
-   GROUP MENU
+  /* ===========================
+   WHEEL MENU 3D
    =========================== */
-.qr-group-menu{
-  overflow:hidden;
-  margin-bottom:16px;
-}
-
-.qr-group-track{
+.qr-group-wheel{
+  perspective:800px;
+  margin-bottom:18px;
+  height:48px;
   display:flex;
   justify-content:center;
-  gap:24px;
-  transition:transform .3s ease;
+  align-items:center;
+  overflow:hidden;
 }
 
+.qr-wheel{
+  position:relative;
+  display:flex;
+  gap:32px;
+  transform-style:preserve-3d;
+  transition:transform .45s cubic-bezier(.4,.2,.2,1);
+}
+
+/* GROUP ITEM */
 .qr-group{
   font-size:14px;
-  opacity:.4;
+  opacity:.35;
+  transform-origin:center center -60px;
+  transition:
+    transform .45s cubic-bezier(.4,.2,.2,1),
+    opacity .3s,
+    color .3s;
   cursor:pointer;
-  transition:.3s;
 }
 
+/* CENTER (ACTIVE) */
 .qr-group.active{
   color:var(--gold);
   opacity:1;
   font-weight:600;
+  transform:translateZ(40px);
 }
+
+/* LEFT */
+.qr-group.left{
+  transform:rotateY(35deg) translateZ(0);
+}
+
+/* RIGHT */
+.qr-group.right{
+  transform:rotateY(-35deg) translateZ(0);
+}
+  
 
 /* ===========================
    QR CONTENT
