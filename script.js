@@ -42,6 +42,10 @@ phone.animate(
 
 window.openWebsite=()=>window.open("https://yourwebsite.com","_blank");
 
+function openArchivement(){
+  window.open("https://yourcompany.com/profile","_blank");
+}
+
 window.openQR=()=>qrPopup.classList.add("active");
 window.closeQR=()=>qrPopup.classList.remove("active");
 
