@@ -61,6 +61,11 @@ function updateWheel(){
 
     const angle = (i - currentIndex) * angleStep;
 
+    // chuẩn hoá 0–360
+    const normalized = ((angle % 360) + 360) % 360;
+
+    const isBack = normalized > 90 && normalized < 270;
+
     g.style.transform = `
       translate(-50%,-50%)
       rotateY(${angle}deg)
@@ -68,6 +73,8 @@ function updateWheel(){
     `;
 
     g.classList.toggle("active", i === currentIndex);
+    g.classList.toggle("back", isBack);
+
     panels[i].classList.toggle("active", i === currentIndex);
   });
 }
