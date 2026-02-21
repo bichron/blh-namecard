@@ -69,7 +69,7 @@ function updateWheel(){
     g.style.transform = `
       translate(-50%,-50%)
       rotateY(${angle}deg)
-      translateZ(140px)
+      translateZ(80px)
     `;
 
     g.classList.toggle("active", i === currentIndex);
