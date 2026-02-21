@@ -8,6 +8,8 @@
 --glass:rgba(255,255,255,0.05);
 --border:#8c7a4f;
 --gold:#ffd700;
+  /* ✅ THÊM */
+--popup-bg: rgba(10,20,35,0.88);
 }
 
 body.light{
@@ -18,6 +20,8 @@ body.light{
 --glass:rgba(255,255,255,0.7);
 --border:rgba(0,0,0,0.1);
 --gold:#c6a643;
+  /* ✅ THÊM */
+--popup-bg: rgba(255,255,255,0.92);
 }
 
 body{
@@ -222,7 +226,8 @@ z-index:100;
 
 .popup-content{
 position:relative;
-background:rgba(10,20,35,0.85);
+background: var(--popup-bg);
+color: var(--text);
 backdrop-filter:blur(70px) saturate(200%);
 border:1px solid var(--border);
 padding:30px;
