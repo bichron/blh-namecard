@@ -42,6 +42,27 @@ phone.animate(
 );
 }
 
+document.querySelectorAll(".qr-slider").forEach(slider=>{
+  const track = slider.querySelector(".qr-track");
+  const items = track.children;
+  let index = 0;
+  let startX = 0;
+
+  slider.addEventListener("touchstart",e=>{
+    startX = e.touches[0].clientX;
+  });
+
+  slider.addEventListener("touchend",e=>{
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - startX;
+
+    if(diff < -40 && index < items.length - 1) index++;
+    if(diff > 40 && index > 0) index--;
+
+    track.style.transform = `translateX(${-index * 192}px)`;
+  });
+});
+
 window.openWebsite=()=>window.open("https://blh.vn","_blank");
 window.openAchievement = () =>
   window.open("https://blh.vn/profile","_blank");
