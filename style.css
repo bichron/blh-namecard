@@ -287,25 +287,26 @@ transition:.4s;
 }
 
 /* ===========================
-   CYLINDER WHEEL
+   POPUP
+=========================== */
+
+/* ===========================
+   WHEEL CYLINDER
 =========================== */
 
 .qr-group-wheel{
-  position:relative;
-  z-index:5;            /* NỔI TRÊN GLASS */
-  perspective:1400px;
-  height:90px;
+  perspective:1200px;
+  height:80px;
   display:flex;
   justify-content:center;
   align-items:center;
-  overflow:hidden;
   margin-bottom:20px;
 }
 
 .qr-wheel{
   position:relative;
-  width:280px;
-  height:80px;
+  width:240px;
+  height:70px;
   transform-style:preserve-3d;
 }
 
@@ -316,16 +317,22 @@ transition:.4s;
   width:75px;
   text-align:center;
   font-size:14px;
-  pointer-events:auto;
+
   transform-style:preserve-3d;
-  transform-origin:center center -80px;
   backface-visibility:visible;
 
-  opacity:.25;
-  transition:
-    transform .7s cubic-bezier(.22,.61,.36,1),
-    opacity .4s,
-    color .4s;
+  /* 🔥 BÁN KÍNH NHỎ LẠI */
+  transform-origin:center center -80px;
+
+  opacity:.3;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1),
+             opacity .4s,
+             color .4s;
+}
+
+.qr-group span{
+  display:block;
+  transform-style:preserve-3d;
 }
 
 .qr-group.active{
