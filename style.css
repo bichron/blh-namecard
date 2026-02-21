@@ -181,12 +181,13 @@ object-fit:cover;
 object-position:center top;
 }
 
-.buttons{margin-top:auto;display:flex;flex-direction:column;gap:10px;}
-.row{display:flex;gap:10px;}
+.buttons{margin-top:auto;display:flex;flex-direction:column;gap:8px;}
+.row{display:flex;gap:8px;}
 
 .btn{
 flex:1;
-padding:10px 14px;
+min-height:8px;
+padding:8px 12px;
 border-radius:24px;
 font-size:13px;
 background:var(--glass);
