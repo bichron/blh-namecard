@@ -43,26 +43,33 @@ phone.animate(
 }
 
 /* QRPOPUP controller */
-let currentGroup = 1;
+const wheelGroups = document.querySelectorAll(".qr-group");
+let wheelIndex = 1; // Personal ở giữa
 
-const groups = document.querySelectorAll(".qr-group");
-const panels = document.querySelectorAll(".qr-panel");
+function updateWheel(){
+  wheelGroups.forEach((g,i)=>{
+    g.classList.remove("active","left","right");
 
-/* SWITCH GROUP */
-groups.forEach((g, i)=>{
-  g.addEventListener("click", ()=>{
-    setGroup(i);
+    if(i === wheelIndex){
+      g.classList.add("active");
+    }else if(i === wheelIndex - 1){
+      g.classList.add("left");
+    }else if(i === wheelIndex + 1){
+      g.classList.add("right");
+    }
+  });
+}
+
+updateWheel();
+
+/* CLICK */
+wheelGroups.forEach((g,i)=>{
+  g.addEventListener("click",()=>{
+    wheelIndex = i;
+    updateWheel();
+    setGroup(i); // gọi logic đổi QR panel đã có
   });
 });
-
-function setGroup(i){
-  currentGroup = i;
-  groups.forEach(g=>g.classList.remove("active"));
-  panels.forEach(p=>p.classList.remove("active"));
-
-  groups[i].classList.add("active");
-  panels[i].classList.add("active");
-}
 
 /* QR ZOOM */
 document.querySelectorAll(".qr-slider img").forEach(img=>{
