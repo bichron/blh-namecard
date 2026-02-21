@@ -43,67 +43,55 @@ phone.animate(
 }
 
 /* ===========================
-   CENTER SNAP WHEEL LOGIC
+   CYLINDER WHEEL CONTROLLER
    =========================== */
 
-const wheel = document.querySelector(".qr-wheel");
 const groups = document.querySelectorAll(".qr-group");
 const panels = document.querySelectorAll(".qr-panel");
+const total = groups.length;
 
 let currentIndex = 0;
-let startX = 0;
-let currentTranslate = 0;
+const angleStep = 360 / total;
 
-const itemWidth = 115; // 75 width + gap ~40
-const centerOffset = (wheel.parentElement.offsetWidth / 2) - (75/2);
-
-/* UPDATE ACTIVE */
-function updateActive(){
+/* UPDATE WHEEL */
+function updateWheel(){
   groups.forEach((g,i)=>{
-    g.classList.remove("active");
-    panels[i].classList.remove("active");
+    const angle = (i - currentIndex) * angleStep;
+    g.style.transform =
+      `translate(-50%,-50%) rotateY(${angle}deg) translateZ(120px)`;
 
-    if(i === currentIndex){
-      g.classList.add("active");
-      panels[i].classList.add("active");
-    }
+    g.classList.toggle("active", i === currentIndex);
+    panels[i].classList.toggle("active", i === currentIndex);
   });
 }
 
-/* SNAP TO INDEX */
-function snapTo(index){
-  currentIndex = Math.max(0, Math.min(index, groups.length-1));
-  currentTranslate = centerOffset - (currentIndex * itemWidth);
-  wheel.style.transform = `translateX(${currentTranslate}px)`;
-  updateActive();
-}
-
-/* INIT */
-setTimeout(()=>{
-  snapTo(0);
-},50);
+updateWheel();
 
 /* SWIPE */
-wheel.addEventListener("touchstart",e=>{
+let startX = 0;
+const wheelWrap = document.querySelector(".qr-group-wheel");
+
+wheelWrap.addEventListener("touchstart",e=>{
   startX = e.touches[0].clientX;
 },{passive:true});
 
-wheel.addEventListener("touchend",e=>{
+wheelWrap.addEventListener("touchend",e=>{
   const diff = e.changedTouches[0].clientX - startX;
-
   if(Math.abs(diff) < 30) return;
 
-  if(diff < 0){
-    snapTo(currentIndex + 1);
-  }else{
-    snapTo(currentIndex - 1);
-  }
+  currentIndex =
+    diff < 0
+      ? (currentIndex + 1) % total
+      : (currentIndex - 1 + total) % total;
+
+  updateWheel();
 });
 
-/* CLICK SELECT */
+/* CLICK */
 groups.forEach((g,i)=>{
   g.addEventListener("click",()=>{
-    snapTo(i);
+    currentIndex = i;
+    updateWheel();
   });
 });
 
