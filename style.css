@@ -241,26 +241,9 @@ transition:.4s;
 }
 
 .popup.active .popup-content{transform:scale(1);}
-/*
-.popup-content::before{
-content:"";
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:70%;
-height:70%;
-background:url('assets/logo.png') no-repeat center/contain;
-opacity:.12;
-filter:brightness(1.5) drop-shadow(0 0 40px rgba(255,215,0,0.7));
-pointer-events:none;
-animation:glowPulse 4s ease-in-out infinite alternate;
-} */
 
-/* ===========================
-   ENTERPRISE POPUP LOGO GLOW ONLY
-   =========================== */
-#enterprisePopup .popup-content::before{
+/* Base skeleton */
+.popup-content::before{
   content:"";
   position:absolute;
   top:50%;
@@ -268,10 +251,14 @@ animation:glowPulse 4s ease-in-out infinite alternate;
   transform:translate(-50%,-50%);
   width:70%;
   height:70%;
+  pointer-events:none;
+}
+
+/* Enterprise popup only: logo glow */
+#enterprisePopup .popup-content::before{
   background:url('assets/logo.png') no-repeat center/contain;
   opacity:.12;
   filter:brightness(1.5) drop-shadow(0 0 40px rgba(255,215,0,0.7));
-  pointer-events:none;
   animation:glowPulse 4s ease-in-out infinite alternate;
 }
 
