@@ -312,6 +312,23 @@ transition:.4s;
 }
 
 /* ===========================
+   QR GROUP TEXT FIX
+=========================== */
+
+.qr-group span{
+  display:block;
+  transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1),
+             opacity .4s;
+}
+
+/* chữ ở mặt sau */
+.qr-group.back span{
+  transform:rotateY(180deg);
+  opacity:.6;
+}
+
+/* ===========================
    QR CONTENT
 =========================== */
 
