@@ -43,7 +43,7 @@ phone.animate(
 }
 
 window.openWebsite=()=>window.open("https://blh.vn","_blank");
-window.openArchivement = () =>
+window.openAchievement = () =>
   window.open("https://blh.vn/profile","_blank");
 
 window.openQR=()=>qrPopup.classList.add("active");
