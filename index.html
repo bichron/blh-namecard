@@ -105,21 +105,28 @@
 <div class="popup" id="qrPopup">
   <div class="popup-content qr-popup">
 
-    <h3>QR Codes</h3>
-
-    <!-- GROUP 1: NAMECARD -->
-    <div class="qr-group">
-      <div class="qr-title">Namecard</div>
-      <div class="qr-single">
-        <img src="assets/qr/namecard.png" alt="QR Namecard">
+    <!-- GROUP SWIPE MENU -->
+    <div class="qr-group-menu">
+      <div class="qr-group-track">
+        <div class="qr-group">Namecard</div>
+        <div class="qr-group active">Personal</div>
+        <div class="qr-group">BLH</div>
       </div>
     </div>
 
-    <!-- GROUP 2: PERSONAL BANK -->
-    <div class="qr-group">
-      <div class="qr-title">Personal Payment</div>
-      <div class="qr-slider" data-group="personal">
-        <div class="qr-track">
+    <!-- QR CONTENT -->
+    <div class="qr-content">
+
+      <!-- GROUP 0 -->
+      <div class="qr-panel">
+        <div class="qr-slider">
+          <img src="assets/qr/namecard.png">
+        </div>
+      </div>
+
+      <!-- GROUP 1 -->
+      <div class="qr-panel active">
+        <div class="qr-slider">
           <img src="assets/qr/personal-1.png">
           <img src="assets/qr/personal-2.png">
           <img src="assets/qr/personal-3.png">
@@ -127,21 +134,24 @@
           <img src="assets/qr/personal-5.png">
         </div>
       </div>
-    </div>
 
-    <!-- GROUP 3: BLH BANK -->
-    <div class="qr-group">
-      <div class="qr-title">BLH Payment</div>
-      <div class="qr-slider" data-group="blh">
-        <div class="qr-track">
+      <!-- GROUP 2 -->
+      <div class="qr-panel">
+        <div class="qr-slider">
           <img src="assets/qr/blh-1.png">
           <img src="assets/qr/blh-2.png">
           <img src="assets/qr/blh-3.png">
         </div>
       </div>
+
     </div>
 
     <div class="close" onclick="closeQR()">Close</div>
+  </div>
+
+  <!-- QR ZOOM OVERLAY -->
+  <div class="qr-zoom" onclick="closeQRZoom()">
+    <img id="qrZoomImg">
   </div>
 </div>
 
