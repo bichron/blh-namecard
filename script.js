@@ -55,20 +55,19 @@ const angleStep = 360 / total;
 
 function updateWheel(){
   groups.forEach((g,i)=>{
-    const angle = (i - currentIndex) * angleStep;
+    const angle = (i - currentIndex) * (360 / total);
 
-    const normalized = ((angle % 360) + 360) % 360;
-    const isBack = normalized > 90 && normalized < 270;
+    const isFront = i === currentIndex;
 
     g.style.transform = `
       translate(-50%,-50%)
       rotateY(${angle}deg)
       translateZ(140px)
-      ${isBack ? "rotateY(180deg) scale(.85)" : ""}
+      ${isFront ? "" : "rotateY(180deg)"}
     `;
 
-    g.classList.toggle("active", i === currentIndex);
-    panels[i].classList.toggle("active", i === currentIndex);
+    g.classList.toggle("active", isFront);
+    panels[i].classList.toggle("active", isFront);
   });
 }
 
