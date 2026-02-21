@@ -537,46 +537,6 @@ body.light .enterprise-stamp{
 }
 
 /* ===========================
-   WHEEL SNAP PREMIUM
-   =========================== */
-
-.qr-wheel{
-  display:flex;
-  gap:20px;
-  transform-style:preserve-3d;
-  transition:transform .6s cubic-bezier(.22,.61,.36,1);
-}
-
-.qr-group{
-  width:75px;
-  text-align:center;
-  font-size:14px;
-  opacity:.35;
-  cursor:pointer;
-  transition:
-    transform .6s cubic-bezier(.22,.61,.36,1),
-    opacity .3s,
-    color .3s;
-}
-
-.qr-group.active{
-  color:var(--gold);
-  opacity:1;
-  font-weight:600;
-  transform:translateZ(70px) scale(1.15);
-}
-
-.qr-group.left{
-  transform:rotateY(60deg) scale(.8);
-  opacity:.5;
-}
-
-.qr-group.right{
-  transform:rotateY(-60deg) scale(.8);
-  opacity:.5;
-}
-
-/* ===========================
    QR INDICATOR DOTS
    =========================== */
 
