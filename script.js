@@ -80,6 +80,7 @@ function updateWheel(){
 }
 
 updateWheel();
+panels[0].classList.add("active");
 
 /* SWIPE ROTATE */
 let startX = 0;
