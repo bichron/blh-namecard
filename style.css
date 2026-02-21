@@ -258,33 +258,33 @@ transition:.4s;
    QR POPUP
    =========================== */
 /* ===========================
-   QR GROUP WHEEL 3D
+   QR WHEEL MENU
    =========================== */
 
 .qr-group-wheel{
   perspective:1000px;
-  height:50px;
+  height:60px;
   display:flex;
   justify-content:center;
   align-items:center;
   overflow:hidden;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
 .qr-wheel{
   display:flex;
-  gap:40px;
+  gap:20px;
   transform-style:preserve-3d;
-  transition:transform .5s cubic-bezier(.22,.61,.36,1);
 }
 
-/* BASE STYLE */
 .qr-group{
+  width:75px;
+  text-align:center;
   font-size:14px;
   opacity:.35;
   cursor:pointer;
   transition:
-    transform .5s cubic-bezier(.22,.61,.36,1),
+    transform .45s cubic-bezier(.22,.61,.36,1),
     opacity .3s,
     color .3s;
 }
@@ -297,21 +297,22 @@ transition:.4s;
   transform:translateZ(60px) scale(1.1);
 }
 
-/* LEFT SIDE */
+/* LEFT */
 .qr-group.left{
-  transform:rotateY(60deg) scale(.85);
+  transform:rotateY(55deg) scale(.85);
   opacity:.5;
 }
 
-/* RIGHT SIDE */
+/* RIGHT */
 .qr-group.right{
-  transform:rotateY(-60deg) scale(.85);
+  transform:rotateY(-55deg) scale(.85);
   opacity:.5;
 }
 
 /* ===========================
    QR CONTENT
    =========================== */
+
 .qr-content{
   position:relative;
   overflow:hidden;
@@ -327,14 +328,18 @@ transition:.4s;
 
 .qr-slider{
   display:flex;
-  gap:12px;
-  justify-content:center;
+  gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding-bottom:6px;
 }
 
 .qr-slider img{
-  width:80px;
-  height:80px;
-  border-radius:10px;
+  width:110px;
+  height:110px;
+  border-radius:12px;
+  flex-shrink:0;
+  scroll-snap-align:center;
   cursor:pointer;
   transition:.25s;
 }
@@ -346,6 +351,7 @@ transition:.4s;
 /* ===========================
    QR ZOOM
    =========================== */
+
 .qr-zoom{
   position:fixed;
   inset:0;
@@ -365,11 +371,15 @@ transition:.4s;
 }
 
 .qr-zoom img{
-  width:200px; /* 80px x 2.5 */
-  height:200px;
+  width:275px; /* 110px x 2.5 */
+  height:275px;
 }
 
-/* Enterprise popup only: logo glow */
+
+
+/* ===========================
+   ENTERPRISE POPUP only: logo glow
+   =========================== */
 #enterprisePopup .popup-content::before{
   background:url('assets/logo.png') no-repeat center/contain;
   opacity:.12;
