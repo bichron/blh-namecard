@@ -254,6 +254,54 @@ transition:.4s;
   pointer-events:none;
 }
 
+/* ===========================
+   QR POPUP
+   =========================== */
+.qr-popup{
+  width:320px;
+}
+
+.qr-group{
+  margin-top:18px;
+}
+
+.qr-title{
+  font-size:13px;
+  font-weight:600;
+  color:var(--gold);
+  margin-bottom:8px;
+  text-align:center;
+}
+
+/* SINGLE QR */
+.qr-single{
+  display:flex;
+  justify-content:center;
+}
+
+.qr-single img{
+  width:180px;
+  border-radius:12px;
+}
+
+/* SLIDER */
+.qr-slider{
+  overflow:hidden;
+  width:100%;
+}
+
+.qr-track{
+  display:flex;
+  gap:12px;
+  transition:transform .35s ease;
+}
+
+.qr-track img{
+  width:180px;
+  flex-shrink:0;
+  border-radius:12px;
+}
+
 /* Enterprise popup only: logo glow */
 #enterprisePopup .popup-content::before{
   background:url('assets/logo.png') no-repeat center/contain;
