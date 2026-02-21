@@ -62,6 +62,29 @@ const angleStep = 360 / total;
 let currentIndex = 0;
 
 function updateWheel(){
+  groups.forEach((g, i) => {
+  const angle = (i - currentIndex) * angleStep;
+
+  g.style.transform = `
+    translate(-50%, -50%)
+    rotateY(${angle}deg)
+    translateZ(80px)
+  `;
+
+  const rad = angle * Math.PI / 180;
+  const isBack = Math.cos(rad) < 0;
+
+  g.classList.toggle("active", i === currentIndex);
+
+  // 🔥 KHÔNG COUNTER ROTATE
+  const text = g.querySelector("span");
+
+  // chỉ giảm opacity phía sau cho tự nhiên
+  text.style.opacity = isBack ? "0.5" : "1";
+
+  panels[i].classList.toggle("active", i === currentIndex);
+});
+  /* đóng tạm
   groups.forEach((g,i)=>{
     const angle = (i - currentIndex) * angleStep;
     const normalized = ((angle % 360) + 360) % 360;
@@ -76,7 +99,7 @@ function updateWheel(){
     g.classList.toggle("active", i === currentIndex);
     g.classList.toggle("back", isBack);
     panels[i].classList.toggle("active", i === currentIndex);
-  });
+  }); đóng tạm */
 }
 
 updateWheel();
