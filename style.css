@@ -258,26 +258,27 @@ transition:.4s;
    QR POPUP
    =========================== */
 /* ===========================
-   CYLINDER WHEEL MENU
+   CYLINDER WHEEL – FRONT + BACK
    =========================== */
 
 .qr-group-wheel{
-  perspective:1200px;
-  height:70px;
+  perspective:1400px;
+  height:90px;
   display:flex;
   justify-content:center;
   align-items:center;
   overflow:hidden;
-  margin-bottom:18px;
+  margin-bottom:20px;
 }
 
 .qr-wheel{
   position:relative;
-  width:260px;
-  height:60px;
+  width:280px;
+  height:80px;
   transform-style:preserve-3d;
 }
 
+/* GROUP ITEM */
 .qr-group{
   position:absolute;
   left:50%;
@@ -285,19 +286,27 @@ transition:.4s;
   width:75px;
   text-align:center;
   font-size:14px;
+
+  /* 🔑 CHO PHÉP NHÌN MẶT SAU */
+  backface-visibility:visible;
+
   transform-style:preserve-3d;
-  transform-origin:center center -120px;
+  transform-origin:center center -140px;
+
   opacity:.35;
+  filter:blur(.3px);
   transition:
-    transform .6s cubic-bezier(.22,.61,.36,1),
-    opacity .3s,
-    color .3s;
+    transform .7s cubic-bezier(.22,.61,.36,1),
+    opacity .4s,
+    filter .4s,
+    color .4s;
 }
 
-/* ACTIVE (MẶT TRƯỚC) */
+/* MẶT TRƯỚC – ĐANG CHỌN */
 .qr-group.active{
   color:var(--gold);
   opacity:1;
+  filter:none;
   font-weight:600;
 }
 
