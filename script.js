@@ -43,7 +43,7 @@ phone.animate(
 }
 
 /* ===========================
-   CYLINDER WHEEL CONTROLLER
+   CYLINDER WHEEL – 360 DEG
    =========================== */
 
 const groups = document.querySelectorAll(".qr-group");
@@ -57,8 +57,9 @@ const angleStep = 360 / total;
 function updateWheel(){
   groups.forEach((g,i)=>{
     const angle = (i - currentIndex) * angleStep;
+
     g.style.transform =
-      `translate(-50%,-50%) rotateY(${angle}deg) translateZ(120px)`;
+      `translate(-50%,-50%) rotateY(${angle}deg) translateZ(140px)`;
 
     g.classList.toggle("active", i === currentIndex);
     panels[i].classList.toggle("active", i === currentIndex);
