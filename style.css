@@ -258,8 +258,16 @@ transition:.4s;
    QR POPUP
    =========================== */
 /* ===========================
-   CYLINDER WHEEL – FRONT + BACK
-   =========================== */
+   QR POPUP PREMIUM
+=========================== */
+
+.qr-popup{
+  width:320px;
+}
+
+/* ===========================
+   CYLINDER WHEEL
+=========================== */
 
 .qr-group-wheel{
   perspective:1400px;
@@ -278,7 +286,6 @@ transition:.4s;
   transform-style:preserve-3d;
 }
 
-/* GROUP ITEM */
 .qr-group{
   position:absolute;
   left:50%;
@@ -287,36 +294,29 @@ transition:.4s;
   text-align:center;
   font-size:14px;
 
-  /* 🔑 CHO PHÉP NHÌN MẶT SAU */
-  backface-visibility:visible;
-
   transform-style:preserve-3d;
   transform-origin:center center -140px;
+  backface-visibility:visible;
 
-  opacity:.35;
-  filter:blur(.3px);
+  opacity:.25;
   transition:
     transform .7s cubic-bezier(.22,.61,.36,1),
     opacity .4s,
-    filter .4s,
     color .4s;
 }
 
-/* MẶT TRƯỚC – ĐANG CHỌN */
 .qr-group.active{
   color:var(--gold);
   opacity:1;
-  filter:none;
   font-weight:600;
 }
 
 /* ===========================
    QR CONTENT
-   =========================== */
+=========================== */
 
 .qr-content{
   position:relative;
-  overflow:hidden;
 }
 
 .qr-panel{
@@ -332,7 +332,6 @@ transition:.4s;
   gap:14px;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
-  padding-bottom:6px;
 }
 
 .qr-slider img{
@@ -351,18 +350,18 @@ transition:.4s;
 
 /* ===========================
    QR ZOOM
-   =========================== */
+=========================== */
 
 .qr-zoom{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.75);
+  background:rgba(0,0,0,.85);
   display:flex;
   justify-content:center;
   align-items:center;
   opacity:0;
   visibility:hidden;
-  transition:.3s;
+  transition:.35s;
   z-index:999;
 }
 
@@ -372,8 +371,14 @@ transition:.4s;
 }
 
 .qr-zoom img{
-  width:275px; /* 110px x 2.5 */
+  width:275px;
   height:275px;
+  transform:scale(.7);
+  transition:transform .35s cubic-bezier(.22,.61,.36,1);
+}
+
+.qr-zoom.active img{
+  transform:scale(1);
 }
 
 
