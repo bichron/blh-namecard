@@ -43,49 +43,49 @@ phone.animate(
 }
 
 /* ===========================
-   QR POPUP – WHEEL CONTROLLER
+   QR WHEEL CONTROLLER
    =========================== */
 
 const wheelGroups = document.querySelectorAll(".qr-group");
-const totalGroups = wheelGroups.length;
-let wheelIndex = 1; // group ở giữa ban đầu (Personal)
+const panels = document.querySelectorAll(".qr-panel");
+const total = wheelGroups.length;
+let wheelIndex = 0;
 
-/* UPDATE WHEEL STATE */
+/* UPDATE WHEEL */
 function updateWheel(){
   wheelGroups.forEach((g,i)=>{
     g.classList.remove("active","left","right");
 
-    // tính offset vòng tròn
-    const offset = (i - wheelIndex + totalGroups) % totalGroups;
+    const offset = (i - wheelIndex + total) % total;
 
     if(offset === 0){
       g.classList.add("active");
-    }else if(offset === totalGroups - 1){
+      panels[i].classList.add("active");
+    }else{
+      panels[i].classList.remove("active");
+    }
+
+    if(offset === total - 1){
       g.classList.add("left");
-    }else if(offset === 1){
+    }
+    if(offset === 1){
       g.classList.add("right");
     }
   });
 }
 
-/* INIT */
 updateWheel();
 
-/* CLICK TO ROTATE */
+/* CLICK ROTATE */
 wheelGroups.forEach((g,i)=>{
   g.addEventListener("click",()=>{
     wheelIndex = i;
     updateWheel();
-    setGroup(i); // đổi QR panel theo group
   });
 });
 
-/* ===========================
-   SWIPE TO ROTATE (MOBILE)
-   =========================== */
-
+/* SWIPE ROTATE */
 let startX = 0;
-
 const wheelContainer = document.querySelector(".qr-group-wheel");
 
 wheelContainer.addEventListener("touchstart",e=>{
@@ -93,39 +93,36 @@ wheelContainer.addEventListener("touchstart",e=>{
 },{passive:true});
 
 wheelContainer.addEventListener("touchend",e=>{
-  const endX = e.changedTouches[0].clientX;
-  const diff = endX - startX;
+  const diff = e.changedTouches[0].clientX - startX;
 
   if(Math.abs(diff) < 30) return;
 
   if(diff < 0){
-    // swipe left → rotate right
-    wheelIndex = (wheelIndex + 1) % totalGroups;
+    wheelIndex = (wheelIndex + 1) % total;
   }else{
-    // swipe right → rotate left
-    wheelIndex = (wheelIndex - 1 + totalGroups) % totalGroups;
+    wheelIndex = (wheelIndex - 1 + total) % total;
   }
 
   updateWheel();
-  setGroup(wheelIndex);
 });
 
 /* ===========================
    QR ZOOM
    =========================== */
 
+const zoom = document.getElementById("qrZoom");
+const zoomImg = document.getElementById("qrZoomImg");
+
 document.querySelectorAll(".qr-slider img").forEach(img=>{
   img.addEventListener("click",()=>{
-    const zoom = document.querySelector(".qr-zoom");
-    const zoomImg = document.getElementById("qrZoomImg");
     zoomImg.src = img.src;
     zoom.classList.add("active");
   });
 });
 
-function closeQRZoom(){
-  document.querySelector(".qr-zoom").classList.remove("active");
-}
+zoom.addEventListener("click",()=>{
+  zoom.classList.remove("active");
+});
 
 window.openWebsite=()=>window.open("https://blh.vn","_blank");
 window.openAchievement = () =>
