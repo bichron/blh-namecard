@@ -61,22 +61,14 @@ function updateWheel(){
 
     const angle = (i - currentIndex) * angleStep;
 
-    // chuẩn hoá về 0 → 360
-    const normalized = ((angle % 360) + 360) % 360;
-
-    // nếu nằm mặt sau hình trụ
-    const isBack = normalized > 90 && normalized < 270;
-
     g.style.transform = `
       translate(-50%,-50%)
       rotateY(${angle}deg)
       translateZ(140px)
-      ${isBack ? "rotateY(180deg)" : ""}
     `;
 
     g.classList.toggle("active", i === currentIndex);
     panels[i].classList.toggle("active", i === currentIndex);
-
   });
 }
 
