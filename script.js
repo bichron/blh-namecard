@@ -43,8 +43,8 @@ phone.animate(
 }
 
 /* ===========================
-   CYLINDER WHEEL – 360 DEG
-   =========================== */
+   QR POPUP CYLINDER LOGIC
+=========================== */
 
 const groups = document.querySelectorAll(".qr-group");
 const panels = document.querySelectorAll(".qr-panel");
@@ -53,13 +53,19 @@ const total = groups.length;
 let currentIndex = 0;
 const angleStep = 360 / total;
 
-/* UPDATE WHEEL */
 function updateWheel(){
   groups.forEach((g,i)=>{
     const angle = (i - currentIndex) * angleStep;
 
-    g.style.transform =
-      `translate(-50%,-50%) rotateY(${angle}deg) translateZ(140px)`;
+    const normalized = ((angle % 360) + 360) % 360;
+    const isBack = normalized > 90 && normalized < 270;
+
+    g.style.transform = `
+      translate(-50%,-50%)
+      rotateY(${angle}deg)
+      translateZ(140px)
+      ${isBack ? "rotateY(180deg) scale(.85)" : ""}
+    `;
 
     g.classList.toggle("active", i === currentIndex);
     panels[i].classList.toggle("active", i === currentIndex);
@@ -68,7 +74,7 @@ function updateWheel(){
 
 updateWheel();
 
-/* SWIPE */
+/* SWIPE ROTATE */
 let startX = 0;
 const wheelWrap = document.querySelector(".qr-group-wheel");
 
@@ -88,7 +94,7 @@ wheelWrap.addEventListener("touchend",e=>{
   updateWheel();
 });
 
-/* CLICK */
+/* CLICK SELECT */
 groups.forEach((g,i)=>{
   g.addEventListener("click",()=>{
     currentIndex = i;
@@ -96,34 +102,7 @@ groups.forEach((g,i)=>{
   });
 });
 
-/* ===========================
-   QR INDICATOR LOGIC
-   =========================== */
-
-function updateIndicators(){
-  panels.forEach(panel=>{
-    const slider = panel.querySelector(".qr-slider");
-    const dotsContainer = panel.querySelector(".qr-indicator");
-    if(!slider || !dotsContainer) return;
-
-    const count = slider.querySelectorAll("img").length;
-
-    dotsContainer.innerHTML = "";
-    for(let i=0;i<count;i++){
-      const dot = document.createElement("div");
-      dot.className="qr-dot";
-      if(i===0) dot.classList.add("active");
-      dotsContainer.appendChild(dot);
-    }
-  });
-}
-
-updateIndicators();
-
-/* ===========================
-   QR ZOOM TOGGLE
-   =========================== */
-
+/* QR ZOOM */
 const zoom = document.getElementById("qrZoom");
 const zoomImg = document.getElementById("qrZoomImg");
 
@@ -137,6 +116,15 @@ document.querySelectorAll(".qr-slider img").forEach(img=>{
 zoom.addEventListener("click",()=>{
   zoom.classList.remove("active");
 });
+
+/* OPEN/CLOSE POPUP */
+function openQR(){
+  document.getElementById("qrPopup").classList.add("active");
+}
+
+function closeQR(){
+  document.getElementById("qrPopup").classList.remove("active");
+}
 
 window.openWebsite=()=>window.open("https://blh.vn","_blank");
 window.openAchievement = () =>
