@@ -1,6 +1,8 @@
 window.addEventListener("DOMContentLoaded",()=>{
 
 const phone=document.getElementById("phone");
+const qrPopup = document.getElementById("qrPopup");
+const enterprisePopup = document.getElementById("enterprisePopup");
 
 function scaleCard(){
 const scale=Math.min(innerWidth/360, innerHeight/700);
