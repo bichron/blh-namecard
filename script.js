@@ -42,26 +42,41 @@ phone.animate(
 );
 }
 
-document.querySelectorAll(".qr-slider").forEach(slider=>{
-  const track = slider.querySelector(".qr-track");
-  const items = track.children;
-  let index = 0;
-  let startX = 0;
+/* QRPOPUP controller */
+let currentGroup = 1;
 
-  slider.addEventListener("touchstart",e=>{
-    startX = e.touches[0].clientX;
-  });
+const groups = document.querySelectorAll(".qr-group");
+const panels = document.querySelectorAll(".qr-panel");
 
-  slider.addEventListener("touchend",e=>{
-    const endX = e.changedTouches[0].clientX;
-    const diff = endX - startX;
-
-    if(diff < -40 && index < items.length - 1) index++;
-    if(diff > 40 && index > 0) index--;
-
-    track.style.transform = `translateX(${-index * 192}px)`;
+/* SWITCH GROUP */
+groups.forEach((g, i)=>{
+  g.addEventListener("click", ()=>{
+    setGroup(i);
   });
 });
+
+function setGroup(i){
+  currentGroup = i;
+  groups.forEach(g=>g.classList.remove("active"));
+  panels.forEach(p=>p.classList.remove("active"));
+
+  groups[i].classList.add("active");
+  panels[i].classList.add("active");
+}
+
+/* QR ZOOM */
+document.querySelectorAll(".qr-slider img").forEach(img=>{
+  img.addEventListener("click",()=>{
+    const zoom = document.querySelector(".qr-zoom");
+    const zoomImg = document.getElementById("qrZoomImg");
+    zoomImg.src = img.src;
+    zoom.classList.add("active");
+  });
+});
+
+function closeQRZoom(){
+  document.querySelector(".qr-zoom").classList.remove("active");
+}
 
 window.openWebsite=()=>window.open("https://blh.vn","_blank");
 window.openAchievement = () =>
