@@ -115,13 +115,13 @@ to{transform:translateY(-12px)}
    THEME TOGGLE – INSIDE FRONTTOP
    =========================== */
 .theme-toggle{
-position:absolute;
-top:202px;          /* ngay dưới avatar – trong fronttop 210px */
-left:50%;
-transform:translateX(-50%);
+margin-top:8px;
 font-size:15px;
 cursor:pointer;
 color:#f8f4ea;
+display:flex;
+justify-content:center;
+font-size:15px;
 z-index:3;
 }
 
