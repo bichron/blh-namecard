@@ -42,36 +42,78 @@ phone.animate(
 );
 }
 
-/* QRPOPUP controller */
-const wheelGroups = document.querySelectorAll(".qr-group");
-let wheelIndex = 1; // Personal ở giữa
+/* ===========================
+   QR POPUP – WHEEL CONTROLLER
+   =========================== */
 
+const wheelGroups = document.querySelectorAll(".qr-group");
+const totalGroups = wheelGroups.length;
+let wheelIndex = 1; // group ở giữa ban đầu (Personal)
+
+/* UPDATE WHEEL STATE */
 function updateWheel(){
   wheelGroups.forEach((g,i)=>{
     g.classList.remove("active","left","right");
 
-    if(i === wheelIndex){
+    // tính offset vòng tròn
+    const offset = (i - wheelIndex + totalGroups) % totalGroups;
+
+    if(offset === 0){
       g.classList.add("active");
-    }else if(i === wheelIndex - 1){
+    }else if(offset === totalGroups - 1){
       g.classList.add("left");
-    }else if(i === wheelIndex + 1){
+    }else if(offset === 1){
       g.classList.add("right");
     }
   });
 }
 
+/* INIT */
 updateWheel();
 
-/* CLICK */
+/* CLICK TO ROTATE */
 wheelGroups.forEach((g,i)=>{
   g.addEventListener("click",()=>{
     wheelIndex = i;
     updateWheel();
-    setGroup(i); // gọi logic đổi QR panel đã có
+    setGroup(i); // đổi QR panel theo group
   });
 });
 
-/* QR ZOOM */
+/* ===========================
+   SWIPE TO ROTATE (MOBILE)
+   =========================== */
+
+let startX = 0;
+
+const wheelContainer = document.querySelector(".qr-group-wheel");
+
+wheelContainer.addEventListener("touchstart",e=>{
+  startX = e.touches[0].clientX;
+},{passive:true});
+
+wheelContainer.addEventListener("touchend",e=>{
+  const endX = e.changedTouches[0].clientX;
+  const diff = endX - startX;
+
+  if(Math.abs(diff) < 30) return;
+
+  if(diff < 0){
+    // swipe left → rotate right
+    wheelIndex = (wheelIndex + 1) % totalGroups;
+  }else{
+    // swipe right → rotate left
+    wheelIndex = (wheelIndex - 1 + totalGroups) % totalGroups;
+  }
+
+  updateWheel();
+  setGroup(wheelIndex);
+});
+
+/* ===========================
+   QR ZOOM
+   =========================== */
+
 document.querySelectorAll(".qr-slider img").forEach(img=>{
   img.addEventListener("click",()=>{
     const zoom = document.querySelector(".qr-zoom");
