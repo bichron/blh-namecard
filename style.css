@@ -329,6 +329,10 @@ body{
   gap:14px;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+
+  /* 🔥 QUAN TRỌNG */
+  padding:0 calc(50% - 55px); /* 110px/2 */
 }
 
 .qr-slider img{
