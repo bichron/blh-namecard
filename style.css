@@ -323,4 +323,12 @@ pointer-events:none;
 z-index:5;
 }
 
-
+body.light .enterprise-stamp{
+  mix-blend-mode: normal; /* tắt screen */
+  opacity:0.85;
+  filter:
+    brightness(1.4)
+    contrast(1.2)
+    saturate(1.2)
+    drop-shadow(0 0 10px rgba(198,166,67,0.4));
+}
