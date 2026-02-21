@@ -105,14 +105,14 @@
 <div class="popup" id="qrPopup">
   <div class="popup-content qr-popup">
 
-    <!-- GROUP SWIPE MENU -->
+    <!-- WHEEL MENU -->
     <div class="qr-group-wheel">
       <div class="qr-wheel">
-       <div class="qr-group">Namecard</div>
-       <div class="qr-group active">Personal</div>
-       <div class="qr-group">BLH</div>
+        <div class="qr-group">Namecard</div>
+        <div class="qr-group">Personal</div>
+        <div class="qr-group">BLH</div>
       </div>
-     </div>
+    </div>
 
     <!-- QR CONTENT -->
     <div class="qr-content">
@@ -125,7 +125,7 @@
       </div>
 
       <!-- GROUP 1 -->
-      <div class="qr-panel active">
+      <div class="qr-panel">
         <div class="qr-slider">
           <img src="assets/qr/personal-1.png">
           <img src="assets/qr/personal-2.png">
@@ -149,8 +149,8 @@
     <div class="close" onclick="closeQR()">Close</div>
   </div>
 
-  <!-- QR ZOOM OVERLAY -->
-  <div class="qr-zoom" onclick="closeQRZoom()">
+  <!-- ZOOM OVERLAY -->
+  <div class="qr-zoom" id="qrZoom">
     <img id="qrZoomImg">
   </div>
 </div>
