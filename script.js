@@ -1,69 +1,70 @@
 window.addEventListener("DOMContentLoaded",()=>{
 
-const phone=document.getElementById("phone");
+const phone = document.getElementById("phone");
 const qrPopup = document.getElementById("qrPopup");
 const enterprisePopup = document.getElementById("enterprisePopup");
 
+/* ===========================
+   SCALE CARD
+=========================== */
 function scaleCard(){
-const scale=Math.min(innerWidth/360, innerHeight/700);
-phone.style.transform=`scale(${scale})`;
+  const scale = Math.min(innerWidth/360, innerHeight/700);
+  phone.style.transform = `scale(${scale})`;
 }
-
 scaleCard();
 phone.classList.add("loaded");
-
 window.addEventListener("resize",()=>requestAnimationFrame(scaleCard));
 
+/* ===========================
+   THEME
+=========================== */
 function toggleTheme(){
-document.body.classList.toggle("light");
-localStorage.setItem(
-"theme",
-document.body.classList.contains("light") ? "light" : "dark"
-);
+  document.body.classList.toggle("light");
+  localStorage.setItem(
+    "theme",
+    document.body.classList.contains("light") ? "light" : "dark"
+  );
 }
-window.toggleTheme=toggleTheme;
+window.toggleTheme = toggleTheme;
 
 if(localStorage.getItem("theme")==="light")
-document.body.classList.add("light");
+  document.body.classList.add("light");
 
+/* ===========================
+   DEVICE ORIENTATION
+=========================== */
 if(window.DeviceOrientationEvent){
-window.addEventListener("deviceorientation",e=>{
-const x=e.gamma/40;
-const y=e.beta/40;
-phone.style.rotate=`${-y}deg ${x}deg`;
-});
-}
-
-const params=new URLSearchParams(location.search);
-if(params.has("nfc")){
-phone.animate(
-[{transform:"scale(.95)"},{transform:"scale(1)"}],
-{duration:800,easing:"ease-out"}
-);
+  window.addEventListener("deviceorientation",e=>{
+    const x = e.gamma / 40;
+    const y = e.beta / 40;
+    phone.style.rotate = `${-y}deg ${x}deg`;
+  });
 }
 
 /* ===========================
-   QR POPUP CYLINDER LOGIC
+   NFC ANIMATION
 =========================== */
+const params = new URLSearchParams(location.search);
+if(params.has("nfc")){
+  phone.animate(
+    [{transform:"scale(.95)"},{transform:"scale(1)"}],
+    {duration:800,easing:"ease-out"}
+  );
+}
 
+/* ===========================
+   QR WHEEL CYLINDER
+=========================== */
 const groups = document.querySelectorAll(".qr-group");
 const panels = document.querySelectorAll(".qr-panel");
 const total = groups.length;
-
-let currentIndex = 0;
 const angleStep = 360 / total;
+let currentIndex = 0;
 
 function updateWheel(){
-
-  const angleStep = 360 / total;
-
   groups.forEach((g,i)=>{
-
     const angle = (i - currentIndex) * angleStep;
-
-    // chuẩn hoá 0–360
     const normalized = ((angle % 360) + 360) % 360;
-
     const isBack = normalized > 90 && normalized < 270;
 
     g.style.transform = `
@@ -74,15 +75,16 @@ function updateWheel(){
 
     g.classList.toggle("active", i === currentIndex);
     g.classList.toggle("back", isBack);
-
     panels[i].classList.toggle("active", i === currentIndex);
   });
 }
 
 updateWheel();
-panels[0].classList.add("active");
+panels[0]?.classList.add("active");
 
-/* SWIPE ROTATE */
+/* ===========================
+   WHEEL INTERACTION
+=========================== */
 let startX = 0;
 const wheelWrap = document.querySelector(".qr-group-wheel");
 
@@ -102,7 +104,6 @@ wheelWrap.addEventListener("touchend",e=>{
   updateWheel();
 });
 
-/* CLICK SELECT */
 groups.forEach((g,i)=>{
   g.addEventListener("click",()=>{
     currentIndex = i;
@@ -110,7 +111,9 @@ groups.forEach((g,i)=>{
   });
 });
 
-/* QR ZOOM */
+/* ===========================
+   QR ZOOM
+=========================== */
 const zoom = document.getElementById("qrZoom");
 const zoomImg = document.getElementById("qrZoomImg");
 
@@ -125,38 +128,32 @@ zoom.addEventListener("click",()=>{
   zoom.classList.remove("active");
 });
 
-/* OPEN/CLOSE POPUP */
-function openQR(){
-  document.getElementById("qrPopup").classList.add("active");
-}
+/* ===========================
+   GLOBAL ACTIONS
+=========================== */
+window.openQR = () => qrPopup.classList.add("active");
+window.closeQR = () => qrPopup.classList.remove("active");
 
-function closeQR(){
-  document.getElementById("qrPopup").classList.remove("active");
-}
+window.openEnterprise = () => enterprisePopup.classList.add("active");
+window.closeEnterprise = () => enterprisePopup.classList.remove("active");
 
-window.openWebsite=()=>window.open("https://blh.vn","_blank");
+window.openWebsite = () => window.open("https://blh.vn","_blank");
 window.openAchievement = () =>
   window.open("https://blh.vn/profile","_blank");
 
-window.openQR=()=>qrPopup.classList.add("active");
-window.closeQR=()=>qrPopup.classList.remove("active");
-
-window.openEnterprise=()=>enterprisePopup.classList.add("active");
-window.closeEnterprise=()=>enterprisePopup.classList.remove("active");
-
-window.downloadVCF=()=>{
-const vcf=`BEGIN:VCARD
+window.downloadVCF = ()=>{
+  const vcf=`BEGIN:VCARD
 VERSION:3.0
 FN:Chris Pham
 TITLE:Chief Commercial Officer
 ORG:BLH Joint Stock Company
 TEL:0909554558
 END:VCARD`;
-const blob=new Blob([vcf],{type:"text/vcard"});
-const a=document.createElement("a");
-a.href=URL.createObjectURL(blob);
-a.download="Chris_Pham.vcf";
-a.click();
+  const blob=new Blob([vcf],{type:"text/vcard"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="Chris_Pham.vcf";
+  a.click();
 };
 
 });
