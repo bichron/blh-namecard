@@ -242,15 +242,15 @@ transition:.4s;
 
 .popup.active .popup-content{transform:scale(1);}
 
-/* Base skeleton */
+/* POPUP BASE skeleton */
 .popup-content::before{
   content:"";
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:70%;
-  height:70%;
+  width:76%;
+  height:76%;
   pointer-events:none;
 }
 
