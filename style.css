@@ -1,300 +1,273 @@
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+/* ===========================
+   RESET + VARIABLES
+=========================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
 
 :root{
---bg1:#0b1f3a;
---bg2:#071427;
---text:#f8f4ea;
---sub:rgba(248,244,234,0.7);
---glass:rgba(255,255,255,0.05);
---border:#8c7a4f;
---gold:#ffd700;
-  /* ✅ THÊM */
---popup-bg: rgba(10,20,35,0.88);
+  --bg1:#0b1f3a;
+  --bg2:#071427;
+  --text:#f8f4ea;
+  --sub:rgba(248,244,234,.7);
+  --glass:rgba(255,255,255,.05);
+  --border:#8c7a4f;
+  --gold:#ffd700;
+  --popup-bg:rgba(10,20,35,.88);
 }
 
 body.light{
---bg1:#eef2f7;
---bg2:#dbe4f2;
---text:#0a1a35;
---sub:rgba(10,26,53,0.7);
---glass:rgba(255,255,255,0.7);
---border:rgba(0,0,0,0.1);
---gold:#c6a643;
-  /* ✅ THÊM */
---popup-bg: rgba(255,255,255,0.92);
+  --bg1:#eef2f7;
+  --bg2:#dbe4f2;
+  --text:#0a1a35;
+  --sub:rgba(10,26,53,.7);
+  --glass:rgba(255,255,255,.7);
+  --border:rgba(0,0,0,.1);
+  --gold:#c6a643;
+  --popup-bg:rgba(255,255,255,.92);
 }
 
+/* ===========================
+   BODY + LAYOUT
+=========================== */
 body{
-height:100dvh;
-padding:env(safe-area-inset-top) env(safe-area-inset-right)
-        env(safe-area-inset-bottom) env(safe-area-inset-left);
-overflow:hidden;
-background:radial-gradient(circle at 30% 30%,var(--bg1),var(--bg2) 70%);
-display:flex;
-justify-content:center;
-align-items:center;
-transition:background .4s ease;
+  height:100dvh;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right)
+          env(safe-area-inset-bottom) env(safe-area-inset-left);
+  overflow:hidden;
+  background:radial-gradient(circle at 30% 30%,var(--bg1),var(--bg2) 70%);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  transition:background .4s ease;
 }
 
 .wrapper{
-width:100%;
-height:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-perspective:1400px;
-}
-
-.phone{
-width:360px;
-height:700px;
-border-radius:42px;
-padding:28px;
-display:flex;
-flex-direction:column;
-background:linear-gradient(var(--glass),rgba(255,255,255,0.02));
-backdrop-filter:blur(60px) saturate(180%);
-border:1px solid var(--border);
-box-shadow:0 35px 70px rgba(0,0,0,0.6),
-inset 0 0 0.5px rgba(255,255,255,0.2);
-animation:float 6s ease-in-out infinite alternate;
-transform-origin:center center;
-opacity:0;
-position:relative;
-overflow:hidden;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  perspective:1400px;
 }
 
 /* ===========================
-   TOP PNG BACKGROUND (ADD)
-   =========================== */
-.phone::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:210px;
-background:
-url("assets/fronttop.png") no-repeat center center / cover;
-border-radius:42px 42px 0 0;
-opacity:.95;
-z-index:0;
-pointer-events:none;
+   PHONE
+=========================== */
+.phone{
+  width:360px;
+  height:700px;
+  border-radius:42px;
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  background:linear-gradient(var(--glass),rgba(255,255,255,.02));
+  backdrop-filter:blur(60px) saturate(180%);
+  border:1px solid var(--border);
+  box-shadow:0 35px 70px rgba(0,0,0,.6),
+             inset 0 0 .5px rgba(255,255,255,.2);
+  animation:float 6s ease-in-out infinite alternate;
+  transform-origin:center;
+  opacity:0;
+  position:relative;
+  overflow:hidden;
 }
 
-/* giữ toàn bộ nội dung phía trên PNG */
-.phone > *{
-position:relative;
-z-index:1;
+.phone::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:210px;
+  background:url("assets/fronttop.png") no-repeat center/cover;
+  border-radius:42px 42px 0 0;
+  opacity:.95;
+  pointer-events:none;
 }
 
 .phone::after{
-content:"";
-position:absolute;
-inset:0;
-border-radius:42px;
-background:linear-gradient(120deg,transparent 30%,rgba(255,215,0,0.05),transparent 70%);
-pointer-events:none;
-}
-
-.phone.loaded{
-animation:float 6s ease-in-out infinite alternate, fadeIn .6s ease forwards;
-}
-
-@keyframes fadeIn{
-from{opacity:0; transform:scale(.85);}
-to{opacity:1; transform:scale(1);}
-}
-
-@keyframes float{
-from{transform:translateY(0)}
-to{transform:translateY(-12px)}
-}
-
-/* ===========================
-   THEME TOGGLE – INSIDE FRONTTOP
-   =========================== */
-.theme-toggle{
-margin-top:-10px;
-font-size:15px;
-cursor:pointer;
-color:#f8f4ea;
-display:flex;
-justify-content:center;
-font-size:15px;
-}
-
-.name{text-align:center;color:var(--text);font-size:20px;font-weight:600;margin-top:1px;}
-.title{text-align:center;color:var(--sub);font-size:13px;margin-top:4px;}
-.company{text-align:center;color:var(--text);font-size:14px;margin-top:6px;}
-
-.logo{display:flex;justify-content:center;margin-top:8px;}
-.logo img{width:48px;filter:drop-shadow(0 0 8px rgba(255,215,0,0.4));}
-
-/* ===========================
-   AVATAR WRAP – ALIGN TO FRONTOP BOTTOM
-   =========================== */
-.avatar-wrap{
-position:relative;
-height:183px;           /* đúng bằng height fronttop */
-display:flex;
-justify-content:center;
-align-items:flex-end;   /* đáy avatar trùng đáy fronttop */
-padding-bottom:8px;
-margin-top:0;
-}
-
-.ring{
-position:absolute;
-width:145px;height:145px;
-border-radius:50%;
-border:2px solid var(--border);
-animation:spin 12s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* ===========================
-   AVATAR – FLUSH WITH FRONTOP
-   =========================== */
-.avatar{
-width:140px;
-height:140px;
-border-radius:50%;
-overflow:hidden;
-border:none;
-background:transparent;
-box-shadow:
-0 25px 50px rgba(0,0,0,0.45);
-}
-       
-/* tạo cảm giác hòa nền 
-box-shadow:
-0 25px 50px rgba(0,0,0,0.45),
-0 0 0 6px rgba(255,255,255,0.04);
-} */
-
-.avatar img{
-width:100%;
-height:100%;
-object-fit:cover;
-object-position:center top;
-}
-
-.buttons{margin-top:auto;display:flex;flex-direction:column;gap:8px;}
-.row{display:flex;gap:8px;}
-
-.btn{
-flex:1;
-min-height:8px;
-padding:8px 12px;
-border-radius:24px;
-font-size:13px;
-background:var(--glass);
-backdrop-filter:blur(40px);
-border:1px solid var(--border);
-color:var(--text);
-text-decoration:none;
-font-weight:500;
-transition:.25s ease;
-cursor:pointer;
-box-shadow:0 10px 25px rgba(0,0,0,0.35);
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-}
-.btn:hover{transform:translateY(-3px);}
-.btn:active{transform:scale(.96);}
-
-.btn i{color:var(--gold);margin-bottom:4px;}
-.subtext{font-size:11px;color:var(--sub);}
-
-.popup{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.7);
-display:flex;
-justify-content:center;
-align-items:center;
-visibility:hidden;
-opacity:0;
-transition:.4s;
-z-index:100;
-}
-.popup.active{visibility:visible;opacity:1;}
-
-.popup-content{
-position:relative;
-background: var(--popup-bg);
-color: var(--text);
-backdrop-filter:blur(70px) saturate(200%);
-border:1px solid var(--border);
-padding:30px;
-border-radius:25px;
-text-align:center;
-width:300px;
-overflow:visible;
-box-shadow:0 0 50px rgba(255,215,0,0.25);
-transform:scale(.85);
-transition:.4s;
-}
-/* Đóng tạm xét xoá
-.popup-inner{
-  position:relative;
-  z-index:1;
-  border-radius:25px;
-  overflow:hidden;
-} Đóng tạm xét xoá */
-
-.popup.active .popup-content{transform:scale(1);}
-
-/* POPUP BASE skeleton */
-/* Đóng tạm xét xoá
-.popup-inner::before{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(255,215,0,0.08),
-    transparent 70%
-  );
-  pointer-events:none;
-}
- Đóng tạm xét xoá */
-
-.popup-content::before{
-  content:"";
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:76%;
-  height:76%;
+  border-radius:42px;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,215,0,.05),transparent 70%);
   pointer-events:none;
 }
 
+.phone > *{
+  position:relative;
+  z-index:1;
+}
+
+.phone.loaded{
+  animation:float 6s ease-in-out infinite alternate, fadeIn .6s ease forwards;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(.85);}
+  to{opacity:1; transform:scale(1);}
+}
+
+@keyframes float{
+  from{transform:translateY(0);}
+  to{transform:translateY(-12px);}
+}
+
 /* ===========================
-   QR POPUP
-   =========================== */
-/* ===========================
-   QR POPUP PREMIUM
+   AVATAR + INFO
 =========================== */
+.avatar-wrap{
+  height:183px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  padding-bottom:8px;
+}
 
-.qr-popup{
+.avatar{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  overflow:hidden;
+  box-shadow:0 25px 50px rgba(0,0,0,.45);
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+}
+
+.theme-toggle{
+  margin-top:-10px;
+  display:flex;
+  justify-content:center;
+  cursor:pointer;
+  color:#f8f4ea;
+}
+
+.name{
+  text-align:center;
+  color:var(--text);
+  font-size:20px;
+  font-weight:600;
+  margin-top:1px;
+}
+
+.title{
+  text-align:center;
+  color:var(--gold);
+  font-size:13px;
+  margin-top:4px;
+  text-shadow:0 0 6px rgba(255,215,0,.35);
+}
+
+.company{
+  text-align:center;
+  color:var(--text);
+  font-size:14px;
+  margin-top:6px;
+}
+
+.logo{
+  display:flex;
+  justify-content:center;
+  margin-top:8px;
+}
+
+.logo img{
+  width:48px;
+  filter:drop-shadow(0 0 8px rgba(255,215,0,.4));
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+.buttons{
+  margin-top:auto;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.row{
+  display:flex;
+  gap:8px;
+}
+
+.btn{
+  flex:1;
+  padding:8px 12px;
+  border-radius:24px;
+  font-size:13px;
+  background:var(--glass);
+  backdrop-filter:blur(40px);
+  border:1px solid var(--border);
+  color:var(--text);
+  font-weight:500;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,.35);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transition:.25s ease;
+}
+
+.btn:hover{transform:translateY(-3px);}
+.btn:active{transform:scale(.96);}
+.btn i{color:var(--gold);margin-bottom:4px;}
+.subtext{font-size:11px;color:var(--sub);}
+
+/* ===========================
+   POPUP BASE
+=========================== */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  visibility:hidden;
+  transition:.4s;
+  z-index:100;
+}
+
+.popup.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.popup-content{
+  position:relative;
   width:320px;
+  padding:30px;
+  border-radius:25px;
+  background:var(--popup-bg);
+  backdrop-filter:blur(70px) saturate(200%);
+  border:1px solid var(--border);
+  box-shadow:0 0 50px rgba(255,215,0,.25);
+  color:var(--text);
+  text-align:center;
+  overflow:visible;
+  transform:scale(.85);
+  transition:.4s;
+}
+
+.popup.active .popup-content{
+  transform:scale(1);
 }
 
 /* ===========================
-   POPUP
+   QR WHEEL CYLINDER
 =========================== */
-
-/* ===========================
-   WHEEL CYLINDER
-=========================== */
-
 .qr-group-wheel{
   perspective:1200px;
   height:80px;
@@ -318,13 +291,8 @@ transition:.4s;
   width:75px;
   text-align:center;
   font-size:14px;
-
-  transform-style:preserve-3d;
-  backface-visibility:visible;
-
-  /* 🔥 BÁN KÍNH NHỎ LẠI */
   transform-origin:center center -80px;
-
+  transform-style:preserve-3d;
   opacity:.3;
   transition:transform .6s cubic-bezier(.22,.61,.36,1),
              opacity .4s,
@@ -334,6 +302,8 @@ transition:.4s;
 .qr-group span{
   display:block;
   transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1),
+             opacity .4s;
 }
 
 .qr-group.active{
@@ -342,18 +312,6 @@ transition:.4s;
   font-weight:600;
 }
 
-/* ===========================
-   QR GROUP TEXT FIX
-=========================== */
-
-.qr-group span{
-  display:block;
-  transform-style:preserve-3d;
-  transition:transform .6s cubic-bezier(.22,.61,.36,1),
-             opacity .4s;
-}
-
-/* chữ ở mặt sau */
 .qr-group.back span{
   transform:rotateY(180deg);
   opacity:.6;
@@ -362,18 +320,8 @@ transition:.4s;
 /* ===========================
    QR CONTENT
 =========================== */
-
-.qr-content{
-  position:relative;
-}
-
-.qr-panel{
-  display:none;
-}
-
-.qr-panel.active{
-  display:block;
-}
+.qr-panel{display:none;}
+.qr-panel.active{display:block;}
 
 .qr-slider{
   display:flex;
@@ -399,170 +347,6 @@ transition:.4s;
 /* ===========================
    QR ZOOM
 =========================== */
-
-.qr-zoom{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.85);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  opacity:0;
-  visibility:hidden;
-  transition:.35s;
-  z-index:999;
-}
-
-.qr-zoom.active{
-  opacity:1;
-  visibility:visible;
-}
-
-.qr-zoom img{
-  width:275px;
-  height:275px;
-  transform:scale(.7);
-  transition:transform .35s cubic-bezier(.22,.61,.36,1);
-}
-
-.qr-zoom.active img{
-  transform:scale(1);
-}
-
-
-
-/* ===========================
-   ENTERPRISE POPUP only: logo glow
-   =========================== */
-#enterprisePopup .popup-content::before{
-  background:url('assets/logo.png') no-repeat center/contain;
-  opacity:.12;
-  filter:brightness(1.5) drop-shadow(0 0 40px rgba(255,215,0,0.7));
-  animation:glowPulse 4s ease-in-out infinite alternate;
-}
-
-@keyframes glowPulse{
-from{opacity:.1; transform:translate(-50%,-50%) scale(1);}
-to{opacity:.18; transform:translate(-50%,-50%) scale(1.08);}
-}
-/* Đóng tạm xét xoá
-.popup-inner::after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-100%;
-  width:60%;
-  height:100%;
-  background:linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,0.2),
-    transparent
-  );
-  transform:skewX(-20deg);
-  animation:lightSweep 4s infinite;
-}
- Đóng tạm xét xoá */
-
-.popup-content::after{
-content:"";
-position:absolute;
-top:0;
-left:-100%;
-width:60%;
-height:100%;
-background:linear-gradient(120deg,transparent,rgba(255,255,255,.2),transparent);
-transform:skewX(-20deg);
-animation:lightSweep 4s infinite;
-}
-
-@keyframes lightSweep{
-0%{left:-100%;}
-100%{left:150%;}
-}
-
-.label{opacity:.8;}
-.value{font-weight:600;color:var(--gold);}
-.close{margin-top:15px;cursor:pointer;opacity:.7;}
-.close:hover{opacity:1;}
-
-/* ===========================
-   GOLD BRIGHT TITLE
-   =========================== */
-.title{
-color:var(--gold);
-font-weight:500;
-text-shadow:0 0 6px rgba(255,215,0,0.35);
-}
-
-/* REMOVE RING */
-.ring{
-display:none;
-}
-
-/* ===========================
-   ENTERPRISE STAMP – REAL ELEMENT
-   =========================== */
-
-#enterprisePopup .popup-content{
-position:relative;
-}
-
-.enterprise-stamp{
-position:absolute;
-right:16px;
-bottom:16px;
-width:70px;
-height:70px;
-background:url("assets/stamp.png") no-repeat center / contain;
-opacity:0.65;
-filter:
-    brightness(1.9)
-    contrast(1.3)
-    saturate(1.4)
-    drop-shadow(0 0 18px rgba(255,215,0,0.6));
-mix-blend-mode: screen;
-pointer-events:none;
-z-index:5;
-}
-
-body.light .enterprise-stamp{
-  mix-blend-mode: normal; /* tắt screen */
-  opacity:0.85;
-  filter:
-    brightness(1.4)
-    contrast(1.2)
-    saturate(1.2)
-    drop-shadow(0 0 10px rgba(198,166,67,0.4));
-}
-
-/* ===========================
-   QR INDICATOR DOTS
-   =========================== */
-
-.qr-indicator{
-  display:flex;
-  justify-content:center;
-  gap:6px;
-  margin-top:8px;
-}
-
-.qr-dot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:rgba(255,255,255,.3);
-  transition:.3s;
-}
-
-.qr-dot.active{
-  background:var(--gold);
-}
-
-/* ===========================
-   QR ZOOM ANIMATION
-   =========================== */
-
 .qr-zoom{
   position:fixed;
   inset:0;
@@ -591,3 +375,58 @@ body.light .enterprise-stamp{
 .qr-zoom.active img{
   transform:scale(1);
 }
+
+/* ===========================
+   ENTERPRISE POPUP EFFECTS
+=========================== */
+#enterprisePopup .popup-content::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:76%;
+  height:76%;
+  background:url("assets/logo.png") no-repeat center/contain;
+  opacity:.12;
+  filter:brightness(1.5) drop-shadow(0 0 40px rgba(255,215,0,.7));
+  animation:glowPulse 4s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+
+@keyframes glowPulse{
+  from{opacity:.1; transform:translate(-50%,-50%) scale(1);}
+  to{opacity:.18; transform:translate(-50%,-50%) scale(1.08);}
+}
+
+.enterprise-stamp{
+  position:absolute;
+  right:16px;
+  bottom:16px;
+  width:70px;
+  height:70px;
+  background:url("assets/stamp.png") no-repeat center/contain;
+  opacity:.65;
+  filter:brightness(1.9) contrast(1.3) saturate(1.4)
+         drop-shadow(0 0 18px rgba(255,215,0,.6));
+  mix-blend-mode:screen;
+  pointer-events:none;
+  z-index:5;
+}
+
+body.light .enterprise-stamp{
+  mix-blend-mode:normal;
+  opacity:.85;
+  filter:brightness(1.4) contrast(1.2) saturate(1.2)
+         drop-shadow(0 0 10px rgba(198,166,67,.4));
+}
+
+/* ===========================
+   MISC
+=========================== */
+.close{
+  margin-top:15px;
+  cursor:pointer;
+  opacity:.7;
+}
+.close:hover{opacity:1;}
