@@ -463,3 +463,99 @@ body.light .enterprise-stamp{
     saturate(1.2)
     drop-shadow(0 0 10px rgba(198,166,67,0.4));
 }
+
+/* ===========================
+   WHEEL SNAP PREMIUM
+   =========================== */
+
+.qr-wheel{
+  display:flex;
+  gap:20px;
+  transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1);
+}
+
+.qr-group{
+  width:75px;
+  text-align:center;
+  font-size:14px;
+  opacity:.35;
+  cursor:pointer;
+  transition:
+    transform .6s cubic-bezier(.22,.61,.36,1),
+    opacity .3s,
+    color .3s;
+}
+
+.qr-group.active{
+  color:var(--gold);
+  opacity:1;
+  font-weight:600;
+  transform:translateZ(70px) scale(1.15);
+}
+
+.qr-group.left{
+  transform:rotateY(60deg) scale(.8);
+  opacity:.5;
+}
+
+.qr-group.right{
+  transform:rotateY(-60deg) scale(.8);
+  opacity:.5;
+}
+
+/* ===========================
+   QR INDICATOR DOTS
+   =========================== */
+
+.qr-indicator{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin-top:8px;
+}
+
+.qr-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(255,255,255,.3);
+  transition:.3s;
+}
+
+.qr-dot.active{
+  background:var(--gold);
+}
+
+/* ===========================
+   QR ZOOM ANIMATION
+   =========================== */
+
+.qr-zoom{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  visibility:hidden;
+  transition:.35s ease;
+  z-index:999;
+}
+
+.qr-zoom.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.qr-zoom img{
+  width:275px;
+  height:275px;
+  transform:scale(.7);
+  transition:transform .35s cubic-bezier(.22,.61,.36,1);
+}
+
+.qr-zoom.active img{
+  transform:scale(1);
+}
