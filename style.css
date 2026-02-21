@@ -279,7 +279,7 @@ body{
 
 .qr-wheel{
   position:relative;
-  width:160px;
+  width:120px;
   height:70px;
   transform-style:preserve-3d;
 }
