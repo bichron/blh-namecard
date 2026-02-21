@@ -42,9 +42,9 @@ phone.animate(
 );
 }
 
-window.openWebsite=()=>window.open("https://yourwebsite.com","_blank");
+window.openWebsite=()=>window.open("https://blh.vn","_blank");
 window.openArchivement = () =>
-  window.open("https://yourcompany.com/profile","_blank");
+  window.open("https://blh.vn/profile","_blank");
 
 window.openQR=()=>qrPopup.classList.add("active");
 window.closeQR=()=>qrPopup.classList.remove("active");
