@@ -240,9 +240,29 @@ transform:scale(.85);
 transition:.4s;
 }
 
+.popup-inner{
+  position:relative;
+  border-radius:25px;
+  overflow:hidden; /* chỉ clip glass */
+}
+
 .popup.active .popup-content{transform:scale(1);}
 
 /* POPUP BASE skeleton */
+.popup-inner::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,215,0,0.08),
+    transparent 70%
+  );
+  pointer-events:none;
+}
+
+/* Đóng tạm xét xoá
 .popup-content::before{
   content:"";
   position:absolute;
@@ -252,7 +272,7 @@ transition:.4s;
   width:76%;
   height:76%;
   pointer-events:none;
-}
+} Đóng tạm xét xoá */
 
 /* ===========================
    QR POPUP
@@ -415,6 +435,24 @@ from{opacity:.1; transform:translate(-50%,-50%) scale(1);}
 to{opacity:.18; transform:translate(-50%,-50%) scale(1.08);}
 }
 
+.popup-inner::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:60%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.2),
+    transparent
+  );
+  transform:skewX(-20deg);
+  animation:lightSweep 4s infinite;
+}
+
+/* Đóng tạm xét xoá
 .popup-content::after{
 content:"";
 position:absolute;
@@ -425,7 +463,7 @@ height:100%;
 background:linear-gradient(120deg,transparent,rgba(255,255,255,.2),transparent);
 transform:skewX(-20deg);
 animation:lightSweep 4s infinite;
-}
+} Đóng tạm xét xoá */
 
 @keyframes lightSweep{
 0%{left:-100%;}
