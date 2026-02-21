@@ -43,40 +43,39 @@ phone.animate(
 }
 
 /* ===========================
-   QR WHEEL CONTROLLER
+   PREMIUM WHEEL CONTROLLER
    =========================== */
 
 const wheelGroups = document.querySelectorAll(".qr-group");
 const panels = document.querySelectorAll(".qr-panel");
 const total = wheelGroups.length;
-let wheelIndex = 0;
 
-/* UPDATE WHEEL */
+let wheelIndex = 0;
+let startX = 0;
+let velocity = 0;
+
+/* UPDATE */
 function updateWheel(){
   wheelGroups.forEach((g,i)=>{
     g.classList.remove("active","left","right");
+    panels[i].classList.remove("active");
 
     const offset = (i - wheelIndex + total) % total;
 
     if(offset === 0){
       g.classList.add("active");
       panels[i].classList.add("active");
-    }else{
-      panels[i].classList.remove("active");
     }
-
-    if(offset === total - 1){
-      g.classList.add("left");
-    }
-    if(offset === 1){
-      g.classList.add("right");
-    }
+    if(offset === total - 1) g.classList.add("left");
+    if(offset === 1) g.classList.add("right");
   });
+
+  updateIndicators();
 }
 
 updateWheel();
 
-/* CLICK ROTATE */
+/* CLICK */
 wheelGroups.forEach((g,i)=>{
   g.addEventListener("click",()=>{
     wheelIndex = i;
@@ -84,8 +83,7 @@ wheelGroups.forEach((g,i)=>{
   });
 });
 
-/* SWIPE ROTATE */
-let startX = 0;
+/* SWIPE INERTIA */
 const wheelContainer = document.querySelector(".qr-group-wheel");
 
 wheelContainer.addEventListener("touchstart",e=>{
@@ -97,6 +95,8 @@ wheelContainer.addEventListener("touchend",e=>{
 
   if(Math.abs(diff) < 30) return;
 
+  velocity = diff;
+
   if(diff < 0){
     wheelIndex = (wheelIndex + 1) % total;
   }else{
@@ -107,7 +107,31 @@ wheelContainer.addEventListener("touchend",e=>{
 });
 
 /* ===========================
-   QR ZOOM
+   QR INDICATOR LOGIC
+   =========================== */
+
+function updateIndicators(){
+  panels.forEach(panel=>{
+    const slider = panel.querySelector(".qr-slider");
+    const dotsContainer = panel.querySelector(".qr-indicator");
+    if(!slider || !dotsContainer) return;
+
+    const count = slider.querySelectorAll("img").length;
+
+    dotsContainer.innerHTML = "";
+    for(let i=0;i<count;i++){
+      const dot = document.createElement("div");
+      dot.className="qr-dot";
+      if(i===0) dot.classList.add("active");
+      dotsContainer.appendChild(dot);
+    }
+  });
+}
+
+updateIndicators();
+
+/* ===========================
+   QR ZOOM TOGGLE
    =========================== */
 
 const zoom = document.getElementById("qrZoom");
