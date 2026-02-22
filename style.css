@@ -289,6 +289,7 @@ body{
   left:50%;
   top:50%;
   width:auto;
+  white-space: nowrap;
   text-align:center;
   font-size:14px;
   transform-origin:center center -80px;
