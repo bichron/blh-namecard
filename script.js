@@ -168,6 +168,7 @@ function loadQRSlider(slider){
     }
 
     qrState.set(slider, 0);
+    track.dataset.x = 0;
     enableQRSwipe(slider);
     track.style.transform = "translateX(0)";
     updateQR(slider);
@@ -179,10 +180,9 @@ function loadQRSlider(slider){
 function enableQRSwipe(slider){
   const track = slider.querySelector(".qr-track");
   let startX = 0;
-  let currentX = 0;
   let dragging = false;
 
-  const STEP = 164; // 150 + 14
+  const STEP = 164;
 
   slider.addEventListener("touchstart", e=>{
     dragging = true;
@@ -193,26 +193,25 @@ function enableQRSwipe(slider){
   slider.addEventListener("touchmove", e=>{
     if(!dragging) return;
 
+    const baseX = parseFloat(track.dataset.x || 0);
     const dx = e.touches[0].clientX - startX;
-    track.style.transform = `translateX(${currentX + dx}px)`;
+    track.style.transform = `translateX(${baseX + dx}px)`;
   }, { passive:true });
 
   slider.addEventListener("touchend", e=>{
     if(!dragging) return;
     dragging = false;
 
+    const baseX = parseFloat(track.dataset.x || 0);
     const dx = e.changedTouches[0].clientX - startX;
-    currentX += dx;
+    let currentX = baseX + dx;
 
     const total = track.children.length;
     let index = Math.round(-currentX / STEP);
-
     index = Math.max(0, Math.min(index, total - 1));
 
-    currentX = -index * STEP;
-
-    track.style.transition = "transform .35s ease";
-    track.style.transform = `translateX(${currentX}px)`;
+    const snappedX = -index * STEP;
+    track.dataset.x = snappedX;
 
     qrState.set(slider, index);
     updateQR(slider);
@@ -220,13 +219,16 @@ function enableQRSwipe(slider){
 }
 
 function updateQR(slider){
-  const index = qrState.get(slider);
+  const index = qrState.get(slider) ?? 0;
   const track = slider.querySelector(".qr-track");
   const dots = slider.querySelectorAll(".qr-indicators span");
 
   const STEP = 164;
+  const x = -index * STEP;
+
+  track.dataset.x = x;
   track.style.transition = "transform .35s ease";
-  track.style.transform = `translateX(-${index * STEP}px)`;
+  track.style.transform = `translateX(${x}px)`;
 
   dots.forEach(d => d.classList.remove("active"));
   if(dots[index]) dots[index].classList.add("active");
