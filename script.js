@@ -3,6 +3,7 @@ window.addEventListener("DOMContentLoaded",()=>{
 const phone = document.getElementById("phone");
 const qrPopup = document.getElementById("qrPopup");
 const enterprisePopup = document.getElementById("enterprisePopup");
+const qrState = new Map();
 
 /* ===========================
    SCALE CARD
@@ -59,7 +60,6 @@ const groups = document.querySelectorAll(".qr-group");
 const panels = document.querySelectorAll(".qr-panel");
 const total = groups.length;
 const angleStep = 360 / total;
-let currentIndex = 0;
 
 function updateWheel(){
   groups.forEach((g, i) => {
@@ -84,22 +84,6 @@ function updateWheel(){
 
   panels[i].classList.toggle("active", i === currentIndex);
 });
-  /* đóng tạm
-  groups.forEach((g,i)=>{
-    const angle = (i - currentIndex) * angleStep;
-    const normalized = ((angle % 360) + 360) % 360;
-    const isBack = normalized > 90 && normalized < 270;
-
-    g.style.transform = `
-      translate(-50%,-50%)
-      rotateY(${angle}deg)
-      translateZ(80px)
-    `;
-
-    g.classList.toggle("active", i === currentIndex);
-    g.classList.toggle("back", isBack);
-    panels[i].classList.toggle("active", i === currentIndex);
-  }); đóng tạm */
 }
 
 updateWheel();
@@ -133,6 +117,74 @@ groups.forEach((g,i)=>{
     updateWheel();
   });
 });
+
+/* ĐOẠN THÊM SẼ XẾP LẠI */
+
+function loadQRSlider(slider){
+
+  const track = slider.querySelector(".qr-track");
+  const indicatorBox = slider.querySelector(".qr-indicators");
+
+  const group = slider.dataset.group;
+  const maxAllowed = parseInt(slider.dataset.max);
+
+  track.innerHTML = "";
+  indicatorBox.innerHTML = "";
+
+  let images = [];
+  let index = 1;
+
+  function tryLoad(){
+    const img = new Image();
+    img.src = `assets/qr/${group}/${index}.png`;
+
+    img.onload = () => {
+      images.push(img.src);
+      index++;
+      tryLoad();
+    };
+
+    img.onerror = build;
+  }
+
+  function build(){
+    const count = Math.min(maxAllowed, images.length);
+
+    for(let i = 0; i < count; i++){
+      const el = document.createElement("img");
+      el.src = images[i];
+      track.appendChild(el);
+
+      const dot = document.createElement("span");
+      if(i === 0) dot.classList.add("active");
+      indicatorBox.appendChild(dot);
+    }
+
+    qrState.set(slider, 0);
+    updateQR(slider);
+  }
+
+  tryLoad();
+}
+
+function updateQR(slider){
+  const index = qrState.get(slider);
+  const track = slider.querySelector(".qr-track");
+  const dots = slider.querySelectorAll(".qr-indicators span");
+
+  track.style.transform = `translateX(-${index * 150}px)`;
+
+  dots.forEach(d => d.classList.remove("active"));
+  if(dots[index]) dots[index].classList.add("active");
+}
+
+function openQR(){
+
+  document.querySelectorAll(".qr-slider").forEach(slider=>{
+    loadQRSlider(slider);
+  });
+
+}
 
 /* ===========================
    QR ZOOM
