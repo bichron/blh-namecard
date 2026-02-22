@@ -59,8 +59,8 @@ if(params.has("nfc")){
 const groups = document.querySelectorAll(".qr-group");
 const panels = document.querySelectorAll(".qr-panel");
 const total = groups.length;
-const angleStep = 360 / total;
-
+const angleStep = total ? 360 / total : 0;
+let currentIndex = 0;
 function updateWheel(){
   groups.forEach((g, i) => {
   const angle = (i - currentIndex) * angleStep;
@@ -118,7 +118,7 @@ groups.forEach((g,i)=>{
   });
 });
 
-/* ĐOẠN THÊM SẼ XẾP LẠI */
+/* ĐOẠN THÊM VỀ QR-SLIDER SẼ XẾP LẠI */
 
 function loadQRSlider(slider){
 
@@ -148,7 +148,9 @@ function loadQRSlider(slider){
   }
 
   function build(){
-    const count = Math.min(maxAllowed, images.length);
+    if(count === 0){
+       track.innerHTML = "<div class='qr-empty'>No QR</div>";
+    return;}
 
     for(let i = 0; i < count; i++){
       const el = document.createElement("img");
@@ -178,25 +180,18 @@ function updateQR(slider){
   if(dots[index]) dots[index].classList.add("active");
 }
 
-function openQR(){
-
-  document.querySelectorAll(".qr-slider").forEach(slider=>{
-    loadQRSlider(slider);
-  });
-
-}
-
 /* ===========================
    QR ZOOM
 =========================== */
 const zoom = document.getElementById("qrZoom");
 const zoomImg = document.getElementById("qrZoomImg");
 
-document.querySelectorAll(".qr-slider img").forEach(img=>{
-  img.addEventListener("click",()=>{
-    zoomImg.src = img.src;
-    zoom.classList.add("active");
-  });
+document.addEventListener("click", e => {
+  const img = e.target.closest(".qr-track img");
+  if(!img) return;
+
+  zoomImg.src = img.src;
+  zoom.classList.add("active");
 });
 
 zoom.addEventListener("click",()=>{
@@ -213,7 +208,10 @@ window.openQR = () => {
   panels.forEach((p,i)=>{
     p.classList.toggle("active", i === 0);
   });
-
+  // 🔥 LOAD QR SLIDER TẠI ĐÂY
+  document.querySelectorAll(".qr-slider").forEach(slider=>{
+    loadQRSlider(slider);
+  });
   qrPopup.classList.add("active");
 };
 window.closeQR = () => qrPopup.classList.remove("active");
