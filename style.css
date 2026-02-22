@@ -330,10 +330,10 @@ body{
 }
 
 .qr-group.active{
+  position:relative;
   color:var(--gold);
   opacity:1;
   font-weight:600;
-  position:relative;
 }
 
 .qr-group.back span{
