@@ -170,7 +170,6 @@ function loadQRSlider(slider){
     qrState.set(slider, 0);
     track.dataset.x = 0;
     enableQRSwipe(slider);
-    track.style.transform = "translateX(0)";
     updateQR(slider);
   }
 
@@ -178,6 +177,9 @@ function loadQRSlider(slider){
 }
 
 function enableQRSwipe(slider){
+  // 🔒 chặn gắn listener nhiều lần
+  if(slider.dataset.swipeBound) return;
+  slider.dataset.swipeBound = "1";
   const track = slider.querySelector(".qr-track");
   let startX = 0;
   let dragging = false;
