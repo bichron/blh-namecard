@@ -359,29 +359,60 @@ body{
 .qr-panel{display:none;}
 .qr-panel.active{display:block;}
 
-.qr-slider{
-  display:flex;
-  gap:14px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
+/* ===========================
+   QR SLIDER (NEW STRUCTURE)
+=========================== */
 
-  /* 🔥 QUAN TRỌNG */
-  padding:0 calc(50% - 55px); /* 110px/2 */
+.qr-slider{
+  width:150px;
+  margin:auto;
+  overflow:hidden;
+  position:relative;
 }
 
-.qr-slider img{
+.qr-track{
+  display:flex;
+  transition:transform .35s ease;
+  gap:14px; /* giữ khoảng cách cũ */
+}
+
+.qr-track img{
   width:150px;
   height:150px;
   border-radius:12px;
   flex-shrink:0;
-  scroll-snap-align:center;
   cursor:pointer;
   transition:.25s;
 }
 
-.qr-slider img:hover{
+.qr-track img:hover{
   transform:scale(1.05);
+}
+
+/* ===========================
+   QR INDICATORS
+=========================== */
+
+.qr-indicators{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:12px;
+}
+
+.qr-indicators span{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#999;
+  opacity:.4;
+  transition:.3s;
+}
+
+.qr-indicators span.active{
+  background:#fff;
+  opacity:1;
+  transform:scale(1.2);
 }
 
 /* ===========================
