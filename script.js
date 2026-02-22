@@ -77,10 +77,12 @@ function updateWheel(){
   g.classList.toggle("active", i === currentIndex);
 
   // 🔥 KHÔNG COUNTER ROTATE
-  const text = g.querySelector("span");
+const text = g.querySelector("span");
 
   // chỉ giảm opacity phía sau cho tự nhiên
+if(text){
   text.style.opacity = isBack ? "0.5" : "1";
+}
 
   panels[i].classList.toggle("active", i === currentIndex);
 });
@@ -95,21 +97,23 @@ panels[0]?.classList.add("active");
 let startX = 0;
 const wheelWrap = document.querySelector(".qr-group-wheel");
 
-wheelWrap.addEventListener("touchstart",e=>{
-  startX = e.touches[0].clientX;
-},{passive:true});
+if(wheelWrap){
+  wheelWrap.addEventListener("touchstart", e=>{
+    startX = e.touches[0].clientX;
+  },{passive:true});
 
-wheelWrap.addEventListener("touchend",e=>{
-  const diff = e.changedTouches[0].clientX - startX;
-  if(Math.abs(diff) < 30) return;
+  wheelWrap.addEventListener("touchend", e=>{
+    const diff = e.changedTouches[0].clientX - startX;
+    if(Math.abs(diff) < 30) return;
 
-  currentIndex =
-    diff < 0
-      ? (currentIndex + 1) % total
-      : (currentIndex - 1 + total) % total;
+    currentIndex =
+      diff < 0
+        ? (currentIndex + 1) % total
+        : (currentIndex - 1 + total) % total;
 
-  updateWheel();
-});
+    updateWheel();
+  });
+}
 
 groups.forEach((g,i)=>{
   g.addEventListener("click",()=>{
@@ -148,6 +152,7 @@ function loadQRSlider(slider){
   }
 
   function build(){
+    const count = Math.min(maxAllowed, images.length);
     if(count === 0){
        track.innerHTML = "<div class='qr-empty'>No QR</div>";
     return;}
