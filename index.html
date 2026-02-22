@@ -146,35 +146,48 @@
       </div>
     </div>
 
-      <!-- QR PANELS -->
-      <div class="qr-content">
-        <div class="qr-panel active">
-          <div class="qr-slider">
-            <img src="assets/qr/namecard.png" alt="Namecard QR">
-          </div>
-        </div>
+<!-- QR PANELS -->
+<div class="qr-content">
 
-        <div class="qr-panel">
-          <div class="qr-slider">
-            <img src="assets/CCOPham/personal1.png">
-            <img src="assets/CCOPham/personal2.png">
-            <img src="assets/CCOPham/personal3.png">
-            <img src="assets/CCOPham/personal4.png">
-            <img src="assets/CCOPham/personal5.png">
-          </div>
-        </div>
+  <!-- PANEL 1 : NAMECARD -->
+  <div class="qr-panel active">
+    <div class="qr-slider"
+         data-group="namecard"
+         data-max="1">
 
-        <div class="qr-panel">
-          <div class="qr-slider">
-            <img src="assets/qr/blh1.png">
-            <img src="assets/qr/blh2.png">
-            <img src="assets/qr/blh3.png">
-          </div>
-        </div>
-      </div>
+      <div class="qr-track"></div>
+      <div class="qr-indicators"></div>
 
-      <div class="close" onclick="closeQR()">Close</div>
     </div>
+  </div>
+
+  <!-- PANEL 2 : PERSONAL BANK -->
+  <div class="qr-panel">
+    <div class="qr-slider"
+         data-group="personal"
+         data-max="5">
+
+      <div class="qr-track"></div>
+      <div class="qr-indicators"></div>
+
+    </div>
+  </div>
+
+  <!-- PANEL 3 : INSURANCE -->
+  <div class="qr-panel">
+    <div class="qr-slider"
+         data-group="insurance"
+         data-max="3">
+
+      <div class="qr-track"></div>
+      <div class="qr-indicators"></div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="close" onclick="closeQR()">Close</div>
 
     <!-- QR ZOOM -->
     <div class="qr-zoom" id="qrZoom">
