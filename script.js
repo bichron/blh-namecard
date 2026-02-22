@@ -176,38 +176,60 @@ function loadQRSlider(slider){
   tryLoad();
 }
 
+function enableQRSwipe(slider){
+  const track = slider.querySelector(".qr-track");
+  let startX = 0;
+  let currentX = 0;
+  let dragging = false;
+
+  const STEP = 164; // 150 + 14
+
+  slider.addEventListener("touchstart", e=>{
+    dragging = true;
+    startX = e.touches[0].clientX;
+    track.style.transition = "none";
+  }, { passive:true });
+
+  slider.addEventListener("touchmove", e=>{
+    if(!dragging) return;
+
+    const dx = e.touches[0].clientX - startX;
+    track.style.transform = `translateX(${currentX + dx}px)`;
+  }, { passive:true });
+
+  slider.addEventListener("touchend", e=>{
+    if(!dragging) return;
+    dragging = false;
+
+    const dx = e.changedTouches[0].clientX - startX;
+    currentX += dx;
+
+    const total = track.children.length;
+    let index = Math.round(-currentX / STEP);
+
+    index = Math.max(0, Math.min(index, total - 1));
+
+    currentX = -index * STEP;
+
+    track.style.transition = "transform .35s ease";
+    track.style.transform = `translateX(${currentX}px)`;
+
+    qrState.set(slider, index);
+    updateQR(slider);
+  });
+}
+
 function updateQR(slider){
   const index = qrState.get(slider);
   const track = slider.querySelector(".qr-track");
   const dots = slider.querySelectorAll(".qr-indicators span");
 
-  track.style.transform = `translateX(-${index * 150}px)`;
+  const STEP = 164;
+  track.style.transition = "transform .35s ease";
+  track.style.transform = `translateX(-${index * STEP}px)`;
 
   dots.forEach(d => d.classList.remove("active"));
   if(dots[index]) dots[index].classList.add("active");
-}
-
-function enableQRSwipe(slider){
-  let startX = 0;
-
-  slider.addEventListener("touchstart", e=>{
-    startX = e.touches[0].clientX;
-  }, { passive:true });
-
-  slider.addEventListener("touchend", e=>{
-    const diff = e.changedTouches[0].clientX - startX;
-    if(Math.abs(diff) < 30) return;
-
-    const track = slider.querySelector(".qr-track");
-    const total = track.children.length;
-    let index = qrState.get(slider) ?? 0;
-
-    if(diff < 0 && index < total - 1) index++;
-    if(diff > 0 && index > 0) index--;
-
-    qrState.set(slider, index);
-    updateQR(slider);
-  });
 }
 
 /* ===========================
