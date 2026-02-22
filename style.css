@@ -267,7 +267,7 @@ body{
   width:320px;
 
   /* wheel scale theo popup */
-  --wheel-size: 90%;
+  --wheel-size: 100%;
 }
 
 .popup.active .popup-content{
