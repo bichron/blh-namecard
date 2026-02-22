@@ -261,6 +261,15 @@ body{
   transition:.4s;
 }
 
+/* 🔥 QR POPUP CONFIG (local scope) */
+.qr-popup{
+  /* popup riêng cho QR */
+  width:320px;
+
+  /* wheel scale theo popup */
+  --wheel-size: 80%;
+}
+
 .popup.active .popup-content{
   transform:scale(1);
 }
