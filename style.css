@@ -338,7 +338,7 @@ body{
 
 .qr-group.back span{
   transform:rotateY(180deg);
-  opacity:.6;
+  opacity:.8;
 }
 
 .qr-group.active::after{
