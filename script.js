@@ -168,6 +168,7 @@ function loadQRSlider(slider){
     }
 
     qrState.set(slider, 0);
+    track.style.transform = "translateX(0)";
     updateQR(slider);
   }
 
