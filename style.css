@@ -275,20 +275,28 @@ body{
 }
 
 /* ===========================
+   WHEEL MASK
+=========================== */
+
+.qr-wheel-mask{
+  overflow:hidden;
+  border-radius:12px;
+}
+
+/* ===========================
    QR WHEEL CYLINDER
 =========================== */
 .qr-group-wheel{
-  perspective:1200px;
+  perspective:1000px;
   height:80px;
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-bottom:20px;
 }
 
 .qr-wheel{
   position:relative;
-  width:120px;
+  width:var(--wheel-size);
   height:70px;
   transform-style:preserve-3d;
 }
@@ -301,13 +309,17 @@ body{
   white-space: nowrap;
   text-align:center;
   font-size:14px;
-  transform-origin:center center -80px;
   transform-style:preserve-3d;
-  opacity:.3;
+  backface-visibility: visible; /* rất quan trọng */
+  /* 🔥 bán kính tự tính */
+  transform-origin:
+    center center
+    calc(-1 * var(--wheel-size) / 3);
+
+  opacity:.35;
   transition:transform .6s cubic-bezier(.22,.61,.36,1),
              opacity .4s,
              color .4s;
-  backface-visibility: visible; /* rất quan trọng */
 }
 
 .qr-group span{
