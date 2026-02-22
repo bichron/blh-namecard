@@ -168,6 +168,7 @@ function loadQRSlider(slider){
     }
 
     qrState.set(slider, 0);
+    enableQRSwipe(slider);
     track.style.transform = "translateX(0)";
     updateQR(slider);
   }
@@ -184,6 +185,29 @@ function updateQR(slider){
 
   dots.forEach(d => d.classList.remove("active"));
   if(dots[index]) dots[index].classList.add("active");
+}
+
+function enableQRSwipe(slider){
+  let startX = 0;
+
+  slider.addEventListener("touchstart", e=>{
+    startX = e.touches[0].clientX;
+  }, { passive:true });
+
+  slider.addEventListener("touchend", e=>{
+    const diff = e.changedTouches[0].clientX - startX;
+    if(Math.abs(diff) < 30) return;
+
+    const track = slider.querySelector(".qr-track");
+    const total = track.children.length;
+    let index = qrState.get(slider) ?? 0;
+
+    if(diff < 0 && index < total - 1) index++;
+    if(diff > 0 && index > 0) index--;
+
+    qrState.set(slider, index);
+    updateQR(slider);
+  });
 }
 
 /* ===========================
