@@ -265,7 +265,7 @@ body{
 }
 
 .popup-content h3 {
-  margin-top:0;
+  margin-top:20;
   margin-bottom:0;
 }
 
@@ -273,7 +273,7 @@ body{
 .qr-popup{
   /* popup riêng cho QR */
   width:320px;
-  padding-top: 16px;
+  padding-top: 10px;
   padding-bottom: 10px;
 
   /* wheel scale theo popup */
