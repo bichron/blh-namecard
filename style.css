@@ -478,7 +478,9 @@ body{
 }
 
 #enterprisePopup.active{
-  pointer-events: auto;
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto;
 }
 
 .enterprise-stamp{
