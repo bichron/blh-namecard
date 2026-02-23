@@ -1,6 +1,21 @@
-/* ===========================
-   RESET + VARIABLES
-=========================== */
+/* =========================
+   ROOT VARIABLES
+   ========================= */
+:root{
+  --bg-main:#0b1f3a;
+  --bg-dark:#071427;
+  --text-main:#ffffff;
+  --accent:#3fa9f5;
+
+  --radius-lg:24px;
+  --radius-md:16px;
+
+  --wheel-size:260px;
+}
+
+/* =========================
+   RESET
+   ========================= */
 *{
   margin:0;
   padding:0;
@@ -8,465 +23,185 @@
   font-family:'Poppins',sans-serif;
 }
 
-:root{
-  --bg1:#0b1f3a;
-  --bg2:#071427;
-  --text:#f8f4ea;
-  --sub:rgba(248,244,234,.7);
-  --glass:rgba(255,255,255,.05);
-  --border:#8c7a4f;
-  --gold:#ffd700;
-  --popup-bg:rgba(10,20,35,.88);
-}
-
-body.light{
-  --bg1:#eef2f7;
-  --bg2:#dbe4f2;
-  --text:#0a1a35;
-  --sub:rgba(10,26,53,.7);
-  --glass:rgba(255,255,255,.7);
-  --border:rgba(0,0,0,.1);
-  --gold:#c6a643;
-  --popup-bg:rgba(255,255,255,.92);
-}
-
-/* ===========================
-   BODY + LAYOUT
-=========================== */
+/* =========================
+   BODY
+   ========================= */
 body{
-  height:100dvh;
-  padding:env(safe-area-inset-top) env(safe-area-inset-right)
-          env(safe-area-inset-bottom) env(safe-area-inset-left);
-  overflow:hidden;
-  background:radial-gradient(circle at 30% 30%,var(--bg1),var(--bg2) 70%);
+  background:linear-gradient(180deg,var(--bg-main),var(--bg-dark));
+  color:var(--text-main);
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  transition:background .4s ease;
 }
 
-.wrapper{
-  width:100%;
-  height:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  perspective:1400px;
-}
-
-/* ===========================
+/* =========================
    PHONE
-=========================== */
+   ========================= */
 .phone{
   width:360px;
-  height:700px;
-  border-radius:42px;
-  padding:28px;
-  display:flex;
-  flex-direction:column;
-  background:linear-gradient(var(--glass),rgba(255,255,255,.02));
-  backdrop-filter:blur(60px) saturate(180%);
-  border:1px solid var(--border);
-  box-shadow:0 35px 70px rgba(0,0,0,.6),
-             inset 0 0 .5px rgba(255,255,255,.2);
-  animation:float 6s ease-in-out infinite alternate;
-  transform-origin:center;
-  opacity:0;
-  position:relative;
-  overflow:hidden;
+  max-width:100%;
+  padding:20px;
 }
 
-.phone::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:210px;
-  background:url("assets/fronttop.png") no-repeat center/cover;
-  border-radius:42px 42px 0 0;
-  opacity:.95;
-  pointer-events:none;
+/* =========================
+   CARD
+   ========================= */
+.card{
+  background:rgba(255,255,255,.08);
+  border-radius:var(--radius-lg);
+  padding:24px;
+  text-align:center;
+  backdrop-filter:blur(12px);
 }
 
-.phone::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:42px;
-  background:linear-gradient(120deg,transparent 30%,rgba(255,215,0,.05),transparent 70%);
-  pointer-events:none;
-}
-
-.phone > *{
-  position:relative;
-  z-index:1;
-}
-
-.phone.loaded{
-  animation:float 6s ease-in-out infinite alternate, fadeIn .6s ease forwards;
-}
-
-@keyframes fadeIn{
-  from{opacity:0; transform:scale(.85);}
-  to{opacity:1; transform:scale(1);}
-}
-
-@keyframes float{
-  from{transform:translateY(0);}
-  to{transform:translateY(-12px);}
-}
-
-/* ===========================
-   AVATAR + INFO
-=========================== */
+/* =========================
+   AVATAR
+   ========================= */
 .avatar-wrap{
-  height:183px;
-  display:flex;
-  justify-content:center;
-  align-items:flex-end;
-  padding-bottom:8px;
-}
-
-.avatar{
-  width:140px;
-  height:140px;
+  width:110px;
+  height:110px;
+  margin:0 auto 10px;
   border-radius:50%;
   overflow:hidden;
-  box-shadow:0 25px 50px rgba(0,0,0,.45);
 }
-
-.avatar img{
+.avatar-wrap img{
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center top;
 }
 
-.theme-toggle{
-  margin-top:-10px;
-  display:flex;
-  justify-content:center;
-  cursor:pointer;
-  color:#f8f4ea;
-}
-
-.name{
-  text-align:center;
-  color:var(--text);
+/* =========================
+   INFO
+   ========================= */
+.info .name{
   font-size:20px;
   font-weight:600;
-  margin-top:1px;
 }
-
-.title{
-  text-align:center;
-  color:var(--gold);
-  font-size:13px;
-  margin-top:4px;
-  text-shadow:0 0 6px rgba(255,215,0,.35);
-}
-
-.company{
-  text-align:center;
-  color:var(--text);
+.info .title,
+.info .company{
   font-size:14px;
-  margin-top:6px;
+  opacity:.85;
 }
 
-.logo{
-  display:flex;
-  justify-content:center;
-  margin-top:8px;
-}
-
-.logo img{
-  width:48px;
-  filter:drop-shadow(0 0 8px rgba(255,215,0,.4));
-}
-
-/* ===========================
+/* =========================
    BUTTONS
-=========================== */
-.buttons{
-  margin-top:auto;
+   ========================= */
+.actions{
+  margin-top:16px;
   display:flex;
-  flex-direction:column;
-  gap:8px;
+  gap:10px;
 }
-
-.row{
-  display:flex;
-  gap:8px;
-}
-
 .btn{
   flex:1;
-  padding:8px 12px;
-  border-radius:24px;
-  font-size:13px;
-  background:var(--glass);
-  backdrop-filter:blur(40px);
-  border:1px solid var(--border);
-  color:var(--text);
-  font-weight:500;
+  padding:10px;
+  border:none;
+  border-radius:var(--radius-md);
   cursor:pointer;
-  box-shadow:0 10px 25px rgba(0,0,0,.35);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  transition:.25s ease;
+}
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+}
+.btn-secondary{
+  background:rgba(255,255,255,.15);
+  color:#fff;
 }
 
-.btn:hover{transform:translateY(-3px);}
-.btn:active{transform:scale(.96);}
-.btn i{color:var(--gold);margin-bottom:4px;}
-.subtext{font-size:11px;color:var(--sub);}
-
-/* ===========================
+/* =========================
    POPUP BASE
-=========================== */
+   ========================= */
 .popup{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.7);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  opacity:0;
-  visibility:hidden;
-  transition:.4s;
+  display:none;
   z-index:100;
 }
-
 .popup.active{
-  opacity:1;
-  visibility:visible;
+  display:block;
 }
-
+.popup-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.6);
+}
 .popup-content{
   position:relative;
-  width:320px;
-  padding:30px;
-  border-radius:25px;
-  background:var(--popup-bg);
-  backdrop-filter:blur(70px) saturate(200%);
-  border:1px solid var(--border);
-  box-shadow:0 0 50px rgba(255,215,0,.25);
-  color:var(--text);
-  text-align:center;
-  overflow:visible;
-  transform:scale(.85);
-  transition:.4s;
+  background:#fff;
+  color:#000;
+  width:90%;
+  max-width:360px;
+  margin:10vh auto;
+  border-radius:var(--radius-lg);
+  padding:20px;
 }
 
-/* 🔥 QR POPUP CONFIG (local scope) */
+/* =========================
+   QR POPUP
+   ========================= */
 .qr-popup{
-  /* popup riêng cho QR */
-  width:320px;
-
-  /* wheel scale theo popup */
-  --wheel-size: 90%;
+  padding-top:12px;
 }
 
-.popup.active .popup-content{
-  transform:scale(1);
-}
-
-/* ===========================
-   WHEEL MASK
-=========================== */
-
-.qr-wheel-mask{
-  overflow:hidden;
-  border-radius:12px;
-}
-
-/* ===========================
-   QR WHEEL CYLINDER
-=========================== */
-.qr-group-wheel{
-  perspective:1000px;
-  height:80px;
+/* HEADER */
+.qr-header{
   display:flex;
-  justify-content:center;
+  justify-content:space-between;
   align-items:center;
+}
+.close-btn{
+  background:none;
+  border:none;
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* =========================
+   QR WHEEL
+   ========================= */
+.qr-wheel-mask{
+  width:var(--wheel-size);
+  height:var(--wheel-size);
+  margin:20px auto;
+  overflow:hidden;
+  position:relative;
 }
 
 .qr-wheel{
+  width:100%;
+  height:100%;
   position:relative;
-  width:var(--wheel-size);
-  height:70px;
   transform-style:preserve-3d;
+  transition:transform .6s ease;
 }
 
-.qr-group{
+.qr-item{
   position:absolute;
-  left:50%;
-  top:50%;
-  width:auto;
-  white-space: nowrap;
-  text-align:center;
-  font-size:14px;
-  transform-style:preserve-3d;
-  backface-visibility: visible; /* rất quan trọng */
-  /* 🔥 bán kính tự tính */
-  transform-origin:
-    center center
-    calc(-1 * var(--wheel-size) / 3);
-
-  opacity:.35;
-  transition:transform .6s cubic-bezier(.22,.61,.36,1),
-             opacity .4s,
-             color .4s;
-}
-
-.qr-group span{
-  display:block;
-  transform-style:preserve-3d;
-  transition:transform .6s cubic-bezier(.22,.61,.36,1),
-             opacity .4s;
-}
-
-.qr-group.active{
-  position:relative;
-  color:var(--gold);
-  opacity:1;
-  font-weight:600;
-}
-
-.qr-group.back span{
-  transform:rotateY(180deg);
-  opacity:.8;
-}
-
-.qr-group.active::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  bottom:-6px;
-  width:20px;
-  height:2px;
-  background:var(--gold);
-  transform:translateX(-50%);
-  border-radius:2px;
-}
-
-/* ===========================
-   QR CONTENT
-=========================== */
-.qr-panel{display:none;}
-.qr-panel.active{display:block;}
-
-.qr-slider{
-  display:flex;
-  gap:14px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-
-  /* 🔥 QUAN TRỌNG */
-  padding:0 calc(50% - 55px); /* 110px/2 */
-}
-
-.qr-slider img{
-  width:150px;
-  height:150px;
-  border-radius:12px;
-  flex-shrink:0;
-  scroll-snap-align:center;
-  cursor:pointer;
-  transition:.25s;
-}
-
-.qr-slider img:hover{
-  transform:scale(1.05);
-}
-
-/* ===========================
-   QR ZOOM
-=========================== */
-.qr-zoom{
-  position:fixed;
   inset:0;
-  background:rgba(0,0,0,.85);
   display:flex;
   justify-content:center;
   align-items:center;
+  backface-visibility:hidden;
   opacity:0;
-  visibility:hidden;
-  transition:.35s ease;
-  z-index:999;
+  transition:opacity .3s;
 }
-
-.qr-zoom.active{
+.qr-item img{
+  width:150px;
+  height:150px;
+  object-fit:contain;
+}
+.qr-item.active{
   opacity:1;
-  visibility:visible;
 }
 
-.qr-zoom img{
-  width:275px;
-  height:275px;
-  transform:scale(.7);
-  transition:transform .35s cubic-bezier(.22,.61,.36,1);
+/* =========================
+   CONTROLS
+   ========================= */
+.qr-controls{
+  display:flex;
+  justify-content:space-between;
 }
-
-.qr-zoom.active img{
-  transform:scale(1);
+.qr-controls button{
+  width:48%;
+  padding:10px;
 }
-
-/* ===========================
-   ENTERPRISE POPUP EFFECTS
-=========================== */
-#enterprisePopup .popup-content::before{
-  content:"";
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:76%;
-  height:76%;
-  background:url("assets/logo.png") no-repeat center/contain;
-  opacity:.12;
-  filter:brightness(1.5) drop-shadow(0 0 40px rgba(255,215,0,.7));
-  animation:glowPulse 4s ease-in-out infinite alternate;
-  pointer-events:none;
-}
-
-@keyframes glowPulse{
-  from{opacity:.1; transform:translate(-50%,-50%) scale(1);}
-  to{opacity:.18; transform:translate(-50%,-50%) scale(1.08);}
-}
-
-.enterprise-stamp{
-  position:absolute;
-  right:16px;
-  bottom:16px;
-  width:70px;
-  height:70px;
-  background:url("assets/stamp.png") no-repeat center/contain;
-  opacity:.65;
-  filter:brightness(1.9) contrast(1.3) saturate(1.4)
-         drop-shadow(0 0 18px rgba(255,215,0,.6));
-  mix-blend-mode:screen;
-  pointer-events:none;
-  z-index:5;
-}
-
-body.light .enterprise-stamp{
-  mix-blend-mode:normal;
-  opacity:.85;
-  filter:brightness(1.4) contrast(1.2) saturate(1.2)
-         drop-shadow(0 0 10px rgba(198,166,67,.4));
-}
-
-/* ===========================
-   MISC
-=========================== */
-.close{
-  margin-top:15px;
-  cursor:pointer;
-  opacity:.7;
-}
-.close:hover{opacity:1;}
