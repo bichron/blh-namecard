@@ -249,7 +249,8 @@ body{
 .popup-content{
   position:relative;
   width:320px;
-  padding:30px;
+  padding:24px 20px 20px;
+  justify-content:flex-start;
   border-radius:25px;
   background:var(--popup-bg);
   backdrop-filter:blur(70px) saturate(200%);
