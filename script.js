@@ -408,8 +408,7 @@ function openPopup(id) {
   const popup = document.getElementById(id);
   if (!popup) return;
 
-  popup.style.display = 'block';
-  requestAnimationFrame(() => popup.classList.add('active'));
+  popup.classList.add('active');
 
   document.body.classList.add('locked');
   document.querySelector('.overlay')?.classList.add('active');
