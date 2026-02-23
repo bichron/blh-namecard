@@ -90,9 +90,9 @@ if(text){
 });
 }
 
-if (!groups.length || !panels.length) return;
-updateWheel();
-/* dư panels[0]?.classList.add("active"); dư */
+if (groups.length && panels.length) {
+  updateWheel();
+}
 
 /* ===========================
    WHEEL INTERACTION
@@ -246,7 +246,7 @@ const zoom = document.getElementById("qrZoom");
 const zoomImg = document.getElementById("qrZoomImg");
 
 document.addEventListener("click", e => {
-  if(!qrPopup.classList.contains("active")) return;
+  if(!qrPopup || !qrPopup.classList.contains("active")) return;
 
   const img = e.target.closest(".qr-track img");
   if(!img) return;
