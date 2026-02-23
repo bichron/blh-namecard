@@ -470,6 +470,17 @@ body{
   to{opacity:.18; transform:translate(-50%,-50%) scale(1.08);}
 }
 
+#enterprisePopup{
+  position: fixed;
+  inset: 0;
+  z-index: 9999; /* cao hơn QR popup */
+  pointer-events: none;
+}
+
+#enterprisePopup.active{
+  pointer-events: auto;
+}
+
 .enterprise-stamp{
   position:absolute;
   right:16px;
