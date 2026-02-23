@@ -1,4 +1,29 @@
 /* ===========================
+   GENERATE QR CODE (UTILITY)
+=========================== */
+function generateQRCode(text) {
+  const box = document.getElementById("qrCode");
+  if (!box) {
+    console.warn("#qrCode not found");
+    return;
+  }
+
+  box.innerHTML = "";
+
+  const img = document.createElement("img");
+  img.alt = "QR Code";
+  img.width = 200;
+  img.height = 200;
+
+  img.src =
+    "https://api.qrserver.com/v1/create-qr-code/?" +
+    "size=200x200&data=" +
+    encodeURIComponent(text);
+
+  box.appendChild(img);
+}
+
+/* ===========================
    DYNAMIC QR TOKEN CONFIG
 =========================== */
 const QR_TOKEN_KEY = "dynamicQRToken";
@@ -20,20 +45,33 @@ function getLocalQRToken() {
 
 /* Gọi server tạo token mới */
 async function createNewQRToken() {
-  const res = await fetch(API_CREATE_TOKEN, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      ownerId: "chrispham"
-    })
-  });
+  try {
+    const res = await fetch(API_CREATE_TOKEN, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ownerId: "chrispham" })
+    });
 
-  const data = await res.json();
-  localStorage.setItem(QR_TOKEN_KEY, JSON.stringify(data));
-  return data;
+    if (!res.ok) throw new Error("API error");
+
+    const data = await res.json();
+    localStorage.setItem(QR_TOKEN_KEY, JSON.stringify(data));
+    return data;
+
+  } catch (err) {
+    console.warn("QR API failed – fallback used", err);
+
+    // fallback KHÔNG làm treo page
+    return {
+      token: "STATIC-FALLBACK",
+      expiresAt: Date.now() + QR_EXPIRE_TIME
+    };
+  }
 }
 
-/* Generate QR (HOOK VÀO DEV02.002) */
+/* ===========================
+   LOAD DYNAMIC QR (ENTRY)
+=========================== */
 async function loadDynamicQR() {
   let tokenData = getLocalQRToken();
   if (!tokenData) {
@@ -45,7 +83,6 @@ async function loadDynamicQR() {
   if (typeof window.generateQRCode === "function") {
     window.generateQRCode(qrUrl);
   } else {
-    console.warn("generateQRCode() not found – QR dynamic skipped");
+    console.warn("generateQRCode() not found – skipped");
   }
 }
-
