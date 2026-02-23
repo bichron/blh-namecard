@@ -281,7 +281,7 @@ body{
 }
 
 .qr-popup h3 {
-  margin: 0 0 6px;       /* trước thường 12–16px */
+  margin: 20 0 6px;       /* trước thường 12–16px */
   line-height: 1.25;
   font-size: 16px;
 }
