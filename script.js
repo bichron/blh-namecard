@@ -385,7 +385,10 @@ function closeLandingpage(){
   `;
 }
 
-
+const qrBtn = document.getElementById("qrBtn");
+if(qrBtn){
+  qrBtn.addEventListener("click", openQR);
+}
 
 
 window.closeQR = () => qrPopup.classList.remove("active");
