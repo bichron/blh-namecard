@@ -296,9 +296,7 @@ body{
   overflow:hidden;
   border-radius:12px;
   margin: 6px 0 8px;
-  height: 130px;
-  display: flex;
-  align-items: flex-start;
+  height: 80px;
 }
 
 /* ===========================
