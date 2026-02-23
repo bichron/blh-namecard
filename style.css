@@ -228,10 +228,10 @@ body{
    POPUP BASE
 =========================== */
 .popup{
-  position:fixed;
+  position:absolute;
   inset:0;
   background:rgba(0,0,0,.7);
-  display:flex;
+  display:none;
   justify-content:center;
   align-items:center;
   opacity:0;
@@ -243,6 +243,7 @@ body{
 .popup.active{
   opacity:1;
   visibility:visible;
+  display:flex;
 }
 
 .popup-content{
