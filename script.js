@@ -268,16 +268,16 @@ function resetSessionTimer(){
   sessionTimer = setTimeout(expireSession, SESSION_TIMEOUT);
 }
 
-function resetSessionTimer(){
-  clearTimeout(sessionTimer);
-  sessionTimer = setTimeout(expireSession, SESSION_TIMEOUT);
-}
-
 ["click","touchstart","keydown","scroll"].forEach(evt=>{
   document.addEventListener(evt, resetSessionTimer, { passive:true });
 });
 
 resetSessionTimer();
+
+function expireSession(){
+  document.body.classList.add("session-expired");
+  showUnlockOverlay();
+}
 
 /* ===========================
    GLOBAL ACTIONS
