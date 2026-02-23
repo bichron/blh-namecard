@@ -589,6 +589,32 @@ body.light .enterprise-stamp{
 }
 
 /* ===========================
+   PAGE CLOSED STATE
+=========================== */
+.page-closed{
+  position:fixed;
+  inset:0;
+  background:#000;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:24px;
+  z-index:10000;
+}
+
+.page-closed h3{
+  margin-bottom:8px;
+}
+
+.page-closed p{
+  font-size:14px;
+  opacity:.75;
+}
+
+/* ===========================
    MISC
 =========================== */
 .close{
