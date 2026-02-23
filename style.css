@@ -307,7 +307,7 @@ body{
 =========================== */
 .qr-group-wheel{
   perspective:1000px;
-  height:110px;
+  height:20px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -316,7 +316,7 @@ body{
 .qr-wheel{
   position:relative;
   width:var(--wheel-size);
-  height:10px;
+  height:20px;
   transform-style:preserve-3d;
 }
 
