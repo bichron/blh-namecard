@@ -231,7 +231,8 @@ body{
   position:absolute;
   inset:0;
   background:rgba(0,0,0,.7);
-  display:none;
+  display:flex;
+  padding-top:20px;
   justify-content:center;
   align-items:center;
   opacity:0;
@@ -263,6 +264,11 @@ body{
   transition:.4s;
 }
 
+.popup-content h3 {
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
 /* 🔥 QR POPUP CONFIG (local scope) */
 .qr-popup{
   /* popup riêng cho QR */
@@ -270,6 +276,12 @@ body{
 
   /* wheel scale theo popup */
   --wheel-size: 90%;
+}
+
+.qr-popup h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.3;
 }
 
 .popup.active .popup-content{
@@ -378,7 +390,7 @@ body{
 
 .qr-slider{
   width:150px;
-  margin:12px;
+  margin:auto;
   overflow:hidden;
   position:relative;
 }
