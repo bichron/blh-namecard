@@ -378,7 +378,7 @@ body{
 
 .qr-slider{
   width:150px;
-  margin:auto;
+  margin:12px;
   overflow:hidden;
   position:relative;
 }
