@@ -88,7 +88,10 @@ function updateWheel(){
 }
 
 updateWheel();
-panels[0]?.classList.add("active");
+if(groups.length && panels.length){
+  updateWheel();
+  panels[0]?.classList.add("active");
+}
 
 /* ===========================
    WHEEL INTERACTION
@@ -271,7 +274,13 @@ window.openQR = () => {
 };
 window.closeQR = () => qrPopup.classList.remove("active");
 
-window.openEnterprise = () => enterprisePopup.classList.add("active");
+window.openEnterprise = () => {
+  if(enterprisePopup){
+    enterprisePopup.classList.add("active");
+  } else {
+    console.warn("enterprisePopup not found");
+  }
+};
 window.closeEnterprise = () => enterprisePopup.classList.remove("active");
 
 window.openWebsite = () => window.open("https://blh.vn","_blank");
