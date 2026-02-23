@@ -281,9 +281,10 @@ window.openQR = () => {
     loadQRSlider(slider);
   });
   qrPopup.classList.add("active");
-  // ✅ GẮN Ở ĐÂY
-  if (typeof loadDynamicQR === "function") {
-    loadDynamicQR();
+  
+   // ✅ BỌC KIỂM TRA – KHÔNG ĐỨNG PAGE
+  if (typeof window.loadDynamicQR === "function") {
+    window.loadDynamicQR();
   }
 };
 
