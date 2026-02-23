@@ -1,226 +1,114 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Chris Pham - Digital Card</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-  <!-- PWA / THEME -->
-  <meta name="theme-color" content="#0b1f3a">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-icon" href="assets/logo.png">
+  <title>Chris Pham – Digital Namecard</title>
 
-  <!-- FONTS & ICONS -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Meta -->
+  <meta name="theme-color" content="#0b1f3a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
 
-  <!-- MAIN CSS -->
-  <link rel="stylesheet" href="style.css">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-  <!-- ===========================
-       APP WRAPPER
-  ============================ -->
-  <div class="wrapper">
+  <!-- =========================
+       APP ROOT
+       ========================= -->
+  <main id="app">
 
-    <!-- ===========================
-         PHONE CARD
-    ============================ -->
-    <div class="phone" id="phone">
+    <!-- PHONE FRAME -->
+    <section class="phone">
 
-      <!-- AVATAR -->
-      <div class="avatar-wrap">
-        <div class="avatar">
-          <img src="assets/CCOPham/avatar.png" alt="Chris Pham">
-        </div>
-      </div>
+      <!-- =========================
+           CARD CONTENT
+           ========================= -->
+      <section class="card">
 
-      <!-- THEME TOGGLE -->
-      <div class="theme-toggle" onclick="toggleTheme()">
-        <i class="fa-solid fa-circle-half-stroke"></i>
-      </div>
-
-      <!-- BASIC INFO -->
-      <div class="name">CHRIS PHAM</div>
-      <div class="title">Chief Commercial Officer</div>
-      <div class="company">BLH Joint Stock Company</div>
-
-      <!-- LOGO -->
-      <div class="logo">
-        <img src="assets/logo.png" alt="BLH Logo">
-      </div>
-
-      <!-- ===========================
-           ACTION BUTTONS
-      ============================ -->
-      <div class="buttons">
-
-        <!-- CALL / SAVE -->
-        <div class="row">
-          <a href="tel:0909554558" class="btn">
-            <div class="btn-main">
-              <i class="fa-solid fa-phone"></i>
-              <span>Call</span>
-            </div>
-            <div class="subtext">0909554558</div>
-          </a>
-
-          <div class="btn" onclick="downloadVCF()">
-            <div class="btn-main">
-              <i class="fa-solid fa-address-card"></i>
-              <span>Save Contact</span>
-            </div>
-          </div>
+        <!-- AVATAR -->
+        <div class="avatar-wrap">
+          <img src="assets/avatar.png" alt="Chris Pham" />
         </div>
 
-        <!-- CHAT -->
-        <div class="btn">
-          <div class="btn-main">
-            <i class="fa-brands fa-facebook-messenger"></i>
-            <span>Chat</span>
-          </div>
-          <div class="subtext">Telegram • WhatsApp • Zalo</div>
+        <!-- INFO -->
+        <div class="info">
+          <h1 class="name">Chris Pham</h1>
+          <p class="title">Digital Business</p>
+          <p class="company">Freelancer</p>
         </div>
 
-        <!-- QR -->
-        <div class="btn" onclick="openQR()">
-          <div class="btn-main">
-            <i class="fa-solid fa-qrcode"></i>
-            <span>QR Code</span>
-          </div>
-          <div class="subtext">My namecard • My bank • BLH bank</div>
+        <!-- ACTION BUTTONS -->
+        <div class="actions">
+          <button class="btn btn-primary" data-open="qrPopup">QR Code</button>
+          <button class="btn btn-secondary" data-open="enterprisePopup">Doanh nghiệp</button>
         </div>
 
-        <!-- ENTERPRISE -->
-        <div class="btn" onclick="openEnterprise()">
-          <div class="btn-main">
-            <i class="fa-solid fa-building"></i>
-            <span>Enterprise Code / Tax Code</span>
-          </div>
-        </div>
+      </section>
+    </section>
+  </main>
 
-        <!-- WEBSITE / ACHIEVEMENT -->
-        <div class="row">
-          <div class="btn" onclick="openWebsite()">
-            <div class="btn-main">
-              <i class="fa-solid fa-globe"></i>
-              <span>Website</span>
-            </div>
-          </div>
+  <!-- =========================
+       POPUPS
+       ========================= -->
 
-          <div class="btn" onclick="openAchievement()">
-            <div class="btn-main">
-              <i class="fa-solid fa-certificate"></i>
-              <span>Achievement</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <!-- /buttons -->
-
+  <!-- ENTERPRISE POPUP -->
+  <div class="popup" id="enterprisePopup">
+    <div class="popup-overlay" data-close></div>
+    <div class="popup-content">
+      <h2>Thông tin doanh nghiệp</h2>
+      <p>Nội dung doanh nghiệp giữ nguyên</p>
     </div>
-    <!-- /phone -->
-
   </div>
-  <!-- /wrapper -->
 
-  <!-- ===========================
-       QR POPUP
-  ============================ -->
+  <!-- QR POPUP -->
   <div class="popup" id="qrPopup">
+    <div class="popup-overlay" data-close></div>
 
     <div class="popup-content qr-popup">
-      <h3>QR CODE<br>swipe - choose - scan</h3>
-      <!-- QR GROUP WHEEL -->
-    <div class="qr-wheel-mask">
-      <div class="qr-group-wheel">
-        <div class="qr-wheel">
-          <div class="qr-group"><span>Namecard</span></div>
-          <div class="qr-group"><span>Personal bank</span></div>
-          <div class="qr-group"><span>BLH payment</span></div>
-        </div>
-      </div>
-    </div>
 
-      <!-- QR PANELS -->
-      <div class="qr-content">
-        <div class="qr-panel active">
-          <div class="qr-slider">
-            <img src="assets/qr/namecard/1.png" alt="Namecard QR">
-          </div>
-        </div>
+      <!-- HEADER -->
+      <header class="qr-header">
+        <h2>QR Thanh toán</h2>
+        <button class="close-btn" data-close>&times;</button>
+      </header>
 
-        <div class="qr-panel">
-          <div class="qr-slider">
-            <img src="assets/qr/personal/1.png">
-            <img src="assets/qr/personal/2.png">
-            <img src="assets/qr/personal/3.png">
-            <img src="assets/qr/personal/4.png">
-            <img src="assets/qr/personal/5.png">
-          </div>
-        </div>
+      <!-- WHEEL -->
+      <div class="qr-wheel-mask">
+        <div class="qr-wheel" id="qrWheel">
 
-        <div class="qr-panel">
-          <div class="qr-slider">
-            <img src="assets/qr/blh/1.png">
-            <img src="assets/qr/blh/2.png">
-            <img src="assets/qr/blh/3.png">
+          <!-- ITEM -->
+          <div class="qr-item">
+            <img src="assets/qr1.png" alt="QR 1" />
           </div>
+          <div class="qr-item">
+            <img src="assets/qr2.png" alt="QR 2" />
+          </div>
+          <div class="qr-item">
+            <img src="assets/qr3.png" alt="QR 3" />
+          </div>
+
         </div>
       </div>
 
-      <div class="close" onclick="closeQR()">Close</div>
-    </div>
+      <!-- CONTROLS -->
+      <div class="qr-controls">
+        <button id="qrPrev">‹</button>
+        <button id="qrNext">›</button>
+      </div>
 
-    <!-- QR ZOOM -->
-    <div class="qr-zoom" id="qrZoom">
-      <img id="qrZoomImg" alt="QR Zoom">
-    </div>
-
-  </div>
-  <!-- /qrPopup -->
-
-  <!-- ===========================
-       ENTERPRISE POPUP
-  ============================ -->
-  <div class="popup" id="enterprisePopup">
-    <div class="popup-content">
-
-      <div class="enterprise-stamp"></div>
-
-      <h3>Business Information</h3>
-
-      <p class="company-name">
-        <span class="value">BLH Joint Stock Company</span>
-      </p>
-
-      <p>
-        <span class="label">Enterprise Code / Tax Code:</span>
-        <span class="value">0318787124</span>
-      </p>
-
-      <p>
-        <span class="label">Head Office / Address:</span><br>
-        <span class="value">
-          2224A Đỗ Mười, Trung Mỹ Tây, HCMC, Vietnam
-        </span>
-      </p>
-
-      <p>
-        <span class="label">Representative / CEO:</span>
-        <span class="value">Nguyễn Trung Hiếu</span>
-      </p>
-
-      <div class="close" onclick="closeEnterprise()">Close</div>
     </div>
   </div>
 
-  <!-- MAIN JS -->
+  <!-- JS -->
   <script src="script.js"></script>
-
 </body>
 </html>
