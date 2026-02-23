@@ -304,6 +304,42 @@ window.openQR = () => {
   }
 };
 
+/* ===========================
+   UNCLOCK OVERLAY
+=========================== */
+function showUnlockOverlay(){
+  if(document.getElementById("unlockOverlay")) return;
+
+  const overlay = document.createElement("div");
+  overlay.id = "unlockOverlay";
+  overlay.innerHTML = `
+    <div class="unlock-box">
+      <h3>Session expired</h3>
+      <p>Please enter 6-digit code to continue</p>
+      <input type="password" maxlength="6" inputmode="numeric" />
+      <button>Unlock</button>
+      <div class="unlock-error"></div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  const input = overlay.querySelector("input");
+  const button = overlay.querySelector("button");
+  const error = overlay.querySelector(".unlock-error");
+
+  button.onclick = () => {
+    if(input.value === VIEWER_UNLOCK_CODE){
+      location.reload(); // scan lại
+    }else{
+      error.textContent = "Invalid code";
+      input.value = "";
+      input.focus();
+    }
+  };
+}
+
+
 window.closeQR = () => qrPopup.classList.remove("active");
 
 window.openEnterprise = () => enterprisePopup.classList.add("active");
