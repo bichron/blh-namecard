@@ -263,16 +263,17 @@ const SESSION_TIMEOUT = 1 * 60 * 1000; // 1 phút
 let sessionTimer = null;
 
 function resetSessionTimer(){
+  if(document.body.classList.contains("session-expired")) return;
   clearTimeout(sessionTimer);
   sessionTimer = setTimeout(expireSession, SESSION_TIMEOUT);
 }
 
-function expireSession(){
-  document.body.classList.add("session-expired");
-  showUnlockOverlay();
+function resetSessionTimer(){
+  clearTimeout(sessionTimer);
+  sessionTimer = setTimeout(expireSession, SESSION_TIMEOUT);
 }
 
-["click","touchstart","mousemove","keydown","scroll"].forEach(evt=>{
+["click","touchstart","keydown","scroll"].forEach(evt=>{
   document.addEventListener(evt, resetSessionTimer, { passive:true });
 });
 
