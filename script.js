@@ -439,11 +439,27 @@ if(qrBtn){
   });
 }
 
+window.openQR = () => {
 
-window.closeQR = () => qrPopup.classList.remove("active");
+  currentIndex = 0;
+  updateWheel();
 
-window.openEnterprise = () => enterprisePopup.classList.add("active");
-window.closeEnterprise = () => enterprisePopup.classList.remove("active");
+  panels.forEach((p,i)=>{
+    p.classList.toggle("active", i === 0);
+  });
+
+  document.querySelectorAll(".qr-slider").forEach(slider=>{
+    loadQRSlider(slider);
+  });
+
+  // 👇 QUAN TRỌNG
+  openPopup("qrPopup");
+
+  if (typeof window.loadDynamicQR === "function") {
+    window.loadDynamicQR();
+  }
+};
+
 
 window.openWebsite = () => window.open("https://blh.vn","_blank");
 window.openAchievement = () =>
