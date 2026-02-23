@@ -127,7 +127,7 @@ groups.forEach((g,i)=>{
 /* ĐOẠN THÊM VỀ QR-SLIDER SẼ XẾP LẠI */
 
 function loadQRSlider(slider){
-
+  delete slider.dataset.swipeBound;  // 🔥 reset listener flag
   const track = slider.querySelector(".qr-track");
   const indicatorBox = slider.querySelector(".qr-indicators");
 
@@ -281,7 +281,7 @@ function expireSession(){
 
 /* ===========================
    GLOBAL ACTIONS
-=========================== */
+===========================
 
 window.openQR = () => {
   currentIndex = 0;      // 🔥 luôn reset về Namecard
@@ -300,7 +300,7 @@ window.openQR = () => {
   if (typeof window.loadDynamicQR === "function") {
     window.loadDynamicQR();
   }
-};
+}; */
 
 /* ===========================
    UNCLOCK / SHUTDOWN OVERLAY
@@ -391,7 +391,6 @@ let activePopup = null;
 function closeAllPopups() {
   document.querySelectorAll('.popup').forEach(p => {
     p.classList.remove('active');
-    p.style.display = 'none';
   });
 
   document.body.classList.remove('locked');
@@ -421,7 +420,23 @@ document.getElementById('btn-enterprise')?.addEventListener('click', () => {
 });
 
 document.getElementById('btn-qrcode')?.addEventListener('click', () => {
+
+  currentIndex = 0;
+  updateWheel();
+
+  panels.forEach((p,i)=>{
+    p.classList.toggle("active", i === 0);
+  });
+
+  document.querySelectorAll(".qr-slider").forEach(slider=>{
+    loadQRSlider(slider);
+  });
+
   openPopup('qrPopup');
+
+  if (typeof window.loadDynamicQR === "function") {
+    window.loadDynamicQR();
+  }
 });
 
 document.getElementById('btn-chat')?.addEventListener('click', () => {
@@ -430,13 +445,9 @@ document.getElementById('btn-chat')?.addEventListener('click', () => {
 
 document.querySelector('.overlay')?.addEventListener('click', closeAllPopups);
 
-const qrBtn = document.getElementById("qrBtn");
-if(qrBtn){
-  qrBtn.addEventListener("click", () => {
-    console.log("QR button clicked");
-    openQR();
-  });
-}
+document.querySelectorAll('.popup .close').forEach(btn => {
+  btn.addEventListener('click', closeAllPopups);
+});
 
 window.openQR = () => {
 
