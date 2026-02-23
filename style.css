@@ -382,7 +382,7 @@ body{
   display:flex;
   flex-direction:column;
   align-items:center;
-  min-height:auto; /* tránh giật layout khi chuyển panel */
+  min-height:180px; /* tránh giật layout khi chuyển panel */
 }
 
 /* ===========================
