@@ -313,7 +313,7 @@ body{
 .qr-wheel{
   position:relative;
   width:var(--wheel-size);
-  height:40px;
+  height:60px;
   transform-style:preserve-3d;
 }
 
