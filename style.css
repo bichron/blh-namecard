@@ -265,8 +265,8 @@ body{
 }
 
 .popup-content h3 {
-  margin-top: 0;
-  margin-bottom: 14px;
+  margin-top:0;
+  margin-bottom:0;
 }
 
 /* 🔥 QR POPUP CONFIG (local scope) */
