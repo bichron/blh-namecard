@@ -245,6 +245,8 @@ const zoom = document.getElementById("qrZoom");
 const zoomImg = document.getElementById("qrZoomImg");
 
 document.addEventListener("click", e => {
+  if(!qrPopup.classList.contains("active")) return;
+
   const img = e.target.closest(".qr-track img");
   if(!img) return;
 
@@ -275,6 +277,7 @@ function resetSessionTimer(){
 resetSessionTimer();
 
 function expireSession(){
+  closeAllPopups();          // 🔥 reset popup state
   document.body.classList.add("session-expired");
   showUnlockOverlay();
 }
@@ -424,9 +427,9 @@ document.getElementById('btn-qrcode')?.addEventListener('click', () => {
   currentIndex = 0;
   updateWheel();
 
-  panels.forEach((p,i)=>{
+/* xoá  panels.forEach((p,i)=>{
     p.classList.toggle("active", i === 0);
-  });
+  }); xoá */
 
   document.querySelectorAll(".qr-slider").forEach(slider=>{
     loadQRSlider(slider);
@@ -440,7 +443,9 @@ document.getElementById('btn-qrcode')?.addEventListener('click', () => {
 });
 
 document.getElementById('btn-chat')?.addEventListener('click', () => {
-  openPopup('chatPopup');
+  if(document.getElementById('chatPopup')){
+    openPopup('chatPopup');
+  }
 });
 
 document.querySelector('.overlay')?.addEventListener('click', closeAllPopups);
@@ -454,9 +459,11 @@ window.openQR = () => {
   currentIndex = 0;
   updateWheel();
 
-  panels.forEach((p,i)=>{
+  currentIndex = 0;
+  updateWheel();
+  /* xoá panels.forEach((p,i)=>{
     p.classList.toggle("active", i === 0);
-  });
+  }); xoá */
 
   document.querySelectorAll(".qr-slider").forEach(slider=>{
     loadQRSlider(slider);
