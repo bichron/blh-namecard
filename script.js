@@ -307,19 +307,30 @@ window.openQR = () => {
 };
 
 /* ===========================
-   UNCLOCK OVERLAY
+   UNCLOCK / SHUTDOWN OVERLAY
 =========================== */
+const VIEWER_UNLOCK_CODE = "881909"; // mã 6 số
+let wrongAttempts = 0;
+
 function showUnlockOverlay(){
   if(document.getElementById("unlockOverlay")) return;
+
+  wrongAttempts = 0;
 
   const overlay = document.createElement("div");
   overlay.id = "unlockOverlay";
   overlay.innerHTML = `
     <div class="unlock-box">
       <h3>Session expired</h3>
-      <p>Please enter 6-digit code to continue</p>
-      <input type="password" maxlength="6" inputmode="numeric" />
-      <button>Unlock</button>
+      <p>
+        Enter <b>6-digit code</b> to unlock<br>
+        or enter <b>9</b> to close
+      </p>
+      <input type="password"
+             maxlength="6"
+             inputmode="numeric"
+             placeholder="••••••" />
+      <button id="unlockBtn">Unlock</button>
       <div class="unlock-error"></div>
     </div>
   `;
@@ -327,19 +338,59 @@ function showUnlockOverlay(){
   document.body.appendChild(overlay);
 
   const input = overlay.querySelector("input");
-  const button = overlay.querySelector("button");
+  const button = overlay.querySelector("#unlockBtn");
   const error = overlay.querySelector(".unlock-error");
 
-  button.onclick = () => {
-    if(input.value === VIEWER_UNLOCK_CODE){
-      location.reload(); // scan lại
+  input.focus();
+
+  // 🔄 đổi nút theo input
+  input.addEventListener("input", () => {
+    if(input.value.trim() === "9"){
+      button.textContent = "Close";
     }else{
-      error.textContent = "Invalid code";
-      input.value = "";
-      input.focus();
+      button.textContent = "Unlock";
+    }
+    error.textContent = "";
+  });
+
+  button.onclick = () => {
+    const value = input.value.trim();
+
+    // ✅ nhập 9 → Close
+    if(value === "9"){
+      closeLandingpage();
+      return;
+    }
+
+    // ✅ đúng mã 6 số
+    if(value === VIEWER_UNLOCK_CODE){
+      location.reload();
+      return;
+    }
+
+    // ❌ sai
+    wrongAttempts++;
+    error.textContent = `Invalid code (${wrongAttempts}/3)`;
+    input.value = "";
+    input.focus();
+
+    // ❌ sai 3 lần → tự đóng
+    if(wrongAttempts >= 3){
+      closeLandingpage();
     }
   };
 }
+
+function closeLandingpage(){
+  document.body.innerHTML = `
+    <div class="page-closed">
+      <h3>Session closed</h3>
+      <p>Please scan the QR or NFC card again.</p>
+    </div>
+  `;
+}
+
+
 
 
 window.closeQR = () => qrPopup.classList.remove("active");
