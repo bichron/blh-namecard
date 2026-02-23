@@ -273,15 +273,15 @@ body{
 .qr-popup{
   /* popup riêng cho QR */
   width:320px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 
   /* wheel scale theo popup */
   --wheel-size: 90%;
 }
 
 .qr-popup h3 {
-  margin: 0 0 6px;       /* trước thường 12–16px */
+  margin: 20px 0px 0px;       /* trước thường 12–16px */
   line-height: 1.25;
   font-size: 16px;
 }
