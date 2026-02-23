@@ -251,7 +251,7 @@ body{
   position:relative;
   width:320px;
   padding:24px 20px 20px;
-  justify-content:flex-start;
+  justify-content:center;
   border-radius:25px;
   background:var(--popup-bg);
   backdrop-filter:blur(70px) saturate(200%);
