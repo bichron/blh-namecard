@@ -373,12 +373,12 @@ body{
    QR CONTENT WRAPPER
 =========================== */
 .qr-content{
-  margin-top:16px;
+  margin-top:8px;
   margin-bottom:8px;
   display:flex;
   flex-direction:column;
   align-items:center;
-  min-height:200px; /* tránh giật layout khi chuyển panel */
+  min-height:160px; /* tránh giật layout khi chuyển panel */
 }
 
 /* ===========================
