@@ -390,6 +390,22 @@ body{
 }
 
 /* ===========================
+   DYNAMIC QR BOX
+=========================== */
+#qrCode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 0;
+}
+
+#qrCode img {
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
+}
+
+/* ===========================
    QR INDICATORS
 =========================== */
 
