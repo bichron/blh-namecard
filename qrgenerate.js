@@ -41,5 +41,11 @@ async function loadDynamicQR() {
   }
 
   const qrUrl = `${location.origin}/t/${tokenData.token}`;
-  generateQRCode(qrUrl); // HÀM CŨ CỦA DEV02.002
+
+  if (typeof window.generateQRCode === "function") {
+    window.generateQRCode(qrUrl);
+  } else {
+    console.warn("generateQRCode() not found – QR dynamic skipped");
+  }
 }
+
