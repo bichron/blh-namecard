@@ -122,119 +122,101 @@
       </div>
       <!-- /buttons -->
 
+      <!-- ===========================
+           QR POPUP (MOVE INSIDE PHONE)
+      ============================ -->
+      <div class="popup" id="qrPopup">
+        <div class="popup-content qr-popup">
+          <h3>QR CODE<br>swipe - choose - scan</h3>
+
+          <div class="qr-wheel-mask">
+            <div class="qr-group-wheel">
+              <div class="qr-wheel">
+                <div class="qr-group"><span>Namecard</span></div>
+                <div class="qr-group"><span>Personal bank</span></div>
+                <div class="qr-group"><span>BLH payment</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="qr-content">
+
+            <div class="qr-panel active">
+              <div id="qrCode"></div>
+            </div>
+
+            <div class="qr-panel">
+              <div class="qr-slider" data-group="personal" data-max="5">
+                <div class="qr-track"></div>
+                <div class="qr-indicators"></div>
+              </div>
+            </div>
+
+            <div class="qr-panel">
+              <div class="qr-slider" data-group="blh" data-max="3">
+                <div class="qr-track"></div>
+                <div class="qr-indicators"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="close">Close</div>
+
+          <div class="qr-zoom" id="qrZoom">
+            <img id="qrZoomImg" alt="QR Zoom">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===========================
+           ENTERPRISE POPUP (MOVE INSIDE PHONE)
+      ============================ -->
+      <div class="popup" id="enterprisePopup">
+        <div class="popup-content">
+
+          <div class="enterprise-stamp"></div>
+
+          <h3>Business Information</h3>
+
+          <p class="company-name">
+            <span class="value">BLH Joint Stock Company</span>
+          </p>
+
+          <p>
+            <span class="label">Enterprise Code / Tax Code:</span>
+            <span class="value">0318787124</span>
+          </p>
+
+          <p>
+            <span class="label">Head Office / Address:</span><br>
+            <span class="value">
+              2224A Đỗ Mười, Trung Mỹ Tây, HCMC, Vietnam
+            </span>
+          </p>
+
+          <p>
+            <span class="label">Representative / CEO:</span>
+            <span class="value">Nguyễn Trung Hiếu</span>
+          </p>
+
+          <div class="close">Close</div>
+
+        </div>
+      </div>
+
     </div>
     <!-- /phone -->
 
   </div>
   <!-- /wrapper -->
 
-  <!-- ===========================
-       QR POPUP
-  ============================ -->
-  <div class="popup" id="qrPopup">
+<!-- OVERLAY (BẮT BUỘC CHO POPUP MANAGER) -->
+  <div class="overlay"></div>
+  
 
-    <div class="popup-content qr-popup">
-      <h3>QR CODE<br>swipe - choose - scan</h3>
-      <!-- QR GROUP WHEEL -->
-    <div class="qr-wheel-mask">
-      <div class="qr-group-wheel">
-        <div class="qr-wheel">
-          <div class="qr-group"><span>Namecard</span></div>
-          <div class="qr-group"><span>Personal bank</span></div>
-          <div class="qr-group"><span>BLH payment</span></div>
-        </div>
-      </div>
-    </div>
-
-<!-- QR PANELS -->
-<div class="qr-content">
-
-<!-- QR NAMECARD (DYNAMIC) -->
-<div class="qr-panel active">
-
-  <!-- ✅ PANEL 1 : NAMECARD - QR DYNAMIC THAY THẾ QR TĨNH -->
-  <div id="qrCode"></div>
-
-      <!-- ĐÓNG QR SLIDER ĐỂ QRnamecard là duy nhất
-  <div class="qr-slider" data-group="namecard" data-max="5">
-    <div class="qr-track"></div>
-    <div class="qr-indicators"></div>
-  </div>  ĐÓNG QRnamecard slider -->
-
-</div>
-
-  <!-- PANEL 2 : PERSONAL BANK -->
-  <div class="qr-panel">
-    <div class="qr-slider"
-         data-group="personal"
-         data-max="5">
-
-      <div class="qr-track"></div>
-      <div class="qr-indicators"></div>
-
-    </div>
-  </div>
-
-  <!-- PANEL 3 : BLH PAYMENT -->
-  <div class="qr-panel">
-    <div class="qr-slider"
-         data-group="blh"
-         data-max="3">
-
-      <div class="qr-track"></div>
-      <div class="qr-indicators"></div>
-
-    </div>
-  </div>
-
-</div>
-
-<div class="close">Close</div>
-
-    <!-- QR ZOOM -->
-    <div class="qr-zoom" id="qrZoom">
-      <img id="qrZoomImg" alt="QR Zoom">
-    </div>
-
-  </div>
-  <!-- /qrPopup -->
-
-  <!-- ===========================
-       ENTERPRISE POPUP
-  ============================ -->
-  <div class="popup" id="enterprisePopup">
-    <div class="popup-content">
-
-      <div class="enterprise-stamp"></div>
-
-      <h3>Business Information</h3>
-
-      <p class="company-name">
-        <span class="value">BLH Joint Stock Company</span>
-      </p>
-
-      <p>
-        <span class="label">Enterprise Code / Tax Code:</span>
-        <span class="value">0318787124</span>
-      </p>
-
-      <p>
-        <span class="label">Head Office / Address:</span><br>
-        <span class="value">
-          2224A Đỗ Mười, Trung Mỹ Tây, HCMC, Vietnam
-        </span>
-      </p>
-
-      <p>
-        <span class="label">Representative / CEO:</span>
-        <span class="value">Nguyễn Trung Hiếu</span>
-      </p>
-
-    <div class="close">Close</div>
-    </div>
-  </div>
-
-  <!-- MAIN JS -->
+<!-- MAIN JS -->
   <script src="script.js"></script>
   <script src="qrgenerate.js"></script>
 
