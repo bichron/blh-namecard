@@ -385,9 +385,13 @@ function closeLandingpage(){
   `;
 }
 
+
 const qrBtn = document.getElementById("qrBtn");
 if(qrBtn){
-  qrBtn.addEventListener("click", openQR);
+  qrBtn.addEventListener("click", () => {
+    console.log("QR button clicked");
+    openQR();
+  });
 }
 
 
