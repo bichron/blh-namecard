@@ -90,8 +90,9 @@ if(text){
 });
 }
 
+if (!groups.length || !panels.length) return;
 updateWheel();
-panels[0]?.classList.add("active");
+/* dư panels[0]?.classList.add("active"); dư */
 
 /* ===========================
    WHEEL INTERACTION
@@ -283,29 +284,6 @@ function expireSession(){
 }
 
 /* ===========================
-   GLOBAL ACTIONS
-===========================
-
-window.openQR = () => {
-  currentIndex = 0;      // 🔥 luôn reset về Namecard
-  updateWheel();         // cập nhật wheel
-
-  panels.forEach((p,i)=>{
-    p.classList.toggle("active", i === 0);
-  });
-  // 🔥 LOAD QR SLIDER TẠI ĐÂY
-  document.querySelectorAll(".qr-slider").forEach(slider=>{
-    loadQRSlider(slider);
-  });
-  qrPopup.classList.add("active");
-  
-   // ✅ KIỂM TRA LOAD QRDYNAMIC
-  if (typeof window.loadDynamicQR === "function") {
-    window.loadDynamicQR();
-  }
-}; */
-
-/* ===========================
    UNCLOCK / SHUTDOWN OVERLAY
 =========================== */
 let wrongAttempts = 0;
@@ -459,8 +437,6 @@ window.openQR = () => {
   currentIndex = 0;
   updateWheel();
 
-  currentIndex = 0;
-  updateWheel();
   /* xoá panels.forEach((p,i)=>{
     p.classList.toggle("active", i === 0);
   }); xoá */
