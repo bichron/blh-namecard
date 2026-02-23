@@ -297,7 +297,7 @@ body{
 .qr-wheel-mask{
   overflow:hidden;
   border-radius:12px;
-  height: 110px;         /* giảm từ ~150–180px */
+  height: 90px;         /* giảm từ ~150–180px */
   margin: 4px 0 6px;     /* giảm trống trên & dưới */
   align-items: flex-start;
 }
