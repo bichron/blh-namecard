@@ -262,7 +262,7 @@ zoom.addEventListener("click",()=>{
 /* ===========================
    SESSION EXPIRE + UNLOCK CODE
 =========================== */
-const SESSION_TIMEOUT = 1 * 60 * 1000; // 1 phút
+const SESSION_TIMEOUT = 20 * 60 * 1000; // 20 phút
 let sessionTimer = null;
 
 function resetSessionTimer(){
