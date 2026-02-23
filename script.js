@@ -276,7 +276,7 @@ window.openQR = () => {
   });
   qrPopup.classList.add("active");
   
-   // ✅ BỌC KIỂM TRA – KHÔNG ĐỨNG PAGE
+   // ✅ KIỂM TRA LOAD QRDYNAMIC
   if (typeof window.loadDynamicQR === "function") {
     window.loadDynamicQR();
   }
