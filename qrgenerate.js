@@ -27,7 +27,7 @@ function generateQRCode(text) {
    DYNAMIC QR TOKEN CONFIG
 =========================== */
 const QR_TOKEN_KEY = "dynamicQRToken";
-const QR_EXPIRE_TIME = 24 * 60 * 60 * 1000;
+const QR_EXPIRE_TIME = 10 * 60 * 1000;
 const API_CREATE_TOKEN = "/api/qr/create";
 
 /* Đọc token local */
