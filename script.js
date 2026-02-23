@@ -262,6 +262,13 @@ zoom.addEventListener("click",()=>{
 /* ===========================
    GLOBAL ACTIONS
 =========================== */
+
+  // ✅ GẮN Ở ĐÂY
+  if (typeof loadDynamicQR === "function") {
+    loadDynamicQR();
+  }
+};
+
 window.openQR = () => {
   currentIndex = 0;      // 🔥 luôn reset về Namecard
   updateWheel();         // cập nhật wheel
@@ -274,7 +281,12 @@ window.openQR = () => {
     loadQRSlider(slider);
   });
   qrPopup.classList.add("active");
+  // ✅ GẮN Ở ĐÂY
+  if (typeof loadDynamicQR === "function") {
+    loadDynamicQR();
+  }
 };
+
 window.closeQR = () => qrPopup.classList.remove("active");
 
 window.openEnterprise = () => enterprisePopup.classList.add("active");
