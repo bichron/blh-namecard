@@ -295,6 +295,10 @@ body{
 .qr-wheel-mask{
   overflow:hidden;
   border-radius:12px;
+  margin: 6px 0 8px;
+  height: 130px;
+  display: flex;
+  align-items: flex-start;
 }
 
 /* ===========================
@@ -372,6 +376,7 @@ body{
 =========================== */
 .qr-content{
   margin-top:16px;
+  margin-bottom:8px;
   display:flex;
   flex-direction:column;
   align-items:center;
