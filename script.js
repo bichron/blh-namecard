@@ -238,11 +238,6 @@ function updateQR(slider){
   if(dots[index]) dots[index].classList.add("active");
 }
 
-function openQRPopup() {
-  qrPopup.classList.add("active");
-  loadDynamicQR(); // gọi từ qrgenerate.js
-}
-
 /* ===========================
    QR ZOOM
 =========================== */
@@ -264,7 +259,7 @@ zoom.addEventListener("click",()=>{
 /* ===========================
    SESSION EXPIRE + UNLOCK CODE
 =========================== */
-const SESSION_TIMEOUT = 1 * 60 * 1000; // 60 phút
+const SESSION_TIMEOUT = 1 * 60 * 1000; // 1 phút
 let sessionTimer = null;
 
 function resetSessionTimer(){
@@ -309,7 +304,6 @@ window.openQR = () => {
 /* ===========================
    UNCLOCK / SHUTDOWN OVERLAY
 =========================== */
-const VIEWER_UNLOCK_CODE = "881909"; // mã 6 số
 let wrongAttempts = 0;
 
 function showUnlockOverlay(){
