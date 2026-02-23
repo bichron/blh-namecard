@@ -236,6 +236,11 @@ function updateQR(slider){
   if(dots[index]) dots[index].classList.add("active");
 }
 
+function openQRPopup() {
+  qrPopup.classList.add("active");
+  loadDynamicQR(); // gọi từ qrgenerate.js
+}
+
 /* ===========================
    QR ZOOM
 =========================== */
