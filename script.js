@@ -385,6 +385,51 @@ function closeLandingpage(){
   `;
 }
 
+// === POPUP STATE MANAGER ===
+let activePopup = null;
+
+function closeAllPopups() {
+  document.querySelectorAll('.popup').forEach(p => {
+    p.classList.remove('active');
+    p.style.display = 'none';
+  });
+
+  document.body.classList.remove('locked');
+  document.querySelector('.overlay')?.classList.remove('active');
+
+  activePopup = null;
+}
+
+function openPopup(id) {
+  if (activePopup === id) return;
+
+  closeAllPopups();
+
+  const popup = document.getElementById(id);
+  if (!popup) return;
+
+  popup.style.display = 'block';
+  requestAnimationFrame(() => popup.classList.add('active'));
+
+  document.body.classList.add('locked');
+  document.querySelector('.overlay')?.classList.add('active');
+
+  activePopup = id;
+}
+
+document.getElementById('btn-enterprise')?.addEventListener('click', () => {
+  openPopup('enterprisePopup');
+});
+
+document.getElementById('btn-qrcode')?.addEventListener('click', () => {
+  openPopup('qrPopup');
+});
+
+document.getElementById('btn-chat')?.addEventListener('click', () => {
+  openPopup('chatPopup');
+});
+
+document.querySelector('.overlay')?.addEventListener('click', closeAllPopups);
 
 const qrBtn = document.getElementById("qrBtn");
 if(qrBtn){
