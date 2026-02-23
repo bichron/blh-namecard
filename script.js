@@ -260,26 +260,25 @@ zoom.addEventListener("click",()=>{
 });
 
 /* ===========================
-   AUTO SESSION EXPIRE (VIEWER)
+   SESSION EXPIRE + UNLOCK CODE
 =========================== */
 const SESSION_TIMEOUT = 1 * 60 * 1000; // 60 phút
 let sessionTimer = null;
 
-function resetSessionTimer() {
+function resetSessionTimer(){
   clearTimeout(sessionTimer);
   sessionTimer = setTimeout(expireSession, SESSION_TIMEOUT);
 }
 
-function expireSession() {
+function expireSession(){
   document.body.classList.add("session-expired");
+  showUnlockOverlay();
 }
 
-// Các hành vi được coi là “tương tác”
 ["click","touchstart","mousemove","keydown","scroll"].forEach(evt=>{
   document.addEventListener(evt, resetSessionTimer, { passive:true });
 });
 
-// start timer khi load
 resetSessionTimer();
 
 /* ===========================
