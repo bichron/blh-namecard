@@ -509,6 +509,25 @@ body.light .enterprise-stamp{
 }
 
 /* ===========================
+   SESSION EXPIRED OVERLAY
+=========================== */
+.session-expired::before{
+  content:"Session expired\nPlease rescan QR or NFC card";
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  white-space:pre-line;
+  font-size:16px;
+  padding:24px;
+  z-index:9999;
+}
+
+/* ===========================
    MISC
 =========================== */
 .close{
