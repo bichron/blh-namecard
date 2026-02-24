@@ -304,10 +304,11 @@ body{
    QR WHEEL CYLINDER
 =========================== */
 .qr-group-wheel{
-  perspective:1000px;
-  height:20px;
   display:flex;
-  align-items:center;
+  align-items:flex-start;     /* ← căn giữa dọc đúng chỗ */
+  justify-content:center;
+  height:16px;            /* ↓ chiều cao thực */
+  perspective:1000px;
 }
 
 .qr-wheel{
