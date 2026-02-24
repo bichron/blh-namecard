@@ -273,8 +273,7 @@ body{
 .qr-popup{
   /* popup riêng cho QR */
   width:320px;
-  padding:5px 0px 5px
-  padding-bottom: 5px;
+  padding:5px 0px 5px;
 
   /* wheel scale theo popup */
   --wheel-size: 90%;
@@ -298,7 +297,7 @@ body{
   overflow:hidden;
   border-radius:12px;
   height: 120px;         /* giảm từ ~150–180px */
-  margin: 0px 0px 0px;     /* giảm trống trên & dưới */
+  margin: 4px 0px 0px;     /* giảm trống trên & dưới */
   align-items:center;
 }
 
@@ -309,7 +308,6 @@ body{
   perspective:1000px;
   height:20px;
   display:flex;
-  justify-content:center;
   align-items:center;
 }
 
@@ -401,7 +399,6 @@ body{
 
 .qr-slider{
   position:relative;
-  align-items:center;
   width:150px;
   overflow:hidden;
 }
@@ -430,7 +427,6 @@ body{
 =========================== */
 #qrCode {
   display: flex;
-  justify-content: center;
   margin:4px;
 }
 
