@@ -298,7 +298,6 @@ body{
   border-radius:12px;
   height: 105px;         /* giảm từ ~150–180px */
   margin: 4px 0px 6px;     /* giảm trống trên & dưới */
-  align-items:flex-start;
 }
 
 /* ===========================
@@ -380,7 +379,7 @@ body{
   display:flex;
   flex-direction:column;
   align-items:center;
-  min-height:180px; /* tránh giật layout khi chuyển panel */
+  min-height:auto; /* tránh giật layout khi chuyển panel */
 }
 
 /* ===========================
@@ -443,7 +442,7 @@ body{
 .qr-indicators{
   display:flex;
   justify-content:center;
-  gap:8px;
+  gap:6px;
   margin-top:12px;
 }
 
@@ -649,7 +648,7 @@ body.light .enterprise-stamp{
    MISC
 =========================== */
 .close{
-  margin-top:15px;
+  margin-top:6px;
   cursor:pointer;
   opacity:.7;
 }
