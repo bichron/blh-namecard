@@ -323,7 +323,7 @@ body{
 
 .qr-group{
   position:absolute;
-  padding:40px 0px 6px;
+  margin-top:20px;
   left:50%;
   top:50%;
   width:auto;
