@@ -648,7 +648,7 @@ body.light .enterprise-stamp{
    MISC
 =========================== */
 .close{
-  margin-botton:20px;
+  margin-bottom:20px;
   cursor:pointer;
   opacity:.7;
 }
