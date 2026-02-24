@@ -273,7 +273,7 @@ body{
 .qr-popup{
   /* popup riêng cho QR */
   width:320px;
-  padding-top: 5px;
+  padding:5px 0px 5px
   padding-bottom: 5px;
 
   /* wheel scale theo popup */
@@ -299,7 +299,7 @@ body{
   border-radius:12px;
   height: 120px;         /* giảm từ ~150–180px */
   margin: 0px 0px 0px;     /* giảm trống trên & dưới */
-  align-items: flex-start;
+  align-items:center;
 }
 
 /* ===========================
@@ -382,7 +382,7 @@ body{
   margin-bottom:2px;
   display:flex;
   flex-direction:column;
-  justify-content:center;
+  align-items:center;
   min-height:180px; /* tránh giật layout khi chuyển panel */
 }
 
