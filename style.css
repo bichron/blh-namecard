@@ -298,7 +298,7 @@ body{
   overflow:hidden;
   border-radius:12px;
   height: 120px;         /* giảm từ ~150–180px */
-  margin: 6px 0px 6px;     /* giảm trống trên & dưới */
+  margin: 0px 0px 0px;     /* giảm trống trên & dưới */
   align-items: flex-start;
 }
 
