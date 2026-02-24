@@ -411,7 +411,6 @@ body{
 .qr-track img{
   width:150px;
   height:150px;
-  margin-right:12px;
   border-radius:12px;
   flex-shrink:0;
   cursor:pointer;
@@ -649,7 +648,7 @@ body.light .enterprise-stamp{
    MISC
 =========================== */
 .close{
-  margin-top:6px;
+  margin-botton:20px;
   cursor:pointer;
   opacity:.7;
 }
