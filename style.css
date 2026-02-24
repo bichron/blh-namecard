@@ -380,7 +380,7 @@ body{
   display:flex;
   flex-direction:column;
   align-items:center;
-  min-height:360px; /* tránh giật layout khi chuyển panel */
+  min-height:260px; /* tránh giật layout khi chuyển panel */
 }
 
 /* ===========================
