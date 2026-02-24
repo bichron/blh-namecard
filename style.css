@@ -391,8 +391,7 @@ body{
 =========================== */
 .qr-panel{
   display:none;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding:4px 0px 4px;
 }
 .qr-panel.active{display:block;}
 
@@ -402,6 +401,7 @@ body{
 
 .qr-slider{
   position:relative;
+  align-items:center;
   width:150px;
   overflow:hidden;
 }
