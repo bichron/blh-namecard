@@ -317,7 +317,7 @@ body{
   position:relative;
   padding:6px 0px 6px;
   width:var(--wheel-size);
-  height:20px;
+  height:30px;
   transform-style:preserve-3d;
 }
 
