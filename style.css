@@ -380,7 +380,7 @@ body{
   display:flex;
   flex-direction:column;
   align-items:flex-start;
-  min-height:140px; /* tránh giật layout khi chuyển panel */
+  min-height:180px; /* tránh giật layout khi chuyển panel */
 }
 
 /* ===========================
@@ -648,7 +648,8 @@ body.light .enterprise-stamp{
    MISC
 =========================== */
 .close{
-  margin-top:6px;
+  justify-content:center;
+  align-items:center;
   cursor:pointer;
   opacity:.7;
 }
