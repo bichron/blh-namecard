@@ -310,7 +310,7 @@ body{
   height:20px;
   display:flex;
   justify-content:center;
-  align-items:center;
+  align-items: flex-start;
 }
 
 .qr-wheel{
@@ -383,6 +383,7 @@ body{
   display:flex;
   flex-direction:column;
   justify-content:center;
+  align-items: flex-start;
   min-height:180px; /* tránh giật layout khi chuyển panel */
 }
 
