@@ -358,7 +358,7 @@ body{
 }
 
 .qr-group.back span{
-  padding:40px 0px 6px;
+  padding-top:40;
   transform:rotateY(180deg);
   opacity:.8;
 }
