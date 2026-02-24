@@ -444,12 +444,12 @@ body{
   display:flex;
   justify-content:center;
   gap:6px;
-  margin-top:12px;
+  margin-top:8px;
 }
 
 .qr-indicators span{
-  width:8px;
-  height:8px;
+  width:6px;
+  height:6px;
   border-radius:50%;
   background:#999;
   opacity:.4;
