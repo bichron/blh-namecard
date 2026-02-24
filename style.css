@@ -316,6 +316,7 @@ body{
 .qr-wheel{
   position:relative;
   width:var(--wheel-size);
+  paddingtop:6px;
   height:20px;
   transform-style:preserve-3d;
 }
