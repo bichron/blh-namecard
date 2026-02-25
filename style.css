@@ -264,9 +264,16 @@ body{
   transition:.4s;
 }
 
+/* Chỉ định riêng màu vàng cho dòng địa chỉ */
 .popup-content .value {
   color:var(--gold);
 }
+
+/* Đảm bảo nhãn luôn là màu trắng (nếu cần thiết) */
+.popup-content .label {
+  color: #ffffff;
+}
+
 
 .popup-content h3 {
   margin-top:20;
