@@ -264,18 +264,19 @@ body{
   transition:.4s;
 }
 
-/* Chỉ định riêng màu vàng cho dòng địa chỉ */
+/* Chỉ định riêng màu cho giá trị */
 .popup-content .value {
   color:var(--gold);
 }
 
-/* Đảm bảo nhãn luôn là màu trắng (nếu cần thiết) */
+/* Chỉ định riêng màu cho giá trị */
 .popup-content .label {
   color: #ffffff;
 }
 
 
 .popup-content h3 {
+  color:var(--text);
   margin-top:20;
   margin-bottom:0;
 }
