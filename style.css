@@ -663,5 +663,6 @@ body.light .enterprise-stamp{
   margin-top:15px;
   cursor:pointer;
   opacity:.7;
+  color:var(--text);
 }
 .close:hover{opacity:1;}
