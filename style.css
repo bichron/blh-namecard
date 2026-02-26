@@ -257,7 +257,7 @@ body{
   backdrop-filter:blur(70px) saturate(200%);
   border:1px solid var(--border);
   box-shadow:0 0 50px rgba(255,215,0,.25);
-  color:var(--gold);
+  color:var(--text);
   text-align:center;
   overflow:visible;
   transform:scale(.85);
@@ -269,11 +269,11 @@ body{
   color:var(--gold);
 }
 
-/* Chỉ định riêng màu cho giá trị */
+/* Chỉ định riêng màu cho giá trị 
 .popup-content .label {
-  color: #ffffff;
+  color:var(--text);
 }
-
+*/
 
 .popup-content h3 {
   color:var(--text);
@@ -663,6 +663,5 @@ body.light .enterprise-stamp{
   margin-top:15px;
   cursor:pointer;
   opacity:.7;
-  color:var(--text);
 }
 .close:hover{opacity:1;}
