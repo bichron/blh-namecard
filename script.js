@@ -271,7 +271,7 @@ Tax Code: 0318787124
 Registered Address:
 2220 Đỗ Mười,
 Phường Trung Mỹ Tây,
-Thành phố Hồ Chí Minh, Vietnam
+Thành phố Hồ Chí Minh, Việt 
 
 Email: support@blh.vn
 Website: https://blh.vn
