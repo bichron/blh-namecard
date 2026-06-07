@@ -265,6 +265,7 @@ zoom.addEventListener("click",()=>{
 =========================== */
 window.copyCompanyInfo = () => {
    const text = `BLH JOINT STOCK COMPANY
+Công ty cổ phần BLH
 Tax Code: 0318787124
 
 Registered Address:
@@ -276,7 +277,8 @@ Email: support@blh.vn
 Website: https://blh.vn
 
 Business Contact:
-0819091981`;
+0819091981
+Mr. PHAM NGOC BICH (CCO)`;
 
   navigator.clipboard.writeText(text);
 
