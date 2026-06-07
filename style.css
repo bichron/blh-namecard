@@ -258,6 +258,7 @@ body{
   border:1px solid var(--border);
   box-shadow:0 0 50px rgba(255,215,0,.25);
   color:var(--text);
+  font-size:15px;
   text-align:center;
   overflow:visible;
   transform:scale(.85);
@@ -267,6 +268,7 @@ body{
 /* Chỉ định riêng màu cho giá trị */
 .popup-content .value {
   color:var(--gold);
+  font-size:14px;
 }
 
 /* Chỉ định riêng màu cho giá trị 
