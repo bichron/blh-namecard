@@ -263,10 +263,9 @@ zoom.addEventListener("click",()=>{
 /* ===========================
    STAMP ONCLICK COPY BLH INFO
 =========================== */
-function copyCompanyInfo() {
+function copyCompanyInfo(){
 
   const text = `BLH JOINT STOCK COMPANY
-
 Tax Code: 0318787124
 
 Registered Address:
@@ -280,27 +279,9 @@ Website: https://blh.vn
 Business Contact:
 0819091981`;
 
-  navigator.clipboard.writeText(text)
-    .then(() => {
+  navigator.clipboard.writeText(text);
 
-      const stamp = document.querySelector('.enterprise-stamp');
-
-      const oldTitle = stamp.title;
-
-      stamp.title = "Copied ✓";
-
-      stamp.style.transform = "scale(1.1)";
-
-      setTimeout(() => {
-        stamp.title = oldTitle;
-        stamp.style.transform = "";
-      }, 1200);
-
-    })
-    .catch(err => {
-      console.error("Copy failed:", err);
-      alert("Unable to copy information");
-    });
+  alert("Company information copied");
 }
    
 /* ===========================
