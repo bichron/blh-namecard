@@ -541,8 +541,14 @@ body{
   filter:brightness(1.9) contrast(1.3) saturate(1.4)
          drop-shadow(0 0 18px rgba(255,215,0,.6));
   mix-blend-mode:screen;
-  pointer-events:none;
+  pointer-events:auto;      /* ← sửa dòng này */
+  cursor:pointer;           /* ← thêm */
   z-index:5;
+  transition:.25s ease;    /* ← thêm */
+}
+
+.enterprise-stamp:hover{    /* ← thêm enterprise-stamp */
+  transform:scale(1.08);
 }
 
 body.light .enterprise-stamp{
