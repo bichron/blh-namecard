@@ -162,7 +162,7 @@ body{
 .title{
   text-align:center;
   color:var(--gold);
-  font-size:13px;
+  font-size:15px;
   margin-top:4px;
   text-shadow:0 0 6px rgba(255,215,0,.35);
 }
@@ -170,7 +170,7 @@ body{
 .company{
   text-align:center;
   color:var(--text);
-  font-size:14px;
+  font-size:16px;
   margin-top:6px;
 }
 
