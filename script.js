@@ -263,9 +263,8 @@ zoom.addEventListener("click",()=>{
 /* ===========================
    STAMP ONCLICK COPY BLH INFO
 =========================== */
-function copyCompanyInfo(){
-
-  const text = `BLH JOINT STOCK COMPANY
+window.copyCompanyInfo = () => {
+   const text = `BLH JOINT STOCK COMPANY
 Tax Code: 0318787124
 
 Registered Address:
