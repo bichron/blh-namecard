@@ -259,6 +259,50 @@ zoom.addEventListener("click",()=>{
   zoom.classList.remove("active");
 });
 
+   
+/* ===========================
+   STAMP ONCLICK COPY BLH INFO
+=========================== */
+function copyCompanyInfo() {
+
+  const text = `BLH JOINT STOCK COMPANY
+
+Tax Code: 0318787124
+
+Registered Address:
+2220 Đỗ Mười,
+Phường Trung Mỹ Tây,
+Thành phố Hồ Chí Minh, Vietnam
+
+Email: support@blh.vn
+Website: https://blh.vn
+
+Business Contact:
+0819091981`;
+
+  navigator.clipboard.writeText(text)
+    .then(() => {
+
+      const stamp = document.querySelector('.enterprise-stamp');
+
+      const oldTitle = stamp.title;
+
+      stamp.title = "Copied ✓";
+
+      stamp.style.transform = "scale(1.1)";
+
+      setTimeout(() => {
+        stamp.title = oldTitle;
+        stamp.style.transform = "";
+      }, 1200);
+
+    })
+    .catch(err => {
+      console.error("Copy failed:", err);
+      alert("Unable to copy information");
+    });
+}
+   
 /* ===========================
    SESSION EXPIRE + UNLOCK CODE
 =========================== */
@@ -475,43 +519,3 @@ END:VCARD`;
 
 });
 
-
-function copyCompanyInfo() {
-
-  const text = `BLH JOINT STOCK COMPANY
-
-Tax Code: 0318787124
-
-Registered Address:
-2220 Đỗ Mười,
-Phường Trung Mỹ Tây,
-Thành phố Hồ Chí Minh, Vietnam
-
-Email: support@blh.vn
-Website: https://blh.vn
-
-Business Contact:
-0819091981`;
-
-  navigator.clipboard.writeText(text)
-    .then(() => {
-
-      const stamp = document.querySelector('.enterprise-stamp');
-
-      const oldTitle = stamp.title;
-
-      stamp.title = "Copied ✓";
-
-      stamp.style.transform = "scale(1.1)";
-
-      setTimeout(() => {
-        stamp.title = oldTitle;
-        stamp.style.transform = "";
-      }, 1200);
-
-    })
-    .catch(err => {
-      console.error("Copy failed:", err);
-      alert("Unable to copy information");
-    });
-}
