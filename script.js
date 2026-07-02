@@ -273,7 +273,7 @@ Registered Address:
 Phường Trung Mỹ Tây,
 Thành phố Hồ Chí Minh, Việt Nam
 
-Email: support@blh.vn
+Email: office@blh.vn
 Website: https://blh.vn
 
 Business Contact:
